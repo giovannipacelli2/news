@@ -7,3 +7,24 @@
 :root{
     --color : black;
 }
+
+.bordo {
+    border: 1px solid;
+}
+
+#page {
+    min-height: 800px;
+    width: 100%;
+}
+
+.cards-container {
+    padding: 1.2em;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.cards {
+    max-width: 36rem;
+}
