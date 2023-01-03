@@ -19,7 +19,9 @@ let seeNews = 0;
 
 getRequest( baseUrl + newStories );
 
-/*-------------------Internal-Function-Declaration-----------------*/
+/*------------------------------------Internal-Function-Declaration-----------------------------------*/
+
+/*-----------------------Get-Primary-request-----------------------*/
 
 function getRequest(url){
 
@@ -29,40 +31,47 @@ function getRequest(url){
         }
     })
     .then((response) => {
-        console.log(response);
-
-        let news = getNotice(response.data, seeNews, NEWS_LIMIT);
+        let news = _.slice(response.data, seeNews, NEWS_LIMIT);
         seeNews = news.length;
-        writeNotice(news);
-    }
-        
-    )
-    .catch( (err) => {
-        library.forErrors(err);
-    } );
+        getNoticeById(news);
+    })
+    .catch( (err) => { library.forErrors(err) } );
 }
 
-function writeNotice(news) {
-    for ( let id of news ) {
+
+/*-----------------------Get-news-by-array's-id--------------------*/
+
+function getNoticeById(news) {
+    let arrNews = [];
+
+    let requests = news.map((id)=> {
         let url = baseUrl + 'item/' + id + '.json';
+        return axios.get( url );
+    });
 
-        axios.get( url )
-        .then((res) => {
-            let notice = new Notice(res.data.title, res.data.text, res.data.time, res.data.url);
-            let card = notice.createCard();
-
-            let container = library.getPageElement(".cards-container");
-
-            container.insertAdjacentHTML('beforeend',card);
-        })
-        .catch( (err) => {
-            library.forErrors(err);
+    Promise.all(requests)   /* Get request for each ID */
+    .then((responses) => {
+        responses.forEach((response) => {
+            arrNews.push(response.data);
         });
-    }
+    })
+    .then( ()=>{ 
+        writeNotice(arrNews);   /* write in HTML Document */
+    })
+    .catch( (err) => { library.forErrors(err) } );
 
 }
 
-function getNotice( arr, start, limit ) {
+/*-----------------------Write-NEWS-in-DOCUMENT--------------------*/
 
-    return _.slice(arr, start, limit)
+function writeNotice(news){
+
+    for ( let n of news ) {
+        let notice = new Notice(n.title, n.text, n.time, n.url);
+        let card = notice.createCard();
+
+        let container = library.getPageElement(".cards-container");
+
+        container.insertAdjacentHTML('beforeend',card);
+    }
 }

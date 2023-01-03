@@ -3,7 +3,7 @@ export default class Notice{
     constructor(title = 'Titolo', text = "", date, url) {
         this.title = title;
         this.text = text;
-        this.date = new Date(date);
+        this.date = new Date(date*1000);
         this.fullDate = this.date.getDate() + "/" + (this.date.getMonth()+1) + "/" + this.date.getFullYear();
         this.url = url;
     }
