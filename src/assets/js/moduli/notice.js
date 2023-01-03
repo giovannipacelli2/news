@@ -14,13 +14,13 @@ export default class Notice{
                 <div class="card-body">
 
                 <h5 class="card-title">${this.title}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
                 <p class="card-text">${this.text}</p>
                 <p class="card-text">${this.fullDate}</p>
-                <a href="${this.url}" class="card-link">News link</a>
+                <a href="${this.url}" target="_blank" class="card-link">News link</a>
 
                 </div>
             </div>
         `;
+        return body;
     }
 };

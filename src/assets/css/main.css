@@ -26,5 +26,10 @@
     align-items: center;
 }
 .cards {
-    max-width: 36rem;
+    width: 50%;
+    margin-bottom: 2em;
+}
+
+.cards:last-of-type {
+    margin-bottom: 0;
 }

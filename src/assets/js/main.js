@@ -33,7 +33,6 @@ function getRequest(url){
 
         let news = getNotice(response.data, seeNews, NEWS_LIMIT);
         seeNews = news.length;
-
         writeNotice(news);
     }
         
@@ -44,8 +43,21 @@ function getRequest(url){
 }
 
 function writeNotice(news) {
-    for ( let notice of news ) {
-        
+    for ( let id of news ) {
+        let url = baseUrl + 'item/' + id + '.json';
+
+        axios.get( url )
+        .then((res) => {
+            let notice = new Notice(res.data.title, res.data.text, res.data.time, res.data.url);
+            let card = notice.createCard();
+
+            let container = library.getPageElement(".cards-container");
+
+            container.insertAdjacentHTML('beforeend',card);
+        })
+        .catch( (err) => {
+            library.forErrors(err);
+        });
     }
 
 }
