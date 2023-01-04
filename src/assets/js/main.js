@@ -8,7 +8,7 @@ import 'https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js';
 /*-----------------------Import-functions.js-----------------------*/
 
 import  * as library  from './moduli/functions.js';
-import { Notice, Story, Comment } from './moduli/notice.js';
+import { Notice, Story, Comment, Job } from './moduli/notice.js';
 
 
 let baseUrl = 'https://hacker-news.firebaseio.com/v0/';
@@ -21,8 +21,6 @@ const NEWS_LIMIT = 10;
 let seeNews = 0;
 
 getRequest( baseUrl + newStories );
-
-/* printElement('2921983'); */
 
 /*------------------------------------Internal-Function-Declaration-----------------------------------*/
 
@@ -37,8 +35,8 @@ function getRequest(url){
     })
     .then((response) => {
         newStoriesId = response.data;
-        printElement(newStoriesId[102]); /* Call print one element */
-        getNoticeById(seeMore(response));
+        printElement('192327'); /* Call print one element */
+        /* getNoticeById(seeMore(response)); */
     })
     .catch( (err) => { library.forErrors(err) } );
 }
@@ -71,15 +69,30 @@ function getNoticeById(news) {
 
 function writeNotice(news){
 
-    for ( let n of news ) {
+    
+
+    for ( let data of news ) {
 
         let notice = null;
+        let property = null;
 
-        if ( n.type == "story" ){
-            notice = new Story(n.by, n.id, n.time, n.type, n.title, n.url, n.score);
+        if ( data.type == "story" ){
+            
+            property = library.exstractProperty(data, Story.argumentsOrder);
+
+            notice = new Story(...property);
         }
-        if ( n.type == "comment" ){
-            notice = new Comment(n.by, n.id, n.time, n.type, n.parent, n.text);
+        if ( data.type == "comment" ){
+
+            property = library.exstractProperty(data, Comment.argumentsOrder);
+
+            notice = new Comment(...property);
+        }
+        if ( data.type == "job" ){
+
+            property = library.exstractProperty(data, Job.argumentsOrder);
+
+            notice = new Job(...property);
         }
 
         let card = notice.createCard();
@@ -102,7 +115,6 @@ function seeMore(response) {
 /*--------------------------Get-one-element------------------------*/
 
 function printElement(elem) {
-    debugger;
     let url = baseUrl + 'item/' + elem + '.json';
 
     axios.get( url, {
@@ -111,7 +123,7 @@ function printElement(elem) {
         }
     })
     .then((response) => {
-        debugger;
+        console.log(response.data); /* CONSOLE LOG */
         writeNotice([response.data]);
     })
     .catch( (err) => { library.forErrors(err) } );
