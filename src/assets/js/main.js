@@ -8,7 +8,7 @@ import 'https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js';
 /*-----------------------Import-functions.js-----------------------*/
 
 import  * as library  from './moduli/functions.js';
-import { Notice, Story, Comment, Job } from './moduli/notice.js';
+import { Notice, GenericalNews, Story, Comment, Job } from './moduli/notice.js';
 
 
 let baseUrl = 'https://hacker-news.firebaseio.com/v0/';
@@ -35,7 +35,7 @@ function getRequest(url){
     })
     .then((response) => {
         newStoriesId = response.data;
-        /*printElement('192327');  Call print one element */
+        /*printElement('2921983');  Call print one element*/
         getNoticeById(seeMore(response));
     })
     .catch( (err) => { library.forErrors(err) } );
@@ -82,17 +82,24 @@ function writeNotice(news){
 
             notice = new Story(...property);
         }
-        if ( data.type == "comment" ){
+        else if ( data.type == "comment" ){
 
             property = library.exstractProperty(data, Comment.argumentsOrder);
 
             notice = new Comment(...property);
         }
-        if ( data.type == "job" ){
+        else if ( data.type == "job" ){
 
             property = library.exstractProperty(data, Job.argumentsOrder);
 
             notice = new Job(...property);
+        }
+
+        else {
+
+            property = library.exstractProperty(data, GenericalNews.argumentsOrder);
+
+            notice = new GenericalNews(...property);
         }
 
         let card = notice.createCard();

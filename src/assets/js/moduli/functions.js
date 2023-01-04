@@ -27,7 +27,12 @@ export function exstractProperty(obj, order) {
   let arrRes = [];
 
   for ( let prop of order ) {
-    arrRes.push( obj[prop] );
+    if( obj[prop] ){
+      arrRes.push( obj[prop] );
+    }
+    else {
+      arrRes.push( "" );
+    }
   }
 
   return arrRes;
