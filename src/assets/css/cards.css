@@ -1,0 +1,49 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --color : black;
+}
+
+.cards-container {
+    padding: 0.5em 0.1em;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.cards {
+    width: 90%;
+    margin-bottom: 2em;
+}
+
+.cards:last-of-type {
+    margin-bottom: 0;
+}
+
+.by {
+    font-style: italic;
+}
+
+@media only screen and ( min-width:576px ) {
+
+    .cards-container {
+        padding: 1.2em;
+    }
+
+    .cards {
+        width: 60%;
+        margin-bottom: 2em;
+    }
+}
+
+@media only screen and (min-width:360px) and ( max-width:576px ) {
+    .cards {
+        width: 90%;
+        margin-bottom: 2em;
+    }
+}
