@@ -33,3 +33,7 @@
 .cards:last-of-type {
     margin-bottom: 0;
 }
+
+.by {
+    font-style: italic;
+}
