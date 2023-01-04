@@ -4,8 +4,14 @@
     box-sizing: border-box;
 }
 
+body {
+    font-size: 16px;
+}
+
 :root{
-    --color : black;
+    --headerHeight: 15em;
+    --headerColor : rgb(216, 215, 215);
+    --headerTextColor : rgb(169, 0, 0);
 }
 
 .bordo {
@@ -15,11 +21,52 @@
 #page {
     min-height: 800px;
     width: 100%;
+
+    margin-top: var(--headerHeight);
 }
 
+#header {
 
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    z-index: 1000;
+
+    width: 100%;
+
+    height: var(--headerHeight);
+
+    background: linear-gradient( #faec9a 5%, #fef9de 60%, #ffffff);
+    background-color: var(--headerColor);
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+    align-items: center;
+
+    color : var(--headerTextColor);
+}
+
+.header-text {
+    font-size: 1.2em;
+    text-overflow:clip;
+    text-align: center;
+}
 
 @media only screen and ( min-width:576px ) {
 
+    .header-text {
+        text-align: start;
+    }
 
 }

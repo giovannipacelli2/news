@@ -4,8 +4,13 @@
     box-sizing: border-box;
 }
 
-:root{
-    --color : black;
+.cards{
+    --cardsBorder : #f49653;
+    /* dark thema */
+    --D_bgCard : rgb(123, 82, 82); 
+    --D_cardTextColor : rgb(255, 255, 255); 
+    --D_cardLink : rgb(164, 240, 137); 
+    --D_cardLinkVisited : rgb(255, 255, 255);
 }
 
 .cards-container {
@@ -19,14 +24,29 @@
 .cards {
     width: 90%;
     margin-bottom: 2em;
+    background-color: var(--D_bgCard);
+    color: var(--D_cardTextColor);
+    /* border-color: var(--cardsBorder); */
 }
 
-.cards:last-of-type {
-    margin-bottom: 0;
+.cards a:hover,
+.cards a:link {
+    color: var(--D_cardLink);
+}
+
+.cards a:visited {
+    color: var(--D_cardLinkVisited);
 }
 
 .by {
     font-style: italic;
+}
+
+@media only screen and (min-width:360px) and ( max-width:576px ) {
+    .cards {
+        width: 90%;
+        margin-bottom: 2em;
+    }
 }
 
 @media only screen and ( min-width:576px ) {
@@ -35,15 +55,36 @@
         padding: 1.2em;
     }
 
+    .cards:last-of-type {
+        margin-bottom: 0;
+    }
+
     .cards {
         width: 60%;
         margin-bottom: 2em;
     }
 }
 
-@media only screen and (min-width:360px) and ( max-width:576px ) {
+
+@media only screen and ( min-width:576px ) and ( max-width:768px ) {
+
     .cards {
-        width: 90%;
-        margin-bottom: 2em;
+        width: 80%;
     }
+}
+
+@media only screen and ( min-width:768px ) and ( min-width:992px ) {
+
+    .cards {
+        width: 100%;
+    }
+
+}
+
+@media only screen and ( min-width:992px ) {
+
+    .cards {
+        width: 60%;
+    }
+
 }
