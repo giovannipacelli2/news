@@ -21,4 +21,18 @@ export function forErrors(error){
     console.log(error.config);  
 }
 
+/*-----------------------Exstract-Obj-Property---------------------*/
+
+export function exstractProperty(obj, order) {
+  let arrRes = [];
+
+  for ( let prop of order ) {
+    arrRes.push( obj[prop] );
+  }
+
+  return arrRes;
+
+}
+
+
 /*-------------------------Request-functions-----------------------*/
