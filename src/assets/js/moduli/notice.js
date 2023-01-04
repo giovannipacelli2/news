@@ -33,7 +33,16 @@ export class Notice{
         return fullItData;
     }
 
+    urlController() {
+        if (this.url !== "" ) {
+          return `<a href="${this.url}" target="_blank" class="card-link">${_.capitalize(this.type)} link</a>`;
+        }
+        else return "";  
+    }
+
     createCard(){
+        let url = this.urlController();
+
         let body = `
             <div class="card cards">
                 <div class="card-body">
@@ -42,7 +51,7 @@ export class Notice{
                 <p class="card-text by">By: ${this.by}</p>
                 <p class="card-text">Vuoto</p>
                 <p class="card-text">${this.fullDate}</p>
-                <a href="${this.url}" target="_blank" class="card-link">News link</a>
+                ${url}
 
                 </div>
             </div>
@@ -65,6 +74,8 @@ export class Story extends Notice{
     }
 
     createCard() {
+        let url = this.urlController();
+
         let body = `
             <div class="card cards">
                 <div class="card-body px-4">
@@ -73,7 +84,7 @@ export class Story extends Notice{
                     <p class="card-text by">By: ${this.by}</p>
                     <p class="card-text text-end me-5">Data:</p>
                     <p class="card-text text-end me-4">${this.fullDate}</p>
-                    <a href="${this.url}" target="_blank" class="card-link">News link</a>
+                    ${url}
 
                 </div>
             </div>
@@ -121,6 +132,8 @@ export class Job extends Notice{
     }
 
     createCard() {
+
+        let url = this.urlController();
         let body = `
             <div class="card cards">
                 <div class="card-body px-4">
@@ -130,7 +143,7 @@ export class Job extends Notice{
                     <p class="card-text">${this.text}</p>
                     <p class="card-text text-end me-5">Data:</p>
                     <p class="card-text text-end me-4">${this.fullDate}</p>
-                    <a href="${this.url}" target="_blank" class="card-link">Job link</a>
+                    ${url}
 
                 </div>
             </div>

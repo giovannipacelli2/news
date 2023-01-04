@@ -35,8 +35,8 @@ function getRequest(url){
     })
     .then((response) => {
         newStoriesId = response.data;
-        printElement('192327'); /* Call print one element */
-        /* getNoticeById(seeMore(response)); */
+        /*printElement('192327');  Call print one element */
+        getNoticeById(seeMore(response));
     })
     .catch( (err) => { library.forErrors(err) } );
 }
@@ -100,6 +100,7 @@ function writeNotice(news){
         let container = library.getPageElement(".cards-container");
 
         container.insertAdjacentHTML('beforeend',card);
+
     }
 }
 
