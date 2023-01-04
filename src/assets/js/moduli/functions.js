@@ -23,6 +23,16 @@ export function forErrors(error){
 
 /*-----------------------Exstract-Obj-Property---------------------*/
 
+// This function returns an array from the OBJ values in a specific ORDER
+// If a specific property doesn't exists, it puts a "" in the result array
+
+//Example:
+
+// obj { surname:"Rossi", age: 20, name:"Mario" }
+// order [ "name", "surname", "age" ]
+
+// result [ "Mario", "Rossi", 20 ]
+
 export function exstractProperty(obj, order) {
   let arrRes = [];
 
