@@ -1,3 +1,6 @@
+
+/*-----------------------------PARENT-CLASS-NOTICE------------------------------*/
+
 export class Notice{
 
     constructor(by, id, time, type) {
@@ -48,6 +51,11 @@ export class Notice{
     }
 };
 
+/*-----------------------------CHILDS-CLASSES-NOTICE----------------------------*/
+
+
+/*-----------------------CLASS-STORY------------------------*/
+
 export class Story extends Notice{
     constructor(by, id, time, type, title, url, score){
         super(by, id, time, type);
@@ -74,6 +82,8 @@ export class Story extends Notice{
     }
 }
 
+/*----------------------CLASS-COMMENT-----------------------*/
+
 export class Comment extends Notice{
     constructor(by, id, time, type, parent, text = ""){
         super(by, id, time, type);
@@ -98,6 +108,8 @@ export class Comment extends Notice{
         return body;
     }
 }
+
+/*------------------------CLASS-JOB-------------------------*/
 
 export class Job extends Notice{
     constructor(by, id, time, type, text, title, url, score){
@@ -126,6 +138,10 @@ export class Job extends Notice{
         return body;
     }
 }
+
+/*-------------------------------STATIC-PROPERTY--------------------------------*/
+
+/*------Arrays that store the specific order to constructor arguments of Class-------------*/
 
 Story.argumentsOrder = ['by', 'id', 'time', 'type', 'title', 'url', 'score'];
 
