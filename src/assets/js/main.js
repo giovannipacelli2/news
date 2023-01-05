@@ -7,7 +7,8 @@ import 'https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js';
 
 /*-----------------------Import-functions.js-----------------------*/
 
-import  * as library  from './moduli/functions.js';
+import  * as library  from './moduli/functions-library.js';
+import  * as newsLibrary  from './moduli/news-function-library.js';
 import { Notice, GenericalNews, Story, Comment, Job } from './moduli/notice.js';
 
 
@@ -31,7 +32,7 @@ async function main(){
         let nNotice = seeMore(response);
 
         let arrayNews = await getNoticeById( nNotice );
-        
+
         writeNotice(arrayNews);   /* write in HTML Document */
     }
     catch(err) {

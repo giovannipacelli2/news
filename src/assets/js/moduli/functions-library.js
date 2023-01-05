@@ -1,3 +1,5 @@
+'use strict'
+
 /*-----------------------Document-Elements------------------------*/
 
 export function getPageElement(elem) {

@@ -39,6 +39,7 @@ body {
 
     background: linear-gradient( #faec9a 5%, #fef9de 60%, #ffffff);
     background-color: var(--headerColor);
+    box-shadow: 0 5px 5px #ffffff;
 
     display: flex;
     flex-direction: column;
