@@ -20,31 +20,47 @@ const NEWS_LIMIT = 10;
 
 let seeNews = 0;
 
-getRequest( baseUrl + newStories );
+main();
+
+async function main(){
+
+    try {
+        let response = await getRequest( baseUrl + newStories );
+        newStoriesId = response.data;
+
+        let nNotice = seeMore(response);
+
+        let arrayNews = await getNoticeById( nNotice );
+        
+        writeNotice(arrayNews);   /* write in HTML Document */
+    }
+    catch(err) {
+        library.forErrors(err); 
+    }
+}
+
+
 
 /*------------------------------------Internal-Function-Declaration-----------------------------------*/
 
 /*-----------------------Get-Primary-request-----------------------*/
 
-function getRequest(url){
+async function getRequest(url){
 
-    axios.get( url, {
-        params:{
-            print: 'pretty',
-        }
-    })
-    .then((response) => {
-        newStoriesId = response.data;
-        /*printElement('2921983');  Call print one element*/
-        getNoticeById(seeMore(response));
-    })
-    .catch( (err) => { library.forErrors(err) } );
+    return new Promise( function(resolve, reject) {
+        axios.get( url, {
+            params:{
+                print: 'pretty',
+            }
+        })
+        .then( (res) => { resolve(res) } );
+    });
 }
 
 
 /*-----------------------Get-news-by-array's-id--------------------*/
 
-function getNoticeById(news) {
+async function getNoticeById(news) {
     let arrNews = [];
 
     let requests = news.map((id)=> {
@@ -52,17 +68,16 @@ function getNoticeById(news) {
         return axios.get( url );
     });
 
-    Promise.all(requests)   /* Get request for each ID */
-    .then((responses) => {
-        responses.forEach((response) => {
-            arrNews.push(response.data);
-        });
-    })
-    .then( ()=>{ 
-        writeNotice(arrNews);   /* write in HTML Document */
-    })
-    .catch( (err) => { library.forErrors(err) } );
+    return new Promise( function(resolve, reject) {
 
+        Promise.all(requests)   /* Get request for each ID */
+        .then((responses) => {
+            responses.forEach((response) => {
+                arrNews.push(response.data);
+            });
+        })
+        .then( () => { resolve(arrNews) } );
+    });
 }
 
 /*-----------------------Write-NEWS-in-DOCUMENT--------------------*/
