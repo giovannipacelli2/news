@@ -94,7 +94,7 @@ export function writeNotice(news, container=false){
 
 /*--------------------------Get-one-element------------------------*/
 
-export async function printElement(baseUrl, id) {
+export async function printElement(baseUrl, id, container=false) {
     let url = baseUrl + 'item/' + id + '.json';
 
     return new Promise( function(resolve, reject) {
@@ -106,7 +106,7 @@ export async function printElement(baseUrl, id) {
         })
         .then((response) => {
             console.log(response.data); /* CONSOLE LOG */
-            let elem = writeNotice([response.data]);
+            let elem = writeNotice([response.data], container);
             resolve(elem);
         });
     });
