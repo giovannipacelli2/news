@@ -33,7 +33,7 @@ async function main(){
 
         let arrayNews = await newsLibrary.getNoticeById( baseUrl, nNotice );
 
-        let container = library.getPageElement(".cards-container");
+        let container = document.body.querySelector(".cards-container");
 
         newsLibrary.writeNotice(arrayNews, container);   /* write in HTML Document */     
         

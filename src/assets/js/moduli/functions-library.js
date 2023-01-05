@@ -1,11 +1,5 @@
 'use strict'
 
-/*-----------------------Document-Elements------------------------*/
-
-export function getPageElement(elem) {
-    return document.body.querySelector(elem);
-}
-
 /*-------------------------Error-handlers--------------------------*/
 
 export function forErrors(error){

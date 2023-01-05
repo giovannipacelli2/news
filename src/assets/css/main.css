@@ -8,8 +8,8 @@ body {
     font-size: 16px;
 }
 
-:root{
-    --headerHeight: 15em;
+#header, #page{
+    --headerHeight: 9em;
     --headerColor : rgb(216, 215, 215);
     --headerTextColor : rgb(169, 0, 0);
 }
@@ -68,6 +68,10 @@ body {
 
     .header-text {
         text-align: start;
+    }
+
+    #header, #page{
+        --headerHeight: 12em;
     }
 
 }
