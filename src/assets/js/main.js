@@ -26,14 +26,17 @@ main();
 async function main(){
 
     try {
-        let response = await getRequest( baseUrl + newStories );
+        let response = await newsLibrary.getRequest( baseUrl + newStories );
         newStoriesId = response.data;
 
         let nNotice = seeMore(response);
 
-        let arrayNews = await getNoticeById( nNotice );
+        let arrayNews = await newsLibrary.getNoticeById( baseUrl, nNotice );
 
-        writeNotice(arrayNews);   /* write in HTML Document */
+        let container = library.getPageElement(".cards-container");
+
+        newsLibrary.writeNotice(arrayNews, container);   /* write in HTML Document */     
+        
     }
     catch(err) {
         library.forErrors(err); 
@@ -44,88 +47,6 @@ async function main(){
 
 /*------------------------------------Internal-Function-Declaration-----------------------------------*/
 
-/*-----------------------Get-Primary-request-----------------------*/
-
-async function getRequest(url){
-
-    return new Promise( function(resolve, reject) {
-        axios.get( url, {
-            params:{
-                print: 'pretty',
-            }
-        })
-        .then( (res) => { resolve(res) } );
-    });
-}
-
-
-/*-----------------------Get-news-by-array's-id--------------------*/
-
-async function getNoticeById(news) {
-    let arrNews = [];
-
-    let requests = news.map((id)=> {
-        let url = baseUrl + 'item/' + id + '.json';
-        return axios.get( url );
-    });
-
-    return new Promise( function(resolve, reject) {
-
-        Promise.all(requests)   /* Get request for each ID */
-        .then((responses) => {
-            responses.forEach((response) => {
-                arrNews.push(response.data);
-            });
-        })
-        .then( () => { resolve(arrNews) } );
-    });
-}
-
-/*-----------------------Write-NEWS-in-DOCUMENT--------------------*/
-
-function writeNotice(news){
-
-    
-
-    for ( let data of news ) {
-
-        let notice = null;
-        let property = null;
-
-        if ( data.type == "story" ){
-            
-            property = library.exstractProperty(data, Story.argumentsOrder);
-
-            notice = new Story(...property);
-        }
-        else if ( data.type == "comment" ){
-
-            property = library.exstractProperty(data, Comment.argumentsOrder);
-
-            notice = new Comment(...property);
-        }
-        else if ( data.type == "job" ){
-
-            property = library.exstractProperty(data, Job.argumentsOrder);
-
-            notice = new Job(...property);
-        }
-
-        else {
-
-            property = library.exstractProperty(data, GenericalNews.argumentsOrder);
-
-            notice = new GenericalNews(...property);
-        }
-
-        let card = notice.createCard();
-
-        let container = library.getPageElement(".cards-container");
-
-        container.insertAdjacentHTML('beforeend',card);
-
-    }
-}
 
 /*------------------------Get-id-of-more-news----------------------*/
 
@@ -134,21 +55,4 @@ function seeMore(response) {
     seeNews = news.length;
 
     return news;
-}
-
-/*--------------------------Get-one-element------------------------*/
-
-function printElement(elem) {
-    let url = baseUrl + 'item/' + elem + '.json';
-
-    axios.get( url, {
-        params:{
-            print: 'pretty',
-        }
-    })
-    .then((response) => {
-        console.log(response.data); /* CONSOLE LOG */
-        writeNotice([response.data]);
-    })
-    .catch( (err) => { library.forErrors(err) } );
 }
