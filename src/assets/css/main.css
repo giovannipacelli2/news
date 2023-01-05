@@ -64,6 +64,11 @@ body {
     text-align: center;
 }
 
+.button {
+    margin: var(--cardsBottom) auto;
+    font-size: 1.2em;
+}
+
 @media only screen and ( min-width:576px ) {
 
     .header-text {

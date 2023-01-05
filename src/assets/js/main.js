@@ -17,7 +17,7 @@ let newStories = 'newstories.json';
 
 let newStoriesId = null;
 
-const NEWS_LIMIT = 10;
+const NEWS_LIMIT = 5;
 
 let seeNews = 0;
 
@@ -29,13 +29,19 @@ async function main(){
         let response = await newsLibrary.getRequest( baseUrl + newStories );
         newStoriesId = response.data;
 
-        let nNotice = seeMore(response);
+        let nNotice = newsRangeLimit(response.data);
 
         let arrayNews = await newsLibrary.getNoticeById( baseUrl, nNotice );
 
         let container = document.body.querySelector(".cards-container");
 
-        newsLibrary.writeNotice(arrayNews, container);   /* write in HTML Document */     
+        newsLibrary.writeNotice(arrayNews, container);   /* write in HTML Document */
+
+        let button = createButton("...vedi altro...");
+
+        container.append(button);
+
+        button.addEventListener( 'click', seeMore );
         
     }
     catch(err) {
@@ -48,11 +54,38 @@ async function main(){
 /*------------------------------------Internal-Function-Declaration-----------------------------------*/
 
 
-/*------------------------Get-id-of-more-news----------------------*/
+/*-----------------------Get-LIMIT-for-the-IDs---------------------*/
 
-function seeMore(response) {
-    let news = _.slice(response.data, seeNews, NEWS_LIMIT);
+function newsRangeLimit(idArray) {     /* raggrupa 10 ID da tutte le news */
+    let news = _.slice(idArray, seeNews, ( seeNews + NEWS_LIMIT) );
     seeNews = news.length;
 
     return news;
+}
+
+/*------------------------Get-id-of-more-news----------------------*/
+
+async function seeMore(e) {     /* raggrupa 10 ID da tutte le news */
+
+    let newsIds = newsRangeLimit(newStoriesId); /* get the array of id */
+
+    let moreNews = await newsLibrary.getNoticeById( baseUrl, newsIds );
+    console.log(moreNews);
+    
+    let container = document.body.querySelector(".cards-container");
+
+    newsLibrary.writeNotice(moreNews, container);   /* write in HTML Document */
+
+    container.append(this);
+}
+
+/*---------------------------CREATE-BUTTON-------------------------*/
+
+function createButton(text) {
+    let button = document.createElement('BUTTON');
+    button.classList.add( "btn", "btn-warning","button" );
+    button.setAttribute("type", "button");
+    button.textContent = text;
+
+    return button;
 }
