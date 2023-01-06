@@ -65,7 +65,7 @@ body {
 }
 
 .button {
-    margin: var(--cardsBottom) auto;
+    margin: 2em auto;
     font-size: 1.2em;
 }
 

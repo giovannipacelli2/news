@@ -4,11 +4,8 @@
     box-sizing: border-box;
 }
 
-:root{
-    --cardsBottom : 2em;
-}
-
 .cards{
+    --cardMarginBottom : 2em;
     --cardsBorder : #f49653;
     /* dark thema */
     --D_bgCard : rgb(123, 82, 82); 
@@ -27,7 +24,7 @@
 }
 .cards {
     width: 90%;
-    margin-bottom: var(--cardsBottom);
+    margin-bottom: var(--cardMarginBottom);
     background-color: var(--D_bgCard);
     color: var(--D_cardTextColor);
     /* border-color: var(--cardsBorder); */
