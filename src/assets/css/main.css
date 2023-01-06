@@ -8,6 +8,8 @@ body {
     font-size: 16px;
 }
 
+/*---------------------------------Color Management----------------------------------*/
+
 #header, #footer {
     --yellowBgTop : linear-gradient( #faec9a 5%, #fef9de 60%, #ffffff);
     --yellowBgBottom: linear-gradient( #ffffff, #fef9de, #faec9a);
@@ -19,6 +21,14 @@ body {
     --headerTextColor : rgb(169, 0, 0);
 }
 
+.button {
+    --color: rgb(169, 0, 0);
+    --bgColor: rgb(245, 221, 81);
+    --bgColorHover: rgb(248, 227, 111);
+}
+
+
+/*-----------------------------------------------------------------------------------*/
 .bordo {
     border: 1px solid;
 }
@@ -71,7 +81,23 @@ body {
 
 .button {
     margin: 2em auto;
+    padding: 0.1em 0.5em;
+
+    text-align: center;
+
     font-size: 1.2em;
+
+    border: 2px solid;
+    border-color: var(--bgColor);
+    border-radius: 8px;
+
+    color: var(--color);
+    background-color: var(--bgColor);
+}
+
+.button:hover {
+    color: var(--color);
+    background-color: var(--bgColorHover);
 }
 
 #footer {

@@ -17,7 +17,7 @@ let newStories = 'newstories.json';
 
 let newStoriesId = null;
 
-const NEWS_LIMIT = 5;
+const NEWS_LIMIT = 10;
 
 let seeNews = 0;
 
@@ -35,9 +35,9 @@ async function main(){
 
         let container = document.body.querySelector(".cards-container");
 
-        newsLibrary.writeNotice(arrayNews, container);   /* write in HTML Document */
+        newsLibrary.writeNotice(arrayNews, container);
 
-        let button = createButton("...vedi altro...");
+        let button = library.createButton("...vedi altro...");
 
         container.append(button);
 
@@ -77,15 +77,4 @@ async function seeMore(e) {     /* raggrupa 10 ID da tutte le news */
     newsLibrary.writeNotice(moreNews, container);   /* write in HTML Document */
 
     container.append(this);
-}
-
-/*---------------------------CREATE-BUTTON-------------------------*/
-
-function createButton(text) {
-    let button = document.createElement('BUTTON');
-    button.classList.add( "btn", "btn-warning","button" );
-    button.setAttribute("type", "button");
-    button.textContent = text;
-
-    return button;
 }

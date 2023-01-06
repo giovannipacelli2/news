@@ -1,5 +1,16 @@
 'use strict'
 
+/*-------------------------DOMS-ELEMENTS---------------------------*/
+
+export function createButton(text) {
+  let button = document.createElement('BUTTON');
+  button.classList.add( "button" );
+  button.setAttribute("type", "button");
+  button.textContent = text;
+
+  return button;
+}
+
 /*-------------------------Error-handlers--------------------------*/
 
 export function forErrors(error){
