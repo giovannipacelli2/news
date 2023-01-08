@@ -37,6 +37,10 @@ body {
     min-height: 800px;
     width: 100%;
 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     margin-top: var(--headerHeight);
 }
 

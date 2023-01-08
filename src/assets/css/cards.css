@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+:root {
+    --timeTransition: 1000ms;
+}
+
 .cards{
     --cardMarginBottom : 2em;
     --cardsBorder : #f49653;
@@ -12,6 +16,19 @@
     --D_cardTextColor : rgb(255, 255, 255); 
     --D_cardLink : rgb(164, 240, 137); 
     --D_cardLinkVisited : rgb(255, 255, 255);
+}
+.elem-invisible {
+    display: none;
+    opacity: 0;
+}
+
+.card-transition {
+    display: flex;
+    opacity: 1;
+
+    transform: transition;
+    transition-property: 'opacity';
+    transition-duration: var(--timeTransition);
 }
 
 .cards-container {

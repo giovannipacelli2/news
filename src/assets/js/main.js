@@ -16,6 +16,7 @@ let baseUrl = 'https://hacker-news.firebaseio.com/v0/';
 let newStories = 'newstories.json';
 
 let newStoriesId = null;
+let mainStories = null;
 
 const NEWS_LIMIT = 10;
 
@@ -35,11 +36,13 @@ async function main(){
 
         let container = document.body.querySelector(".cards-container");
 
-        newsLibrary.writeNotice(arrayNews, container);
+        mainStories = newsLibrary.writeNotice(arrayNews);
+
+        await appendStories(mainStories, container);
 
         let button = library.createButton("...vedi altro...");
 
-        container.append(button);
+        container.after(button);
 
         button.addEventListener( 'click', seeMore );
         
@@ -63,18 +66,56 @@ function newsRangeLimit(idArray) {     /* raggrupa 10 ID da tutte le news */
     return news;
 }
 
+/*----------------------Append-array-of-stories--------------------*/
+
+
+async function appendStories( arrStories, father ) {
+
+    let container = document.createElement("DIV");
+    container.classList.add("container-sm", "cards-container", "elem-invisible");
+
+    let cssProperty = window.getComputedStyle(document.documentElement);
+    let timeTransition = cssProperty.getPropertyValue("--timeTransition");
+
+    let time = +timeTransition.split('ms')[0];
+
+    return new Promise( function( resolve, reject ) {
+        for ( let story of arrStories ) {
+            container.insertAdjacentHTML('beforeend',story);       
+        }
+debugger;
+        father.append(container);
+
+        setTimeout( ()=> {
+            container.classList.add("card-transition");
+
+            setTimeout( ()=> {
+                container.classList.remove("elem-invisible");
+                container.classList.remove("card-transition");
+                resolve();
+            } ,time );
+
+        } ,0);
+    } );
+
+        
+    
+}
+
 /*------------------------Get-id-of-more-news----------------------*/
 
 async function seeMore(e) {     /* raggrupa 10 ID da tutte le news */
+debugger;
 
     let newsIds = newsRangeLimit(newStoriesId); /* get the array of id */
 
     let moreNews = await newsLibrary.getNoticeById( baseUrl, newsIds );
-    console.log(moreNews);
     
     let container = document.body.querySelector(".cards-container");
 
-    newsLibrary.writeNotice(moreNews, container);   /* write in HTML Document */
+    let stories = newsLibrary.writeNotice(moreNews);   /* write in HTML Document */
 
-    container.append(this);
+    await appendStories(stories, container);
+
+    container.after(this);
 }
