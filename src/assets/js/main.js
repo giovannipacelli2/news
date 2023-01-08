@@ -82,10 +82,8 @@ async function appendStories( arrStories, father ) {
     return new Promise( function( resolve, reject ) {
         for ( let story of arrStories ) {
             container.insertAdjacentHTML('beforeend',story);       
-        }
-debugger;
+        }     
         father.append(container);
-
         setTimeout( ()=> {
             container.classList.add("card-transition");
 
@@ -95,7 +93,7 @@ debugger;
                 resolve();
             } ,time );
 
-        } ,0);
+        } ,time);
     } );
 
         
