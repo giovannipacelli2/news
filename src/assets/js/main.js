@@ -35,13 +35,14 @@ async function main(){
         let response = await newsLibrary.getRequest( baseUrl + newStories );
         newStoriesId = response.data;
 
-        let nNotice = newsRangeLimit(response.data);
+        let nNotice = library.getArrayRange(response.data, seeNews, ( seeNews + NEWS_LIMIT));
+        seeNews += NEWS_LIMIT;
 
         let arrayNews = await newsLibrary.getNoticeById( baseUrl, nNotice );
 
         mainStories = newsLibrary.writeNotice(arrayNews);
 
-        removeLoading(loading);
+        loading.remove();
 
         await appendStories(mainStories, container);
 
@@ -61,15 +62,6 @@ async function main(){
 
 /*------------------------------------Internal-Function-Declaration-----------------------------------*/
 
-
-/*-----------------------Get-LIMIT-for-the-IDs---------------------*/
-
-function newsRangeLimit(idArray) {     /* raggrupa 10 ID da tutte le news */
-    let news = _.slice(idArray, seeNews, ( seeNews + NEWS_LIMIT) );
-    seeNews = news.length;
-
-    return news;
-}
 
 /*----------------------Append-array-of-stories--------------------*/
 
@@ -106,7 +98,7 @@ async function appendStories( arrStories, father ) {
 
 /*------------------------Get-id-of-more-news----------------------*/
 
-async function seeMore(e) {     /* raggrupa 10 ID da tutte le news */
+async function seeMore(e) {
 
     let button = e.target;
 
@@ -116,13 +108,14 @@ async function seeMore(e) {     /* raggrupa 10 ID da tutte le news */
     let loading = takeTime();
     button.after(loading);
 
-    let newsIds = newsRangeLimit(newStoriesId); /* get the array of id */
+    let newsIds = library.getArrayRange(newStoriesId, seeNews, ( seeNews + NEWS_LIMIT)); /* get the array of id */
+    seeNews += NEWS_LIMIT;
 
     let moreNews = await newsLibrary.getNoticeById( baseUrl, newsIds );
 
     let stories = newsLibrary.writeNotice(moreNews);   /* write in HTML Document */
 
-    removeLoading(loading);
+    loading.remove();
 
     await appendStories(stories, container);
 
@@ -135,8 +128,4 @@ function takeTime(){
     loading.classList.add('loading');
 
     return loading;
-}
-
-function removeLoading( loading ) {
-    loading.remove();
 }

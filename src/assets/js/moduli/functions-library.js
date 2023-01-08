@@ -1,5 +1,7 @@
 'use strict'
 
+import 'https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js';
+
 /*-------------------------DOMS-ELEMENTS---------------------------*/
 
 export function createButton(text) {
@@ -54,6 +56,16 @@ export function exstractProperty(obj, order) {
 
   return arrRes;
 
+}
+
+/*------------------------Get-RANGE-of-array-----------------------*/
+
+// Supplying the START, END values this function returns a portion of that array
+
+export function getArrayRange(array, start, end) {     
+  let newArr = _.slice(array, start, end );
+
+  return newArr;
 }
 
 
