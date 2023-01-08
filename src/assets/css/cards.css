@@ -5,7 +5,7 @@
 }
 
 :root {
-    --timeTransition: 1000ms;
+    --timeTransition: 400ms;
 }
 
 .cards{
@@ -79,6 +79,10 @@
     .cards {
         width: 60%;
     }
+
+    .loading {
+        width: 80px;
+    }
 }
 
 
@@ -100,7 +104,7 @@
 @media only screen and ( min-width:992px ) {
 
     .cards {
-        width: 60%;
+        width: 700px;
     }
 
 }

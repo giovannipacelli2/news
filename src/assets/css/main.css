@@ -39,7 +39,7 @@ body {
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
 
     margin-top: var(--headerHeight);
 }
@@ -81,6 +81,11 @@ body {
     font-size: 1.2em;
     text-overflow:clip;
     text-align: center;
+}
+
+.loading {
+    width: 20%;
+    margin: 0 auto;
 }
 
 .button {
