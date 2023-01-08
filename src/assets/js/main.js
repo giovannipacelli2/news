@@ -14,12 +14,12 @@ import { Notice, GenericalNews, Story, Comment, Job } from './moduli/notice.js';
 let baseUrl = 'https://hacker-news.firebaseio.com/v0/';
 let newStories = 'newstories.json';
 
-let newStoriesId = null;
-let mainStories = null;
+let newStoriesId = null;    // All news ID
+let mainStories = null;     // First block of news printed
 
-const NEWS_LIMIT = 10;
+const NEWS_LIMIT = 10;  // commands the limit of printed news
 
-let seeNews = 0;
+let seeNews = 0; // number of seen news
 
 main();
 
@@ -29,27 +29,35 @@ async function main(){
 
         let container = document.body.querySelector(".cards-container");
 
+        // Create loading animation during loading news
         let loading = takeTime();
         container.before(loading);
 
+        // Call the master request for News list to Hacker News and stores it in a global variable
         let response = await newsLibrary.getRequest( baseUrl + newStories );
         newStoriesId = response.data;
 
+        // Gets a range for the News list from NEWS_LIMIT var
+        // Store number of seen news
         let nNotice = library.getArrayRange(response.data, seeNews, ( seeNews + NEWS_LIMIT));
         seeNews += NEWS_LIMIT;
 
+        // Makes the request to Hacker News API for each ID
         let arrayNews = await newsLibrary.getNoticeById( baseUrl, nNotice );
 
+        // Create every notice by contructor and return them
         mainStories = newsLibrary.writeNotice(arrayNews);
 
         loading.remove();
 
+        // Appends in HTML with CSS animation
         await appendStories(mainStories, container);
 
         let button = library.createButton("...vedi altro...");
 
         container.after(button);
 
+        // Manage MORE news
         button.addEventListener( 'click', seeMore );
         
     }
