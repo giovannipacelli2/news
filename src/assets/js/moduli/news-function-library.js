@@ -13,7 +13,8 @@ export async function getRequest(url){
                 print: 'pretty',
             }
         })
-        .then( (res) => { resolve(res) } );
+        .then( (res) => { resolve(res) } )
+        .catch( (err)=> { forErrors(err) } );
     });
 }
 
@@ -36,7 +37,8 @@ export async function getNoticeById(baseUrl, news) {
                 arrNews.push(response.data);
             });
         })
-        .then( () => { resolve(arrNews) } );
+        .then( () => { resolve(arrNews) } )
+        .catch( (err)=> { forErrors(err) } );;
     });
 }
 
@@ -108,6 +110,30 @@ export async function printElement(baseUrl, id, container=false) {
             console.log(response.data); /* CONSOLE LOG */
             let elem = writeNotice([response.data], container);
             resolve(elem);
-        });
+        })
+        .catch( (err)=> { forErrors(err) } );;
     });
 }
+
+/*-------------------------Error-handlers--------------------------*/
+
+export function forErrors(error){
+
+    let loading = document.body.querySelector(".loading");
+      if ( loading ) {
+          loading.remove();
+      }
+  
+      if (error.response) {
+  
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+  
+        } else if (error.request) {
+          console.log(error.request);
+      } else {
+        throw error;
+      }
+      console.log(error.config);  
+  }

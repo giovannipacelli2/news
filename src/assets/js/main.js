@@ -11,7 +11,7 @@ import  * as library  from './moduli/functions-library.js';
 import  * as newsLibrary  from './moduli/news-function-library.js';
 import { Notice, GenericalNews, Story, Comment, Job } from './moduli/notice.js';
 
-let baseUrl = 'https://hacker-news.firebaseio.com/v0/';
+let baseUrl = 'https://hacker-news.firebaseio.com/v01/';
 let newStories = 'newstories.json';
 
 let newStoriesId = null;    // All news ID
@@ -61,7 +61,7 @@ async function main(){
         button.addEventListener( 'click', seeMore );
         
     }
-    catch(err) {
+    catch(err) {       
         library.forErrors(err); 
     }
 }
