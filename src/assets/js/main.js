@@ -19,7 +19,7 @@ let mainStories = null;     // First block of news printed
 
 const NEWS_LIMIT = 10;  // commands the limit of printed news
 
-let seeNews = 488; // number of seen news
+let seeNews = 477; // number of seen news
 
 main();
 
@@ -115,7 +115,7 @@ async function seeMore(e) {
     let container = document.body.querySelector(".cards-container");
     let loading = createLoading();
     button.after(loading);
-debugger;
+
     let newsIds;
     let remindNews = (newStoriesId.length - 1) - seeNews;
 
@@ -123,6 +123,13 @@ debugger;
 
         if ( remindNews < NEWS_LIMIT) {
             newsIds = _.slice(newStoriesId, seeNews, ( seeNews + remindNews));
+
+            loading.remove();
+            let message = document.createElement('DIV');
+            message.textContent = "No more news!";
+            container.append(message);
+
+            this.removeEventListener('click', seeMore);
         }
 
         else {
