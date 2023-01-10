@@ -49,8 +49,8 @@ export class Notice{
 
                 <h5 class="card-title">${_.capitalize(this.type)}</h5>
                 <p class="card-text by">By: ${this.by}</p>
-                <p class="card-text">Vuoto</p>
-                <p class="card-text">${this.fullDate}</p>
+                <p class="card-text text-end me-5">Data:</p>
+                <p class="card-text text-end me-4">${this.fullDate}</p>
                 ${url}
 
                 </div>
