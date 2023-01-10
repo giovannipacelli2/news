@@ -132,7 +132,7 @@ async function seeMore(e) {
 
 function createLoading(){
     let loading = document.createElement('IMG');
-    loading.src = './assets/img/loading.gif';
+    loading.src = './assets/img/loading_1.gif';
     loading.classList.add('loading');
 
     return loading;
