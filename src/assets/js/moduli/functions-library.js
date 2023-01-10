@@ -44,15 +44,4 @@ export function exstractProperty(obj, order) {
 
 }
 
-/*------------------------Get-RANGE-of-array-----------------------*/
-
-// Supplying the START, END values this function returns a portion of that array
-
-export function getArrayRange(array, start, end) {     
-  let newArr = _.slice(array, start, end );
-
-  return newArr;
-}
-
-
 /*-------------------------Request-functions-----------------------*/

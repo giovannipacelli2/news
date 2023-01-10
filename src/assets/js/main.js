@@ -7,11 +7,11 @@ import 'https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js';
 
 /*-----------------------Import-functions.js-----------------------*/
 
-import  * as library  from './moduli/functions-library.js';
-import  * as newsLibrary  from './moduli/news-function-library.js';
+import  * as Library  from './moduli/functions-library.js';
+import  * as NewsLibrary  from './moduli/news-function-library.js';
 import { Notice, GenericalNews, Story, Comment, Job } from './moduli/notice.js';
 
-let baseUrl = 'https://hacker-news.firebaseio.com/v01/';
+let baseUrl = 'https://hacker-news.firebaseio.com/v0/';
 let newStories = 'newstories.json';
 
 let newStoriesId = null;    // All news ID
@@ -30,30 +30,30 @@ async function main(){
         let container = document.body.querySelector(".cards-container");
 
         // Create loading animation during loading news
-        let loading = takeTime();
+        let loading = createLoading();
         container.before(loading);
 
         // Call the master request for News list to Hacker News and stores it in a global variable
-        let response = await newsLibrary.getRequest( baseUrl + newStories );
+        let response = await NewsLibrary.getRequest( baseUrl + newStories );
         newStoriesId = response.data;
 
         // Gets a range for the News list from NEWS_LIMIT var
         // Store number of seen news
-        let nNotice = library.getArrayRange(response.data, seeNews, ( seeNews + NEWS_LIMIT));
+        let nNotice = _.slice(response.data, seeNews, ( seeNews + NEWS_LIMIT));
         seeNews += NEWS_LIMIT;
 
         // Makes the request to Hacker News API for each ID
-        let arrayNews = await newsLibrary.getNoticeById( baseUrl, nNotice );
+        let arrayNews = await NewsLibrary.getNoticeById( baseUrl, nNotice );
 
         // Create every notice by contructor and return them
-        mainStories = newsLibrary.writeNotice(arrayNews);
+        mainStories = NewsLibrary.writeNotice(arrayNews);
 
         loading.remove();
 
         // Appends in HTML with CSS animation
         await appendStories(mainStories, container);
 
-        let button = library.createButton("...vedi altro...");
+        let button = Library.createButton("...vedi altro...");
 
         container.after(button);
 
@@ -62,7 +62,7 @@ async function main(){
         
     }
     catch(err) {       
-        library.forErrors(err); 
+        NewsLibrary.forErrors(err); 
     }
 }
 
@@ -113,15 +113,15 @@ async function seeMore(e) {
     if ( !button.classList.contains("button") ) return;
 
     let container = document.body.querySelector(".cards-container");
-    let loading = takeTime();
+    let loading = createLoading();
     button.after(loading);
 
-    let newsIds = library.getArrayRange(newStoriesId, seeNews, ( seeNews + NEWS_LIMIT)); /* get the array of id */
+    let newsIds = _.slice(newStoriesId, seeNews, ( seeNews + NEWS_LIMIT)); /* get the array of id */
     seeNews += NEWS_LIMIT;
 
-    let moreNews = await newsLibrary.getNoticeById( baseUrl, newsIds );
+    let moreNews = await NewsLibrary.getNoticeById( baseUrl, newsIds );
 
-    let stories = newsLibrary.writeNotice(moreNews);   /* write in HTML Document */
+    let stories = NewsLibrary.writeNotice(moreNews);   /* write in HTML Document */
 
     loading.remove();
 
@@ -130,7 +130,7 @@ async function seeMore(e) {
     container.after(this);
 }
 
-function takeTime(){
+function createLoading(){
     let loading = document.createElement('IMG');
     loading.src = './assets/img/loading.gif';
     loading.classList.add('loading');
