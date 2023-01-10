@@ -19,7 +19,7 @@ let mainStories = null;     // First block of news printed
 
 const NEWS_LIMIT = 10;  // commands the limit of printed news
 
-let seeNews = 0; // number of seen news
+let seeNews = 488; // number of seen news
 
 main();
 
@@ -115,19 +115,41 @@ async function seeMore(e) {
     let container = document.body.querySelector(".cards-container");
     let loading = createLoading();
     button.after(loading);
+debugger;
+    let newsIds;
+    let remindNews = (newStoriesId.length - 1) - seeNews;
 
-    let newsIds = _.slice(newStoriesId, seeNews, ( seeNews + NEWS_LIMIT)); /* get the array of id */
-    seeNews += NEWS_LIMIT;
+    if ( ((seeNews + NEWS_LIMIT) < newStoriesId.length ) || remindNews < NEWS_LIMIT)  {
 
-    let moreNews = await NewsLibrary.getNoticeById( baseUrl, newsIds );
+        if ( remindNews < NEWS_LIMIT) {
+            newsIds = _.slice(newStoriesId, seeNews, ( seeNews + remindNews));
+        }
 
-    let stories = NewsLibrary.writeNotice(moreNews);   /* write in HTML Document */
+        else {
+            newsIds = _.slice(newStoriesId, seeNews, ( seeNews + NEWS_LIMIT));
+        }
 
-    loading.remove();
+        seeNews += NEWS_LIMIT;
 
-    await appendStories(stories, container);
+        let moreNews = await NewsLibrary.getNoticeById( baseUrl, newsIds );
 
-    container.after(this);
+        let stories = NewsLibrary.writeNotice(moreNews);   /* write in HTML Document */
+
+        loading.remove();
+
+        await appendStories(stories, container);
+
+        container.after(this);
+    }
+
+    else {
+        loading.remove();
+        let message = document.createElement('DIV');
+        message.textContent = "No more news!";
+        container.append(message);
+
+        this.removeEventListener('click', seeMore);
+    }
 }
 
 function createLoading(){
