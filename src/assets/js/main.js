@@ -19,7 +19,7 @@ let mainStories = null;     // First block of news printed
 
 const NEWS_LIMIT = 10;  // commands the limit of printed news
 
-let seeNews = 477; // number of seen news
+let seeNews = 0; // number of seen news
 
 main();
 
