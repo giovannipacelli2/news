@@ -19,9 +19,19 @@ let mainStories = null;     // First block of news printed
 
 const NEWS_LIMIT = 10;  // commands the limit of printed news
 
-let seeNews = 0; // number of seen news
+let seeNews = 0; // number of seen news -486-
+
+let refresh = 20 * 1000;
 
 main();
+
+setInterval(async function() {
+    /* let container = document.body.querySelector(".cards-container");
+    container.innerHTML = "";
+    let button = document.body.querySelector(".button");
+    button.remove(); */
+    refreshNews();
+}, refresh);
 
 async function main(){
 
@@ -39,8 +49,8 @@ async function main(){
 
         // Gets a range for the News list from NEWS_LIMIT var
         // Store number of seen news
-        let nNotice = _.slice(response.data, seeNews, ( seeNews + NEWS_LIMIT));
-        seeNews += NEWS_LIMIT;
+        let nNotice = _.slice(response.data, 0, NEWS_LIMIT);
+        seeNews = NEWS_LIMIT;
 
         // Makes the request to Hacker News API for each ID
         let arrayNews = await NewsLibrary.getNoticeById( baseUrl, nNotice );
@@ -123,39 +133,21 @@ async function seeMore(e) {
 
         if ( remindNews < NEWS_LIMIT) {
             newsIds = _.slice(newStoriesId, seeNews, ( seeNews + remindNews));
-
-            loading.remove();
-            let message = document.createElement('DIV');
-            message.textContent = "No more news!";
-            container.append(message);
-
-            this.removeEventListener('click', seeMore);
+            await requireMoreNews( baseUrl, newsIds, loading, container, button );
+            noMoreNews( loading, container, button );
         }
 
         else {
             newsIds = _.slice(newStoriesId, seeNews, ( seeNews + NEWS_LIMIT));
+            await requireMoreNews( baseUrl, newsIds, loading, container, button );
         }
 
         seeNews += NEWS_LIMIT;
-
-        let moreNews = await NewsLibrary.getNoticeById( baseUrl, newsIds );
-
-        let stories = NewsLibrary.writeNotice(moreNews);   /* write in HTML Document */
-
-        loading.remove();
-
-        await appendStories(stories, container);
-
-        container.after(this);
+        
     }
 
     else {
-        loading.remove();
-        let message = document.createElement('DIV');
-        message.textContent = "No more news!";
-        container.append(message);
-
-        this.removeEventListener('click', seeMore);
+        noMoreNews( loading, container, button );
     }
 }
 
@@ -165,4 +157,44 @@ function createLoading(){
     loading.classList.add('loading');
 
     return loading;
+}
+
+async function requireMoreNews( baseUrl, newsIds, loading, container, button ) {
+    return new Promise( async function( resolve,reject ){
+        let moreNews = await NewsLibrary.getNoticeById( baseUrl, newsIds );
+
+        let stories = NewsLibrary.writeNotice(moreNews);   /* write in HTML Document */
+
+        loading.remove();
+
+        await appendStories(stories, container);
+
+        container.after(button);
+        resolve();
+    } );
+}
+
+function noMoreNews( loading, container, button ) {
+    loading.remove();
+    let message = document.createElement('DIV');
+    message.classList.add("no-more-news");
+    message.textContent = "No more news!";
+    container.append(message);
+
+    button.removeEventListener('click', seeMore);
+}
+
+async function refreshNews() {
+    // Call the master request for News list to Hacker News and stores it in a global variable
+    let response = await NewsLibrary.getRequest( baseUrl + newStories );
+    let refreshNewsIds = response.data;
+
+    let lastNotice = _.findIndex(refreshNewsIds, function(id) { return id == newStoriesId[0]; });
+
+    let refreshNews = _.slice( refreshNewsIds, 0 , lastNotice );
+    console.clear();
+    console.log(refreshNews);
+    console.log("-------");
+    console.dir(newStoriesId);
+    console.dir(refreshNewsIds);
 }

@@ -89,6 +89,15 @@ body {
     opacity: 0.8;
 }
 
+.no-more-news {
+    font-size: 1.5em;
+    font-weight: 600;
+    text-decoration: underline;
+    color: red;
+
+    margin-top: 2em;
+}
+
 .button {
     margin: 2em auto;
     padding: 0.1em 0.5em;
