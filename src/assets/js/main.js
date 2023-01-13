@@ -19,18 +19,23 @@ let mainStories = null;     // First block of news printed
 
 const NEWS_LIMIT = 10;  // commands the limit of printed news
 
-let seeNews = 0; // number of seen news -486-
+let seeNews = 486; // number of seen news -486-
 
-let refresh = 20 * 1000;
+let refresh = 10 * 1000;
 
-main();
+await main();
 
 setInterval(async function() {
-    /* let container = document.body.querySelector(".cards-container");
-    container.innerHTML = "";
+    
+    /* container.innerHTML = "";
     let button = document.body.querySelector(".button");
     button.remove(); */
-    refreshNews();
+
+    let res = await refreshNews(baseUrl, newStories, newStoriesId[0]);
+    if (res) {
+        newStoriesId = res;
+        /* console.dir(newStoriesId); */
+    }
 }, refresh);
 
 async function main(){
@@ -45,12 +50,14 @@ async function main(){
 
         // Call the master request for News list to Hacker News and stores it in a global variable
         let response = await NewsLibrary.getRequest( baseUrl + newStories );
-        newStoriesId = response.data;
+        newStoriesId = await response.data;
 
         // Gets a range for the News list from NEWS_LIMIT var
         // Store number of seen news
-        let nNotice = _.slice(response.data, 0, NEWS_LIMIT);
-        seeNews = NEWS_LIMIT;
+        let nNotice = _.slice(response.data, seeNews, ( seeNews + NEWS_LIMIT ));
+        seeNews += NEWS_LIMIT;
+        /* let nNotice = _.slice(response.data, 0, NEWS_LIMIT);
+        seeNews = NEWS_LIMIT; */
 
         // Makes the request to Hacker News API for each ID
         let arrayNews = await NewsLibrary.getNoticeById( baseUrl, nNotice );
@@ -184,17 +191,34 @@ function noMoreNews( loading, container, button ) {
     button.removeEventListener('click', seeMore);
 }
 
-async function refreshNews() {
+async function refreshNews(baseUrl, newStories, last) {
+    let container = document.body.querySelector(".cards-container");
+
     // Call the master request for News list to Hacker News and stores it in a global variable
     let response = await NewsLibrary.getRequest( baseUrl + newStories );
     let refreshNewsIds = response.data;
 
-    let lastNotice = _.findIndex(refreshNewsIds, function(id) { return id == newStoriesId[0]; });
+    // finds the index of the latest news id since the page was loaded
+    let lastNotice = _.findIndex(refreshNewsIds, function(id) { return id == last; });
 
+    // returns the new news id array
     let refreshNews = _.slice( refreshNewsIds, 0 , lastNotice );
-    console.clear();
-    console.log(refreshNews);
-    console.log("-------");
-    console.dir(newStoriesId);
-    console.dir(refreshNewsIds);
+    
+    if ( refreshNews.length > 0 ){
+
+        console.log(refreshNews);
+        console.log("-------");
+
+        let arrayNews = await NewsLibrary.getNoticeById( baseUrl, refreshNews );
+
+        // Create every notice by contructor and return them
+        let createdStories = NewsLibrary.writeNotice(arrayNews);
+
+        // Appends in HTML with CSS animation
+        let div = document.createElement('DIV');
+        container.prepend(div);
+        await appendStories(createdStories, div);
+
+        return refreshNewsIds;
+    }
 }
