@@ -104,13 +104,14 @@ async function main(){
 
         if ( err instanceof NewsLibrary.NewsError ) {
 
-            message.remove();
-            loading.remove();
-            console.log(err.message);
-            console.log("-----------");
+            console.log(err.message + "\n" + "-----------");
 
             setTimeout( async function(){
-                await main();
+                
+                message.remove();
+                loading.remove();
+
+                await main();   //retry to load main function
             }, 5000 );
         }
 
