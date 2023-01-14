@@ -94,7 +94,7 @@ async function main(){
         
     }
     catch(err) {       
-        NewsLibrary.forErrors(err, MAIN_CONTAINER); 
+        throw err;
     }
 }
 
@@ -131,6 +131,8 @@ async function seeMore(e) {
             newsIds = _.slice(newStoriesId, seeNews, ( seeNews + remainedNews));    // get array of id
 
             await requireMoreNews( baseUrl, newsIds, loading, MAIN_CONTAINER, button );
+
+            // Alerts that the news are finished
             noMoreNews( loading, MAIN_CONTAINER, button );
         }
 
@@ -142,7 +144,7 @@ async function seeMore(e) {
             await requireMoreNews( baseUrl, newsIds, loading, MAIN_CONTAINER, button );
         }
 
-        seeNews += NEWS_LIMIT;
+        seeNews += NEWS_LIMIT;  // Update the number of written news
         
     }
 
@@ -150,6 +152,29 @@ async function seeMore(e) {
         noMoreNews( loading, MAIN_CONTAINER, button );
     }
 }
+
+
+/*--------------Do-the-request-for-news-by-newsIds-array-----------*/
+
+
+async function requireMoreNews( baseUrl, newsIds, loading, mainContainer, button ) {
+
+    return new Promise( async function( resolve,reject ){
+        let moreNews = await NewsLibrary.getNoticeById( baseUrl, newsIds );
+
+        let stories = NewsLibrary.writeNotice(moreNews);   // stories = Array of CARDs html code 
+
+        loading.remove();
+
+        // append into container with animation
+        await NewsLibrary.animationAppendStories(stories, mainContainer);
+
+        mainContainer.after(button);
+        resolve();
+    } );
+
+}
+
 
 /*---------------------Create-loading-animation--------------------*/
 
@@ -160,26 +185,6 @@ function createLoading(){
     loading.classList.add('loading');
 
     return loading;
-}
-
-/*--------------Do-the-request-for-news-by-newsIds-array-----------*/
-
-
-async function requireMoreNews( baseUrl, newsIds, loading, mainContainer, button ) {
-
-    return new Promise( async function( resolve,reject ){
-        let moreNews = await NewsLibrary.getNoticeById( baseUrl, newsIds );
-
-        let stories = NewsLibrary.writeNotice(moreNews);   /* write in HTML Document */
-
-        loading.remove();
-
-        await animationAppendStories(stories, mainContainer);
-
-        mainContainer.after(button);
-        resolve();
-    } );
-
 }
 
 /*----------------Shows-that-there-aren't-more-news----------------*/
