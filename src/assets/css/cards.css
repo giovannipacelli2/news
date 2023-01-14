@@ -9,7 +9,7 @@
 }
 
 .cards{
-    --cardMarginBottom : 2em;
+    --cardMarginBottom : 2.4em;
     --cardsBorder : #f49653;
     /* dark thema */
     --D_bgCard : rgb(123, 82, 82); 
