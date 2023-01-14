@@ -93,33 +93,7 @@ async function main(){
         button.addEventListener( 'click', seeMore );
         
     }
-    catch(err) {     
-        let message = document.createElement('DIV');
-        message.style.fontSize = "1.2em";
-        message.style.color = "red";
-        message.textContent = "Qualcosa non va, prova ad aggiornare la pagina";
-        let loading = document.body.querySelector(".loading");
-
-        MAIN_CONTAINER.prepend(message);
-
-        if ( err instanceof NewsLibrary.NewsError ) {
-
-            console.log(err.message + "\n" + "-----------");
-
-            setTimeout( async function(){
-                
-                message.remove();
-                loading.remove();
-
-                await main();   //retry to load main function
-            }, 5000 );
-        }
-
-        else {
-            throw err;
-        }
-        
-    }
+    catch(err) { errorOnMainRequest(err); }
 }
 
 
@@ -131,50 +105,51 @@ async function main(){
 
 
 async function seeMore(e) {
+    try{
+        let button = e.target;
 
-    let button = e.target;
+        if ( button.id !== "more-button" ) return;
 
-    if ( button.id !== "more-button" ) return;
+        let loading = createLoading();  // Create loading effect
+        button.after(loading);
 
-    let loading = createLoading();  // Create loading effect
-    button.after(loading);
+        let newsIds;
+        let remainedNews = (newStoriesId.length - 1) - seeNews;
 
-    let newsIds;
-    let remainedNews = (newStoriesId.length - 1) - seeNews;
+        // Check if there are news to load
 
-    // Check if there are news to load
+        if ( ((seeNews + NEWS_LIMIT) < newStoriesId.length ) || remainedNews < NEWS_LIMIT)  {
 
-    if ( ((seeNews + NEWS_LIMIT) < newStoriesId.length ) || remainedNews < NEWS_LIMIT)  {
+            if ( remainedNews < NEWS_LIMIT) {
 
-        if ( remainedNews < NEWS_LIMIT) {
+                // if the remaining news is less than NEWS_LIMITS
+                // updates the range to treat
 
-            // if the remaining news is less than NEWS_LIMITS
-            // updates the range to treat
+                newsIds = _.slice(newStoriesId, seeNews, ( seeNews + remainedNews));    // get array of id
 
+                await requireMoreNews( baseUrl, newsIds, loading, MAIN_CONTAINER, button );
+
+                // Alerts that the news are finished
+                noMoreNews( loading, MAIN_CONTAINER, button );
+            }
+
+            else {
+
+                // Goes normally
+
+                newsIds = _.slice(newStoriesId, seeNews, ( seeNews + NEWS_LIMIT));  // get array of id
+                await requireMoreNews( baseUrl, newsIds, loading, MAIN_CONTAINER, button );
+            }
+
+            seeNews += NEWS_LIMIT;  // Update the number of written news
             
-            newsIds = _.slice(newStoriesId, seeNews, ( seeNews + remainedNews));    // get array of id
-
-            await requireMoreNews( baseUrl, newsIds, loading, MAIN_CONTAINER, button );
-
-            // Alerts that the news are finished
-            noMoreNews( loading, MAIN_CONTAINER, button );
         }
 
         else {
-
-            // Goes normally
-
-            newsIds = _.slice(newStoriesId, seeNews, ( seeNews + NEWS_LIMIT));  // get array of id
-            await requireMoreNews( baseUrl, newsIds, loading, MAIN_CONTAINER, button );
+            noMoreNews( loading, MAIN_CONTAINER, button );
         }
-
-        seeNews += NEWS_LIMIT;  // Update the number of written news
-        
     }
-
-    else {
-        noMoreNews( loading, MAIN_CONTAINER, button );
-    }
+    catch(err) { errorButtonLoad(err) }
 }
 
 
@@ -222,4 +197,51 @@ function noMoreNews( loading, mainContainer, button ) {
     mainContainer.append(message);
 
     button.removeEventListener('click', seeMore);
+}
+
+function errorMessage() {
+    let message = document.createElement('DIV');
+    message.style.fontSize = "1.2em";
+    message.style.color = "red";
+    message.textContent = "Qualcosa non va, prova ad aggiornare la pagina";
+
+    return message;
+}
+
+function errorOnMainRequest(err) {
+    let message = errorMessage();
+    let loading = document.body.querySelector(".loading");
+    let page = document.body.querySelector("#page");
+
+    page.prepend(message);
+
+    if ( err instanceof NewsLibrary.NewsError ) {
+
+        console.log(err.message + "\n" + "-----------");
+
+        setTimeout( async function(){
+
+            message.remove();
+            loading.remove();
+
+            await main();   //retry to load main function
+        }, 5000 );
+    }
+
+    else {
+        throw err;
+    }
+}
+
+function errorButtonLoad(err){
+    let message = errorMessage();
+    let button = document.body.querySelector("#more-button");
+    let loading = document.body.querySelector(".loading");
+    let page = document.body.querySelector("#page");
+        
+    loading.remove();
+    button.removeEventListener( 'click', seeMore );
+
+    page.append(message);
+    throw err;
 }
