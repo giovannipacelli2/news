@@ -97,6 +97,74 @@ export function writeNotice(news, container=false){
     }
 }
 
+/*-------------------Requires-the-latest-news-update---------------*/
+
+
+export async function refreshNews(baseUrl, newStories, mainContainer, last) {
+
+    // Call the master request for News list to Hacker News and stores it in a global variable
+    let response = await getRequest( baseUrl + newStories );
+    let refreshNewsIds = response.data;
+
+    // finds the index of the latest news id since the page was loaded
+    let lastNotice = _.findIndex(refreshNewsIds, function(id) { return id == last; });
+
+    // returns the new news id array
+    let refreshNews = _.slice( refreshNewsIds, 0 , lastNotice );
+    
+    if ( refreshNews.length > 0 ){
+
+        let arrayNews = await getNoticeById( baseUrl, refreshNews );
+
+        // Create every notice by contructor and return them
+        let createdStories = writeNotice(arrayNews);
+
+        // Appends in HTML with CSS animation
+        let div = document.createElement('DIV');
+        div.classList.add("new-news");
+        mainContainer.prepend(div);
+        await animationAppendStories(createdStories, div);
+
+        return refreshNewsIds;
+    }
+}
+
+/*-----------------Append-stories-with-CSS-Animation---------------*/
+
+
+export async function animationAppendStories( arrStories, father ) {
+
+    let container = document.createElement("DIV");
+    container.classList.add("container-sm", "cards-container", "elem-invisible");
+
+    let cssProperty = window.getComputedStyle(document.documentElement);
+    let timeTransition = cssProperty.getPropertyValue("--timeTransition");
+    let time = +timeTransition.split('ms')[0];  // get the value of time transition as NUMBER
+
+    return new Promise( function( resolve, reject ) {
+
+        // Insert every story in INVISIBLE CONTAINER
+        for ( let story of arrStories ) {
+            container.insertAdjacentHTML('beforeend',story);       
+        }
+               
+        father.append(container);
+        setTimeout( ()=> {
+            // CSS ANIMATION
+            container.classList.add("card-transition");
+
+            setTimeout( ()=> {
+                // CSS ANIMATION
+                container.classList.remove("elem-invisible");
+                container.classList.remove("card-transition");
+                resolve();
+            } ,time );
+
+        } ,time);
+    } );      
+    
+}
+
 /*--------------------------Get-one-element------------------------*/
 
 export async function printElement(baseUrl, id, container=false) {
