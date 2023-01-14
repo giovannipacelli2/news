@@ -71,6 +71,10 @@
     color: var(--D_cardLinkVisited);
 }
 
+.new-news {
+    width: 100%;
+}
+
 .new-news .cards-container {
     padding-top: 0em;
     padding-bottom: 0em;

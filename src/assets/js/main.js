@@ -27,7 +27,7 @@ const NEWS_LIMIT = 10;  // commands the limit of printed news
 
 let seeNews = 0; // number of seen news -486-
 
-let refresh = 60/*seconds*/ * 1000;
+let refresh = 20/*seconds*/ * 1000;
 
 
 
@@ -93,8 +93,31 @@ async function main(){
         button.addEventListener( 'click', seeMore );
         
     }
-    catch(err) {       
-        throw err;
+    catch(err) {     
+        let message = document.createElement('DIV');
+        message.style.fontSize = "1.2em";
+        message.style.color = "red";
+        message.textContent = "Qualcosa non va, prova ad aggiornare la pagina";
+        let loading = document.body.querySelector(".loading");
+
+        MAIN_CONTAINER.prepend(message);
+
+        if ( err instanceof NewsLibrary.NewsError ) {
+
+            message.remove();
+            loading.remove();
+            console.log(err.message);
+            console.log("-----------");
+
+            setTimeout( async function(){
+                await main();
+            }, 5000 );
+        }
+
+        else {
+            throw err;
+        }
+        
     }
 }
 

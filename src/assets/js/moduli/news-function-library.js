@@ -4,6 +4,12 @@ import  * as Library  from './functions-library.js';
 import { Notice, GenericalNews, Story, Comment, Job } from './notice.js';
 import { MAIN_CONTAINER } from '../main.js';
 
+export class NewsError extends Error{
+    constructor(message){
+        super(message);
+    }
+}
+
 /*------------------------Get-simple-request-----------------------*/
 
 export async function getRequest(url){
@@ -50,53 +56,57 @@ export async function getNoticeById(baseUrl, news) {
 
 export function writeNotice(news, container=false){
 
-    let res = [];
+    try{
+        let res = [];
 
-    for ( let data of news ) {
+        for ( let data of news ) {
 
-        let notice = null;
-        let property = null;
+            let notice = null;
+            let property = null;
 
-        // Creates CARD based on news type
+            // Creates CARD based on news type
 
-        if ( data.type == "story" ){
-            
-            property = Library.exstractProperty(data, Story.argumentsOrder);
+            if ( data.type == "story" ){
+                
+                property = Library.exstractProperty(data, Story.argumentsOrder);
 
-            notice = new Story(...property);
+                notice = new Story(...property);
+            }
+            else if ( data.type == "comment" ){
+
+                property = Library.exstractProperty(data, Comment.argumentsOrder);
+
+                notice = new Comment(...property);
+            }
+            else if ( data.type == "job" ){
+
+                property = Library.exstractProperty(data, Job.argumentsOrder);
+
+                notice = new Job(...property);
+            }
+
+            else {
+
+                property = Library.exstractProperty(data, GenericalNews.argumentsOrder);
+
+                notice = new GenericalNews(...property);
+            }
+
+            let card = notice.createCard();
+
+            if (container) {
+                container.insertAdjacentHTML('beforeend',card);
+            } else {
+                res.push(card);     // Array of CARDs html code
+            }
+
         }
-        else if ( data.type == "comment" ){
 
-            property = Library.exstractProperty(data, Comment.argumentsOrder);
-
-            notice = new Comment(...property);
+        if (!container) {
+            return res;     // If there isn't "container" argument, it returns RES array 
         }
-        else if ( data.type == "job" ){
-
-            property = Library.exstractProperty(data, Job.argumentsOrder);
-
-            notice = new Job(...property);
-        }
-
-        else {
-
-            property = Library.exstractProperty(data, GenericalNews.argumentsOrder);
-
-            notice = new GenericalNews(...property);
-        }
-
-        let card = notice.createCard();
-
-        if (container) {
-            container.insertAdjacentHTML('beforeend',card);
-        } else {
-            res.push(card);     // Array of CARDs html code
-        }
-
-    }
-
-    if (!container) {
-        return res;     // If there isn't "container" argument, it returns RES array 
+    } catch(err){
+        throw new NewsError(err);
     }
 }
 
