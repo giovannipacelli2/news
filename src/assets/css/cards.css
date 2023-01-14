@@ -24,8 +24,8 @@
 
     --D_bgCard : #37474F;
     --D_cardTextColor : rgb(255, 255, 255); 
-    --D_cardLink : #FFD54F;
-    --D_cardLinkVisited : rgb(136, 250, 136);
+    --D_cardLink : #fae49a;
+    --D_cardLinkVisited : rgb(188, 247, 188);
 }
 .elem-invisible {
     display: none;

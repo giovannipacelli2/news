@@ -37,14 +37,14 @@ body {
 #header, #page{
     --headerHeight: 9em;
     --headerColor : rgb(37, 54, 149);
-    --flashNewsColor : rgb(255, 255, 255);
-    --headerTextColor : rgb(255, 255, 255);
+    --flashNewsColor : #fad047;
+    --headerTextColor : #910000;
 }
 
 .button {
     --color: rgb(255, 255, 255);
-    --bgColor: #e87a3f;
-    --bgColorHover: #e56d2d;
+    --bgColor: #41555f;
+    --bgColorHover: #4b606b;
 }
 
 
@@ -99,13 +99,14 @@ body {
 
 .text-container h1 {
     color: var(--flashNewsColor);
+    font-size: 2em;
 }
 
 .header-text {
     font-size: 1.2em;
     text-overflow:clip;
     text-align: center;
-    font-weight: 600;
+    font-style: italic;
 }
 
 .loading {
@@ -167,6 +168,10 @@ body {
 }
 
 @media only screen and ( min-width:576px ) {
+
+    .text-container h1 {
+        font-size: 2.5em;
+    }
 
     .header-text {
         text-align: start;
