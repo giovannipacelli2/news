@@ -9,7 +9,7 @@
 }
 
 .cards{
-    --cardMarginBottom : 2.4em;
+    --cardMarginBottom : 2em;
     --cardsBorder : #f49653;
     /* dark thema */
     --D_bgCard : rgb(123, 82, 82); 
@@ -32,7 +32,7 @@
 }
 
 .cards-container {
-    padding: 0.5em 0.1em;
+    padding: 0 0.1em;
 
     display: flex;
     flex-direction: column;
@@ -56,6 +56,11 @@
     color: var(--D_cardLinkVisited);
 }
 
+.new-news .cards-container {
+    padding-top: 0em;
+    padding-bottom: 0em;
+}
+
 .by {
     font-style: italic;
 }
@@ -67,6 +72,11 @@
 }
 
 @media only screen and ( min-width:576px ) {
+
+    .new-news .cards-container {
+        padding-top: 1.2em;
+        padding-bottom: 0.8em;
+    }
 
     .cards-container {
         padding: 1.2em;

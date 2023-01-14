@@ -21,7 +21,7 @@ const NEWS_LIMIT = 10;  // commands the limit of printed news
 
 let seeNews = 0; // number of seen news -486-
 
-let refresh = 60 * 1000;
+let refresh = 10 * 1000;    // refresh time
 
 await main();
 
@@ -208,6 +208,7 @@ async function refreshNews(baseUrl, newStories, last) {
 
         // Appends in HTML with CSS animation
         let div = document.createElement('DIV');
+        div.classList.add("new-news");
         container.prepend(div);
         await appendStories(createdStories, div);
 

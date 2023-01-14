@@ -41,7 +41,7 @@ body {
     flex-direction: column;
     align-items: center;
 
-    margin-top: var(--headerHeight);
+    margin-top: calc( var(--headerHeight) + 0.5em );
 }
 
 #header {
