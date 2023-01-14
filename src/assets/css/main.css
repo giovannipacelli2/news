@@ -30,19 +30,19 @@ body {
 
 
  #header, #footer {
-    --yellowBgTop : linear-gradient( #263238, #78909C, #ffffff);
+    --yellowBgTop : linear-gradient( #263238, #78909C, #ffffff );
     --yellowBgBottom: linear-gradient( #ffffff, #78909C, #263238);
 }
 
 #header, #page{
-    --headerHeight: 9em;
+    --headerHeight: 10em;
     --headerColor : rgb(37, 54, 149);
-    --flashNewsColor : #fad047;
-    --headerTextColor : #910000;
+    --flashNewsColor : #ffffff;
+    --headerTextColor : #313131; /* #a90000; */
 }
 
 .button {
-    --color: rgb(255, 255, 255);
+    --color: #FFD180;
     --bgColor: #41555f;
     --bgColorHover: #4b606b;
 }
@@ -61,7 +61,7 @@ body {
     flex-direction: column;
     align-items: center;
 
-    margin-top: calc( var(--headerHeight) + 0.5em );
+    margin-top: calc( var(--headerHeight) + 2em );
 }
 
 #header {
@@ -91,8 +91,10 @@ body {
     display: flex;
     flex-direction: column;
 
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+
+    height: 100%;
 
     color : var(--headerTextColor);
 }
@@ -100,10 +102,12 @@ body {
 .text-container h1 {
     color: var(--flashNewsColor);
     font-size: 2em;
+    margin-top: 1em;
+    text-shadow: 7px 5px 2px #313131;
 }
 
 .header-text {
-    font-size: 1.2em;
+    font-size: 1em;
     text-overflow:clip;
     text-align: center;
     font-style: italic;
@@ -175,10 +179,11 @@ body {
 
     .header-text {
         text-align: start;
+        font-size: 1.2em;
     }
 
     #header, #page{
-        --headerHeight: 12em;
+        --headerHeight: 14em;
     }
 
 }

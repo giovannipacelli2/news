@@ -26,6 +26,8 @@
     --D_cardTextColor : rgb(255, 255, 255); 
     --D_cardLink : #fae49a;
     --D_cardLinkVisited : rgb(188, 247, 188);
+
+    --D_cardTitleColor: #FFD180;
 }
 .elem-invisible {
     display: none;
@@ -54,7 +56,10 @@
     margin-bottom: var(--cardMarginBottom);
     background-color: var(--D_bgCard);
     color: var(--D_cardTextColor);
-    /* border-color: var(--cardsBorder); */
+}
+
+.cards h5 {
+    color: var(--D_cardTitleColor);
 }
 
 .cards a:hover,
