@@ -18,7 +18,7 @@ body {
 #header, #page{
     --headerHeight: 9em;
     --headerColor : rgb(216, 215, 215);
-    --flashNewsColor : rgb(216, 215, 215);
+    --flashNewsColor : rgb(169, 0, 0);
     --headerTextColor : rgb(169, 0, 0);
 }
 
@@ -26,25 +26,25 @@ body {
     --color: rgb(169, 0, 0);
     --bgColor: rgb(245, 221, 81);
     --bgColorHover: rgb(248, 227, 111);
-}
- */
+} */
+
 
  #header, #footer {
-    --yellowBgTop : linear-gradient( #252b53, #6977d2, #ffffff);
-    --yellowBgBottom: linear-gradient( #ffffff, #6977d2, #252b53);
+    --yellowBgTop : linear-gradient( #263238, #78909C, #ffffff);
+    --yellowBgBottom: linear-gradient( #ffffff, #78909C, #263238);
 }
 
 #header, #page{
     --headerHeight: 9em;
     --headerColor : rgb(37, 54, 149);
     --flashNewsColor : rgb(255, 255, 255);
-    --headerTextColor : rgb(43, 43, 43);
+    --headerTextColor : rgb(255, 255, 255);
 }
 
 .button {
     --color: rgb(255, 255, 255);
-    --bgColor: rgb(149, 84, 58);
-    --bgColorHover: rgb(125, 66, 42);
+    --bgColor: #e87a3f;
+    --bgColorHover: #e56d2d;
 }
 
 
@@ -145,6 +145,7 @@ body {
 .button:hover {
     color: var(--color);
     background-color: var(--bgColorHover);
+    border-color: var(--bgColorHover);
 }
 
 #footer {

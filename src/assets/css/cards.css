@@ -20,12 +20,12 @@
 
 .cards{
     --cardMarginBottom : 2em;
-    --cardsBorder : rgb(65, 75, 138);
-    /* dark thema */
-    --D_bgCard : rgb(65, 75, 138);
+    --cardsBorder : #37474F;
+
+    --D_bgCard : #37474F;
     --D_cardTextColor : rgb(255, 255, 255); 
-    --D_cardLink : rgb(255, 251, 0); 
-    --D_cardLinkVisited : #f49653;
+    --D_cardLink : #FFD54F;
+    --D_cardLinkVisited : rgb(136, 250, 136);
 }
 .elem-invisible {
     display: none;
