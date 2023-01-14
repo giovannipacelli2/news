@@ -19,22 +19,17 @@ let mainStories = null;     // First block of news printed
 
 const NEWS_LIMIT = 10;  // commands the limit of printed news
 
-let seeNews = 486; // number of seen news -486-
+let seeNews = 0; // number of seen news -486-
 
-let refresh = 10 * 1000;
+let refresh = 60 * 1000;
 
 await main();
 
 setInterval(async function() {
     
-    /* container.innerHTML = "";
-    let button = document.body.querySelector(".button");
-    button.remove(); */
-
     let res = await refreshNews(baseUrl, newStories, newStoriesId[0]);
     if (res) {
         newStoriesId = res;
-        /* console.dir(newStoriesId); */
     }
 }, refresh);
 
@@ -42,7 +37,7 @@ async function main(){
 
     try {
 
-        let container = document.body.querySelector(".cards-container");
+        let container = document.body.querySelector("#main-container");
 
         // Create loading animation during loading news
         let loading = createLoading();
@@ -129,7 +124,7 @@ async function seeMore(e) {
 
     if ( !button.classList.contains("button") ) return;
 
-    let container = document.body.querySelector(".cards-container");
+    let container = document.body.querySelector("#main-container");
     let loading = createLoading();
     button.after(loading);
 
@@ -192,7 +187,7 @@ function noMoreNews( loading, container, button ) {
 }
 
 async function refreshNews(baseUrl, newStories, last) {
-    let container = document.body.querySelector(".cards-container");
+    let container = document.body.querySelector("#main-container");
 
     // Call the master request for News list to Hacker News and stores it in a global variable
     let response = await NewsLibrary.getRequest( baseUrl + newStories );
@@ -205,9 +200,6 @@ async function refreshNews(baseUrl, newStories, last) {
     let refreshNews = _.slice( refreshNewsIds, 0 , lastNotice );
     
     if ( refreshNews.length > 0 ){
-
-        console.log(refreshNews);
-        console.log("-------");
 
         let arrayNews = await NewsLibrary.getNoticeById( baseUrl, refreshNews );
 
