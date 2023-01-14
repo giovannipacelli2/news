@@ -2,6 +2,7 @@
 
 import  * as Library  from './functions-library.js';
 import { Notice, GenericalNews, Story, Comment, Job } from './notice.js';
+import { MAIN_CONTAINER } from '../main.js';
 
 /*------------------------Get-simple-request-----------------------*/
 
@@ -16,7 +17,7 @@ export async function getRequest(url){
         .then( (res) => { resolve(res) } )
         .catch( (err)=> { 
             console.dir(err);
-            forErrors(err) 
+            forErrors(err, MAIN_CONTAINER) 
         } );
     });
 }
@@ -41,7 +42,7 @@ export async function getNoticeById(baseUrl, news) {
             });
         })
         .then( () => { resolve(arrNews) } )
-        .catch( (err)=> { forErrors(err) } );;
+        .catch( (err)=> { forErrors(err, MAIN_CONTAINER) } );;
     });
 }
 
@@ -55,6 +56,8 @@ export function writeNotice(news, container=false){
 
         let notice = null;
         let property = null;
+
+        // Creates CARD based on news type
 
         if ( data.type == "story" ){
             
@@ -87,13 +90,13 @@ export function writeNotice(news, container=false){
         if (container) {
             container.insertAdjacentHTML('beforeend',card);
         } else {
-            res.push(card);
+            res.push(card);     // Array of CARDs html code
         }
 
     }
 
     if (!container) {
-        return res;
+        return res;     // If there isn't "container" argument, it returns RES array 
     }
 }
 
@@ -178,11 +181,10 @@ export async function printElement(baseUrl, id, container=false) {
             }
         })
         .then((response) => {
-            console.log(response.data); /* CONSOLE LOG */
             let elem = writeNotice([response.data], container);
             resolve(elem);
         })
-        .catch( (err)=> { forErrors(err) } );;
+        .catch( (err)=> { forErrors(err, MAIN_CONTAINER) } );;
     });
 }
 
@@ -190,7 +192,7 @@ export async function printElement(baseUrl, id, container=false) {
 
 
 
-export function forErrors(error){
+export function forErrors(error, container){
 
     let loading = document.body.querySelector(".loading");
       if ( loading ) {
@@ -199,15 +201,15 @@ export function forErrors(error){
 
       if (error.response) {
   
-          errorPage(error.response.status, error.response.statusText);
+          errorPage(error.response.status, error.response.statusText, container);
   
         } else if (error.request) {
 
             if ( !error.request.status && !error.request.statusText ){
-                errorPage("", error.message);
+                errorPage("", error.message, container);
             }
             else {
-                errorPage(error.request.status, error.request.statusText);
+                errorPage(error.request.status, error.request.statusText, container);
             }
             
       } else {
@@ -218,7 +220,7 @@ export function forErrors(error){
 
 /*-------------------------Manage-error-page-----------------------*/
 
-  export function errorPage(status, statusText) {
+  export function errorPage(status, statusText, container) {
 
     let text = "";
 
@@ -232,8 +234,6 @@ export function forErrors(error){
             <span style ='font-size:1.2em' >Something gone wrong: <span style ='color:red'>${text}${statusText}</span></span>
         </div>
     `;
-
-    let container = document.body.querySelector(".cards-container");
     container.insertAdjacentHTML('beforeend', html);
 
   }

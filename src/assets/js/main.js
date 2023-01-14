@@ -10,7 +10,7 @@ import 'https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js';
 
 import  * as Library  from './moduli/functions-library.js';
 import  * as NewsLibrary  from './moduli/news-function-library.js';
-import { Notice, GenericalNews, Story, Comment, Job } from './moduli/notice.js';
+/* import { Notice, GenericalNews, Story, Comment, Job } from './moduli/notice.js'; */
 
 
 /*-------------------------VAR-DECLARATION-------------------------*/
@@ -18,7 +18,7 @@ import { Notice, GenericalNews, Story, Comment, Job } from './moduli/notice.js';
 let baseUrl = 'https://hacker-news.firebaseio.com/v0/';
 let newStories = 'newstories.json';
 
-const MAIN_CONTAINER = document.body.querySelector("#main-container");
+export const MAIN_CONTAINER = document.body.querySelector("#main-container");
 
 let newStoriesId = null;    // All news ID
 let mainStories = null;     // First block of news printed
@@ -36,17 +36,19 @@ let refresh = 60/*seconds*/ * 1000;
 
 /*---------------------------MAIN-PROGRAM--------------------------*/
 
+
+
+
 await main();
 
 setInterval(async function() {
     
     let res = await NewsLibrary.refreshNews(baseUrl, newStories, MAIN_CONTAINER, newStoriesId[0]);
-    if (res) {
+
+    if (res) {      // If there are new news, it UPDATES the news ids array
         newStoriesId = res;
     }
 }, refresh);
-
-
 
 
 
@@ -92,7 +94,7 @@ async function main(){
         
     }
     catch(err) {       
-        NewsLibrary.forErrors(err); 
+        NewsLibrary.forErrors(err, MAIN_CONTAINER); 
     }
 }
 
