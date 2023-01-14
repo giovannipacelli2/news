@@ -8,14 +8,24 @@
     --timeTransition: 400ms;
 }
 
-.cards{
+/* .cards{
     --cardMarginBottom : 2em;
     --cardsBorder : #f49653;
-    /* dark thema */
+
     --D_bgCard : rgb(123, 82, 82); 
     --D_cardTextColor : rgb(255, 255, 255); 
     --D_cardLink : rgb(164, 240, 137); 
     --D_cardLinkVisited : rgb(255, 255, 255);
+} */
+
+.cards{
+    --cardMarginBottom : 2em;
+    --cardsBorder : rgb(65, 75, 138);
+    /* dark thema */
+    --D_bgCard : rgb(65, 75, 138);
+    --D_cardTextColor : rgb(255, 255, 255); 
+    --D_cardLink : rgb(255, 251, 0); 
+    --D_cardLinkVisited : #f49653;
 }
 .elem-invisible {
     display: none;

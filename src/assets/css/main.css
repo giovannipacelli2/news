@@ -10,7 +10,7 @@ body {
 
 /*---------------------------------Color Management----------------------------------*/
 
-#header, #footer {
+/* #header, #footer {
     --yellowBgTop : linear-gradient( #faec9a 5%, #fef9de 60%, #ffffff);
     --yellowBgBottom: linear-gradient( #ffffff, #fef9de, #faec9a);
 }
@@ -18,6 +18,7 @@ body {
 #header, #page{
     --headerHeight: 9em;
     --headerColor : rgb(216, 215, 215);
+    --flashNewsColor : rgb(216, 215, 215);
     --headerTextColor : rgb(169, 0, 0);
 }
 
@@ -25,6 +26,25 @@ body {
     --color: rgb(169, 0, 0);
     --bgColor: rgb(245, 221, 81);
     --bgColorHover: rgb(248, 227, 111);
+}
+ */
+
+ #header, #footer {
+    --yellowBgTop : linear-gradient( #252b53, #6977d2, #ffffff);
+    --yellowBgBottom: linear-gradient( #ffffff, #6977d2, #252b53);
+}
+
+#header, #page{
+    --headerHeight: 9em;
+    --headerColor : rgb(37, 54, 149);
+    --flashNewsColor : rgb(255, 255, 255);
+    --headerTextColor : rgb(43, 43, 43);
+}
+
+.button {
+    --color: rgb(255, 255, 255);
+    --bgColor: rgb(149, 84, 58);
+    --bgColorHover: rgb(125, 66, 42);
 }
 
 
@@ -77,10 +97,15 @@ body {
     color : var(--headerTextColor);
 }
 
+.text-container h1 {
+    color: var(--flashNewsColor);
+}
+
 .header-text {
     font-size: 1.2em;
     text-overflow:clip;
     text-align: center;
+    font-weight: 600;
 }
 
 .loading {

@@ -181,7 +181,7 @@ async function requireMoreNews( baseUrl, newsIds, loading, mainContainer, button
 
 function createLoading(){
     let loading = document.createElement('IMG');
-    loading.src = './assets/img/loading_1.gif';
+    loading.src = './assets/img/loading_4.gif';
     loading.classList.add('loading');
 
     return loading;
