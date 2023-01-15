@@ -29,10 +29,8 @@ body {
 }
 
 
-/*-----------------------------------------------------------------------------------*/
-.bordo {
-    border: 1px solid;
-}
+/*---------------------------------------------------------------------------------------------------*/
+
 
 #page {
     min-height: 800px;
@@ -44,6 +42,9 @@ body {
 
     margin-top: calc( var(--headerHeight) + 2em );
 }
+
+/*------------------------------HEADER------------------------------*/
+
 
 #header {
 
@@ -94,6 +95,9 @@ body {
     font-style: italic;
 }
 
+/*--------------------------Other-elements--------------------------*/
+
+
 .loading {
     width: 20%;
     margin: 0 auto;
@@ -109,10 +113,13 @@ body {
     margin-top: 2em;
 }
 
+/*---------------------------Button-Class---------------------------*/
+
 
 #more-button {
     margin: 2em auto;
 }
+
 .button {
     padding: 0.1em 0.5em;
 
@@ -133,6 +140,10 @@ body {
     background-color: var(--bgColorHover);
     border-color: var(--bgColorHover);
 }
+
+
+/*-----------------------------Footer-------------------------------*/
+
 
 #footer {
 
