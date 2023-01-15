@@ -1,7 +1,7 @@
 'use strict'
 
 import  * as Library  from './functions-library.js';
-import { Notice, GenericalNews, Story, Comment, Job } from './notice.js';
+import { Notice } from './notice.js';
 import { MAIN_CONTAINER } from '../main.js';
 
 export class NewsError extends Error{
@@ -66,31 +66,9 @@ export function writeNotice(news, container=false){
 
             // Creates CARD based on news type
 
-            if ( data.type == "story" ){
-                
-                property = Library.exstractProperty(data, Story.argumentsOrder);
+            property = Library.exstractProperty(data, Notice.argumentsOrder);
 
-                notice = new Story(...property);
-            }
-            else if ( data.type == "comment" ){
-
-                property = Library.exstractProperty(data, Comment.argumentsOrder);
-
-                notice = new Comment(...property);
-            }
-            else if ( data.type == "job" ){
-
-                property = Library.exstractProperty(data, Job.argumentsOrder);
-
-                notice = new Job(...property);
-            }
-
-            else {
-
-                property = Library.exstractProperty(data, GenericalNews.argumentsOrder);
-
-                notice = new GenericalNews(...property);
-            }
+            notice = new Notice(...property);
 
             let card = notice.createCard();
 
