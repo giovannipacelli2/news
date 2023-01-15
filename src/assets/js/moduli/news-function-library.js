@@ -64,7 +64,7 @@ export function writeNotice(news, container=false){
             let notice = null;
             let property = null;
 
-            // Creates CARD based on news type
+            // Creates CARD
 
             property = Library.exstractProperty(data, Notice.argumentsOrder);
 
@@ -116,7 +116,7 @@ export async function refreshNews(baseUrl, newStories, mainContainer, last) {
         mainContainer.prepend(div);
         await animationAppendStories(createdStories, div);
 
-        // returns the updated ids and how many there are
+        // returns an OBJ with updated ids array and the NUMBER of downloaded news
         return {
             newsIds : refreshNewsIds,
             downloadedNews: refreshNews.length
