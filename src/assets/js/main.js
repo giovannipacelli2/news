@@ -8,8 +8,8 @@ import 'https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js';
 /*-------------------------MODULES-IMPORT--------------------------*/
 
 
-import  * as Library  from './moduli/functions-library.js';
-import  * as NewsLibrary  from './moduli/news-function-library.js';
+import  * as Library  from './modules/functions-library.js';
+import  * as NewsLibrary  from './modules/news-function-library.js';
 /* import { Notice, GenericalNews, Story, Comment, Job } from './moduli/notice.js'; */
 
 
@@ -21,7 +21,7 @@ let newStories = 'newstories.json';
 export const MAIN_CONTAINER = document.body.querySelector("#main-container");
 
 let newStoriesId = null;    // All news ID
-let mainStories = null;     // First block of news printed
+let mainStories = null;     // First block of printed news
 
 const NEWS_LIMIT = 10;  // commands the limit of printed news
 
