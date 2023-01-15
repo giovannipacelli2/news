@@ -1,7 +1,7 @@
 
 /*--------------------------------CLASS-NOTICE----------------------------------*/
 
-export class Notice{
+export default class Notice{
 
     constructor(by, id, time, type, title, text, url, score) {
         this.by = by;
@@ -14,6 +14,7 @@ export class Notice{
         this.url = url;
         this.score = score;
     }
+    /*---------------Convert-Date-from-Unix-Time-RETURNS-DD/MM/YYYY---------------*/
 
     convertTime(time) {
         let date = new Date( time * 1000 );
@@ -37,12 +38,17 @@ export class Notice{
         return fullItData;
     }
 
+    /*-------------------Returns-HTML-code-IF-URL-is-present----------------------*/
+
+
     urlController() {
         if (this.url !== "" ) {
           return `<a href="${this.url}" target="_blank" class="card-link">${_.capitalize(this.type)} link</a>`;
         }
         else return "";  
     }
+
+    /*-----------Returns-HTML-code-based-on-the-presence-of-text-or-title---------*/
 
     titleOrText() {
         if (this.title !== "" ) {
@@ -56,6 +62,7 @@ export class Notice{
           }
         else return ""; 
     }
+    /*--------------Creates-the-HTML-code-of-a-card-and-returns-it----------------*/
 
     createCard() {
         let url = this.urlController();
@@ -67,7 +74,6 @@ export class Notice{
 
                     ${title}
                     <p class="card-text by">By: ${this.by}</p>
-                    <p class="card-text by">Id: ${this.id}</p>
                     <p class="card-text text-end me-5">Data:</p>
                     <p class="card-text text-end me-4">${this.fullDate}</p>
                     ${url}

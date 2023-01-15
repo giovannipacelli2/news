@@ -10,7 +10,6 @@ import 'https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js';
 
 import  * as Library  from './modules/functions-library.js';
 import  * as NewsLibrary  from './modules/news-function-library.js';
-/* import { Notice, GenericalNews, Story, Comment, Job } from './moduli/notice.js'; */
 
 
 /*-------------------------VAR-DECLARATION-------------------------*/

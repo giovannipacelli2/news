@@ -1,7 +1,7 @@
 'use strict'
 
 import  * as Library  from './functions-library.js';
-import { Notice } from './notice.js';
+import Notice from './notice.js';
 import { MAIN_CONTAINER } from '../main.js';
 
 export class NewsError extends Error{
