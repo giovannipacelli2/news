@@ -31,11 +31,7 @@ let refresh = 60/*seconds*/ * 1000;
 
 
 
-
-
-
 /*---------------------------MAIN-PROGRAM--------------------------*/
-
 
 
 
@@ -163,9 +159,11 @@ async function requireMoreNews( baseUrl, newsIds, loading, mainContainer, button
 
     return new Promise( async function( resolve,reject ){
         try{
+            //Get request for each ID of "newsIds"
             let moreNews = await NewsLibrary.getNoticeById( baseUrl, newsIds );
 
-            let stories = NewsLibrary.writeNotice(moreNews);   // stories = Array of CARDs html code 
+            // stories = Array of CARDs html code 
+            let stories = NewsLibrary.writeNotice(moreNews);   
 
             loading.remove();
 
@@ -174,6 +172,7 @@ async function requireMoreNews( baseUrl, newsIds, loading, mainContainer, button
 
             mainContainer.after(button);
             resolve();
+            
         }
         catch(err) { errorButtonLoad(err); }
     } );

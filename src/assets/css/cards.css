@@ -8,16 +8,6 @@
     --timeTransition: 400ms;
 }
 
-/* .cards{
-    --cardMarginBottom : 2em;
-    --cardsBorder : #f49653;
-
-    --D_bgCard : rgb(123, 82, 82); 
-    --D_cardTextColor : rgb(255, 255, 255); 
-    --D_cardLink : rgb(164, 240, 137); 
-    --D_cardLinkVisited : rgb(255, 255, 255);
-} */
-
 .cards{
     --cardMarginBottom : 2em;
     --cardsBorder : #37474F;

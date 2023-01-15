@@ -78,9 +78,6 @@ export class GenericalNews extends Notice{
         if (this.title !== "" ) {
             return `<h5 class="card-title">${this.title}</h5>`;
           }
-        /* else if (this.text !== "") {
-            return `<p class="card-text">${this.text}</p>`;
-        }  */
         else if (this.title == "" && this.text !== "") {
             return `
                 <h5 class="card-title">${_.capitalize(this.type)}</h5>
@@ -122,7 +119,7 @@ export class Story extends Notice{
         this.score = score;
     }
 
-    createCard() {
+    createCard() {                                                                      //HERE-----------------------------
         let url = this.urlController();
 
         let body = `
@@ -131,6 +128,7 @@ export class Story extends Notice{
 
                     <h5 class="card-title">${this.title}</h5>
                     <p class="card-text by">By: ${this.by}</p>
+                    <p class="card-text by">ID: ${this.id}</p>
                     <p class="card-text text-end me-5">Data:</p>
                     <p class="card-text text-end me-4">${this.fullDate}</p>
                     ${url}

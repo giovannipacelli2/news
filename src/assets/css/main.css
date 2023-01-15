@@ -10,26 +10,7 @@ body {
 
 /*---------------------------------Color Management----------------------------------*/
 
-/* #header, #footer {
-    --yellowBgTop : linear-gradient( #faec9a 5%, #fef9de 60%, #ffffff);
-    --yellowBgBottom: linear-gradient( #ffffff, #fef9de, #faec9a);
-}
-
-#header, #page{
-    --headerHeight: 9em;
-    --headerColor : rgb(216, 215, 215);
-    --flashNewsColor : rgb(169, 0, 0);
-    --headerTextColor : rgb(169, 0, 0);
-}
-
-.button {
-    --color: rgb(169, 0, 0);
-    --bgColor: rgb(245, 221, 81);
-    --bgColorHover: rgb(248, 227, 111);
-} */
-
-
- #header, #footer {
+#header, #footer {
     --yellowBgTop : linear-gradient( #263238, #78909C, #ffffff );
     --yellowBgBottom: linear-gradient( #ffffff, #78909C, #263238);
 }
