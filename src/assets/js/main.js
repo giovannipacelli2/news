@@ -27,7 +27,7 @@ const NEWS_LIMIT = 10;  // commands the limit of printed news
 
 let seeNews = 0; // number of seen news -486-
 
-let refresh = 20/*seconds*/ * 1000;
+let refresh = 60/*seconds*/ * 1000;
 
 
 
@@ -41,12 +41,16 @@ let refresh = 20/*seconds*/ * 1000;
 
 await main();
 
-setInterval(async function() {
-    
-    let res = await NewsLibrary.refreshNews(baseUrl, newStories, MAIN_CONTAINER, newStoriesId[0]);
+let refreshCicle = setInterval(async function() {
+    let res;    
+    try{
+        res = await NewsLibrary.refreshNews(baseUrl, newStories, MAIN_CONTAINER, newStoriesId[0]);
+    }
+    catch(err) { errorAtRefresh(err, refreshCicle); }
 
     if (res) {      // If there are new news, it UPDATES the news ids array
-        newStoriesId = res;
+        newStoriesId = res.newsIds;
+        seeNews += res.downloadedNews;
     }
 }, refresh);
 
@@ -126,7 +130,6 @@ async function seeMore(e) {
                 // updates the range to treat
 
                 newsIds = _.slice(newStoriesId, seeNews, ( seeNews + remainedNews));    // get array of id
-
                 await requireMoreNews( baseUrl, newsIds, loading, MAIN_CONTAINER, button );
 
                 // Alerts that the news are finished
@@ -138,6 +141,7 @@ async function seeMore(e) {
                 // Goes normally
 
                 newsIds = _.slice(newStoriesId, seeNews, ( seeNews + NEWS_LIMIT));  // get array of id
+                newsIds[0] = undefined;
                 await requireMoreNews( baseUrl, newsIds, loading, MAIN_CONTAINER, button );
             }
 
@@ -149,7 +153,7 @@ async function seeMore(e) {
             noMoreNews( loading, MAIN_CONTAINER, button );
         }
     }
-    catch(err) { errorButtonLoad(err) }
+    catch(err) { errorButtonLoad(err); }
 }
 
 
@@ -159,17 +163,20 @@ async function seeMore(e) {
 async function requireMoreNews( baseUrl, newsIds, loading, mainContainer, button ) {
 
     return new Promise( async function( resolve,reject ){
-        let moreNews = await NewsLibrary.getNoticeById( baseUrl, newsIds );
+        try{
+            let moreNews = await NewsLibrary.getNoticeById( baseUrl, newsIds );
 
-        let stories = NewsLibrary.writeNotice(moreNews);   // stories = Array of CARDs html code 
+            let stories = NewsLibrary.writeNotice(moreNews);   // stories = Array of CARDs html code 
 
-        loading.remove();
+            loading.remove();
 
-        // append into container with animation
-        await NewsLibrary.animationAppendStories(stories, mainContainer);
+            // append into container with animation
+            await NewsLibrary.animationAppendStories(stories, mainContainer);
 
-        mainContainer.after(button);
-        resolve();
+            mainContainer.after(button);
+            resolve();
+        }
+        catch(err) { errorButtonLoad(err); }
     } );
 
 }
@@ -180,7 +187,7 @@ async function requireMoreNews( baseUrl, newsIds, loading, mainContainer, button
 
 function createLoading(){
     let loading = document.createElement('IMG');
-    loading.src = './assets/img/loading_4.gif';
+    loading.src = './assets/img/loading_1.gif';
     loading.classList.add('loading');
 
     return loading;
@@ -199,6 +206,12 @@ function noMoreNews( loading, mainContainer, button ) {
     button.removeEventListener('click', seeMore);
 }
 
+/*--------------------------------------------Error-Handling-------------------------------------------*/
+
+
+/*---------------------Create-error-message-DIV--------------------*/
+
+
 function errorMessage() {
     let message = document.createElement('DIV');
     message.style.fontSize = "1.2em";
@@ -207,6 +220,9 @@ function errorMessage() {
 
     return message;
 }
+
+/*-------------------Manage-error-in-MAIN-request------------------*/
+
 
 function errorOnMainRequest(err) {
     let message = errorMessage();
@@ -222,7 +238,7 @@ function errorOnMainRequest(err) {
         setTimeout( async function(){
 
             message.remove();
-            loading.remove();
+            if (loading) loading.remove();
 
             await main();   //retry to load main function
         }, 5000 );
@@ -233,15 +249,35 @@ function errorOnMainRequest(err) {
     }
 }
 
+/*-----------------Manage-error-for-more-news-request--------------*/
+
+
 function errorButtonLoad(err){
     let message = errorMessage();
     let button = document.body.querySelector("#more-button");
     let loading = document.body.querySelector(".loading");
     let page = document.body.querySelector("#page");
         
-    loading.remove();
+    if (loading) loading.remove();
     button.removeEventListener( 'click', seeMore );
 
     page.append(message);
+    throw err;
+}
+
+/*---------------------Manage-error-for-REFRESH--------------------*/
+
+
+function errorAtRefresh(err, refreshCicle){
+
+    clearInterval(refreshCicle);
+
+    let message = errorMessage();
+    let loading = document.body.querySelector(".loading");
+    let page = document.body.querySelector("#page");
+        
+    if (loading) loading.remove();
+
+    page.prepend(message);
     throw err;
 }

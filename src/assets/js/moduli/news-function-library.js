@@ -138,7 +138,12 @@ export async function refreshNews(baseUrl, newStories, mainContainer, last) {
         mainContainer.prepend(div);
         await animationAppendStories(createdStories, div);
 
-        return refreshNewsIds;
+        // returns the updated ids and how many there are
+        return {
+            newsIds : refreshNewsIds,
+            downloadedNews: refreshNews.length
+        };
+        
     }
 }
 
