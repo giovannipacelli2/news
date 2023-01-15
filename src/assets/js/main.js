@@ -141,7 +141,6 @@ async function seeMore(e) {
                 // Goes normally
 
                 newsIds = _.slice(newStoriesId, seeNews, ( seeNews + NEWS_LIMIT));  // get array of id
-                newsIds[0] = undefined;
                 await requireMoreNews( baseUrl, newsIds, loading, MAIN_CONTAINER, button );
             }
 
