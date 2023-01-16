@@ -39,6 +39,9 @@ export default class Notice{
         return fullItData;
     }
 
+    /*----------------------Return-Hours-from-Unix-Time---------------------------*/
+
+
     convertHours(time) {
         let date = new Date( time * 1000 );
 
@@ -46,15 +49,15 @@ export default class Notice{
         let minutes = date.getMinutes();
         let seconds = date.getSeconds();
 
-        if ( hours > 0 && hours < 10 ) {
+        if ( hours >= 0 && hours < 10 ) {
             hours = "0" + hours;
         }
 
-        if ( minutes > 0 && minutes < 10 ) {
+        if ( minutes >= 0 && minutes < 10 ) {
             minutes = "0" + minutes;
         }
 
-        if ( seconds > 0 && seconds < 10 ) {
+        if ( seconds >= 0 && seconds < 10 ) {
             seconds = "0" + seconds;
         }
 
