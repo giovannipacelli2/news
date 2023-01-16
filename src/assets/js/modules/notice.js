@@ -8,6 +8,7 @@ export default class Notice{
         this.id = id;
         this.time = time;
         this.fullDate = this.convertTime(this.time);
+        this.fullHours = this.convertHours(this.time);
         this.type = type;
         this.title = title;
         this.text = text;
@@ -36,6 +37,30 @@ export default class Notice{
         fullItData = day + "/" + mounth + "/" + year;
 
         return fullItData;
+    }
+
+    convertHours(time) {
+        let date = new Date( time * 1000 );
+
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        let seconds = date.getSeconds();
+
+        if ( hours > 0 && hours < 10 ) {
+            hours = "0" + hours;
+        }
+
+        if ( minutes > 0 && minutes < 10 ) {
+            minutes = "0" + minutes;
+        }
+
+        if ( seconds > 0 && seconds < 10 ) {
+            seconds = "0" + seconds;
+        }
+
+        let fullHours = hours + ":" + minutes + ":" + seconds;
+
+        return fullHours;
     }
 
     /*-------------------Returns-HTML-code-IF-URL-is-present----------------------*/
@@ -74,8 +99,9 @@ export default class Notice{
 
                     ${title}
                     <p class="card-text by">By: ${this.by}</p>
-                    <p class="card-text text-end me-5">Data:</p>
-                    <p class="card-text text-end me-4">${this.fullDate}</p>
+                    <p class="card-text text-end me-4">Data e ora:</p>
+                    <p class="card-text text-end me-1">${this.fullDate}-${this.fullHours}</p>
+                    
                     ${url}
 
                 </div>
