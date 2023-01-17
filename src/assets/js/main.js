@@ -225,6 +225,9 @@ function errorOnMainRequest(err) {
     let message = errorMessage();
     let loading = document.body.querySelector(".loading");
     let page = document.body.querySelector("#page");
+    let button = document.body.querySelector("#more-button");
+
+    button.removeEventListener( 'click', seeMore );
 
     page.prepend(message);
 
@@ -272,6 +275,9 @@ function errorAtRefresh(err, refreshCicle){
     let message = errorMessage();
     let loading = document.body.querySelector(".loading");
     let page = document.body.querySelector("#page");
+    let button = document.body.querySelector("#more-button");
+
+    button.removeEventListener( 'click', seeMore );
         
     if (loading) loading.remove();
 
