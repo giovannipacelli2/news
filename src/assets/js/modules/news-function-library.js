@@ -48,7 +48,7 @@ export async function getNoticeById(baseUrl, news) {
             });
         })
         .then( () => { resolve(arrNews) } )
-        .catch( (err)=> { forErrors(err, MAIN_CONTAINER) } );;
+        .catch( (err)=> { resolve(forErrors(err, MAIN_CONTAINER)) } );;
     });
 }
 
@@ -195,6 +195,7 @@ export function forErrors(error, container){
       if (error.response) {
   
           errorPage(error.response.status, error.response.statusText, container);
+          return error;
   
         } else if (error.request) {
 
@@ -204,6 +205,7 @@ export function forErrors(error, container){
             else {
                 errorPage(error.request.status, error.request.statusText, container);
             }
+            return error;
             
       } else {
         throw error;
@@ -214,6 +216,9 @@ export function forErrors(error, container){
 /*-------------------------Manage-error-page-----------------------*/
 
   export function errorPage(status, statusText, container) {
+
+    container.innerHTML = "";
+    window.scrollTo(0,0);
 
     let text = "";
 

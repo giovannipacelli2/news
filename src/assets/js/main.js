@@ -161,6 +161,8 @@ async function requireMoreNews( baseUrl, newsIds, loading, mainContainer, button
             //Get request for each ID of "newsIds"
             let moreNews = await NewsLibrary.getNoticeById( baseUrl, newsIds );
 
+            if ( moreNews instanceof Error ) reject(moreNews);
+
             // stories = Array of CARDs html code 
             let stories = NewsLibrary.writeNotice(moreNews);   
 
@@ -173,7 +175,7 @@ async function requireMoreNews( baseUrl, newsIds, loading, mainContainer, button
             resolve();
             
         }
-        catch(err) { errorButtonLoad(err); }
+        catch(err) { throw err }
     } );
 
 }
@@ -253,6 +255,9 @@ function errorOnMainRequest(err) {
 
 
 function errorButtonLoad(err){
+
+    clearInterval(refreshCicle);
+
     let message = errorMessage();
     let button = document.body.querySelector("#more-button");
     let loading = document.body.querySelector(".loading");
@@ -268,7 +273,7 @@ function errorButtonLoad(err){
 /*---------------------Manage-error-for-REFRESH--------------------*/
 
 
-function errorAtRefresh(err, refreshCicle){
+function errorAtRefresh(err){
 
     clearInterval(refreshCicle);
 
