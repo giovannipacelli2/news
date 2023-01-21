@@ -33,8 +33,9 @@ export async function getRequest(url){
         })
         .then( (res) => { resolve(res) } )
         .catch( (err)=> { 
-            console.log(err);
+            console.log(err.message);
             forErrors(err, PAGE, MAIN_CONTAINER);
+            reject(err);
         } );
     });
 }

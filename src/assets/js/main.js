@@ -28,7 +28,9 @@ const RETRY_TIMES = 3;  // Times to reload main
 
 let seeNews = 0; // number of seen news -486-
 
-let refresh = 60/*seconds*/ * 1000;
+let refreshCicle = null;
+
+let refreshTime = 60/*seconds*/ * 1000;
 
 errorOnMainRequest.retry = 0;
 
@@ -39,21 +41,6 @@ errorOnMainRequest.retry = 0;
 setTimeout( async()=>{ await main() }, 5000 );
 
 /* await main(); */
-
-let refreshCicle = setInterval(async function() {
-    let res;    
-    try{
-        res = await NewsLibrary.refreshNews(baseUrl, newStories, MAIN_CONTAINER, newStoriesId[0]);
-    }
-    catch(err) { genericError(err); }
-
-    if (res) {      // If there are new news, it UPDATES the news ids array
-        newStoriesId = res.newsIds;
-        seeNews += res.downloadedNews;
-    }
-}, refresh);
-
-
 
 
 /*---------------------MAIN-FUNCTION-DECLARATION-------------------*/
@@ -94,6 +81,8 @@ async function main(){
 
         // Manage MORE news
         PAGE.addEventListener( 'click', seeMore );
+
+        refreshCicle = refresh(refreshTime);
         
     }
     catch(err) { errorOnMainRequest(err); }
@@ -103,6 +92,25 @@ async function main(){
 
 /*------------------------------------Internal-Functions-Declaration-----------------------------------*/
 
+
+
+/*----------------------------Get-last-News------------------------*/
+
+function refresh(refreshTime) {
+
+    return setInterval(async function() {
+        let res;    
+        try{
+            res = await NewsLibrary.refreshNews(baseUrl, newStories, MAIN_CONTAINER, newStoriesId[0]);
+        }
+        catch(err) { genericError(err); }
+
+        if (res) {      // If there are new news, it UPDATES the news ids array
+            newStoriesId = res.newsIds;
+            seeNews += res.downloadedNews;
+        }
+    }, refreshTime);
+}
 
 /*---------------Get-id-of-more-news-and-get-the-request-----------*/
 
@@ -220,6 +228,7 @@ function noMoreNews( loading, page, mainContainer ) {
 
 function errorMessage() {
     let message = document.createElement('DIV');
+    message.style.margin = "10px";
     message.style.fontSize = "1.2em";
     message.style.color = "red";
     message.textContent = "Qualcosa non va, prova ad aggiornare la pagina";
@@ -231,11 +240,14 @@ function errorMessage() {
 
 
 function errorOnMainRequest(err) {
+
+    clearInterval(refreshCicle);
+
     let message = errorMessage();
 
     PAGE.removeEventListener( 'click', seeMore );
 
-    PAGE.prepend(message);
+    PAGE.append(message);
 
     if ( err instanceof NewsLibrary.NewsError ) {
 
@@ -255,7 +267,6 @@ function errorOnMainRequest(err) {
             console.log(err.message);
 
             errorOnMainRequest.retry = 0;
-            clearInterval(refreshCicle);
         }
     }
 
