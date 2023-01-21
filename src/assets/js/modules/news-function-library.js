@@ -14,7 +14,7 @@ export class NewsError extends Error{
 
 /*-----------------------Function-CLEAR-PAGE-----------------------*/
 
-function clearPage( page, container) {
+export function clearPage( page, container) {
     page.innerHTML = "";
     page.append(container);
     container.innerHTML = "";
@@ -174,7 +174,7 @@ export async function animationAppendStories( arrStories, father ) {
     
 }
 
-/*--------------------------Get-one-element------------------------*/
+/*--------------------------Get-one-element------------------------*/   // for future implementations
 
 export async function printElement(baseUrl, id, container=false) {
     let url = baseUrl + 'item/' + id + '.json';

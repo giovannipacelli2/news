@@ -21,7 +21,7 @@ export const PAGE = document.body.querySelector("#page");
 export const MAIN_CONTAINER = document.body.querySelector("#main-container");
 
 let newStoriesId = null;    // All news ID
-let mainStories = null;     // First block of printed news
+let mainStories = null;     // First block of printed news, declared as global variable for future implementations
 
 const NEWS_LIMIT = 10;  // commands the limit of printed news
 const RETRY_TIMES = 2;  // Times to reload main 
@@ -82,6 +82,7 @@ async function main(){
         // Manage MORE news
         PAGE.addEventListener( 'click', seeMore );
 
+        // update cycle for the latest news
         refreshCicle = refresh(refreshTime);
         
     }
@@ -239,9 +240,9 @@ function errorMessage() {
 
 function errorOnMainRequest(err) {
 
-    clearInterval(refreshCicle);
+    clearInterval(refreshCicle);    // Removes the news update
 
-    let message = errorMessage();
+    let message = errorMessage();   // create a message DIV
 
     PAGE.removeEventListener( 'click', seeMore );
 
