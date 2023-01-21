@@ -163,6 +163,37 @@ body {
     align-items: center;
 }
 
+/*-----------------------------ERRORS-------------------------------*/
+
+.error-card {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 20px;
+
+    border: 1px solid rgb(193, 0, 0);
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgb(50, 0, 0);
+
+    background-color: rgb(254, 228, 228);
+    text-align: center;
+}
+
+.error-message {
+    margin: 10px auto;
+    padding: 25px 10px;
+
+    font-size: 1.2em;
+    text-align: center;
+    color: red;
+}
+
+@media only screen and ( min-width:400px ) {
+
+    .error-card {
+        width: 344px;
+    }
+}
+
 @media only screen and ( min-width:576px ) {
 
     .text-container h1 {
@@ -176,6 +207,10 @@ body {
 
     #header, #page{
         --headerHeight: 14em;
+    }
+
+    .error-card {
+        width: 400px;
     }
 
 }

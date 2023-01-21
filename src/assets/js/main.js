@@ -24,7 +24,7 @@ let newStoriesId = null;    // All news ID
 let mainStories = null;     // First block of printed news
 
 const NEWS_LIMIT = 10;  // commands the limit of printed news
-const RETRY_TIMES = 3;  // Times to reload main 
+const RETRY_TIMES = 2;  // Times to reload main 
 
 let seeNews = 0; // number of seen news -486-
 
@@ -47,6 +47,8 @@ setTimeout( async()=>{ await main() }, 5000 );
 
 
 async function main(){
+
+    window.scrollTo(0,0);
 
     try {
 
@@ -171,7 +173,7 @@ async function requireMoreNews( baseUrl, newsIds, loading, mainContainer, button
     return new Promise( async function( resolve,reject ){
         try{
             //Get request for each ID of "newsIds"
-            let moreNews = await NewsLibrary.getNoticeById( baseUrl, newsIds );
+            let moreNews = await NewsLibrary.getNoticeById( baseUrl, newsIds );           
             if ( moreNews instanceof Error ) reject(moreNews);
 
             // stories = Array of CARDs html code 
@@ -228,9 +230,7 @@ function noMoreNews( loading, page, mainContainer ) {
 
 function errorMessage() {
     let message = document.createElement('DIV');
-    message.style.margin = "10px";
-    message.style.fontSize = "1.2em";
-    message.style.color = "red";
+    message.classList.add("error-message");
     message.textContent = "Qualcosa non va, prova ad aggiornare la pagina";
 
     return message;

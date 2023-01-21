@@ -60,7 +60,7 @@ export async function getNoticeById(baseUrl, news) {
             });
         })
         .then( () => { resolve(arrNews) } )
-        .catch( (err)=> { resolve(forErrors(err, PAGE, MAIN_CONTAINER)) } );;
+        .catch( (err)=> { reject(forErrors(err, PAGE, MAIN_CONTAINER)) } );;
     });
 }
 
@@ -234,9 +234,9 @@ export function forErrors(error, page, container){
     }
 
     let html = `
-        <div>
+        <div class = "error-card">
             <h1 style ='text-align:center'>Error ${status}</h1>
-            <span style ='font-size:1.2em' >Something gone wrong: <span style ='color:red'>${text}${statusText}</span></span>
+            <div style ='font-size:1.2em' >Something gone wrong: <div style ='color:red'>${text}${statusText}</div></div>
         </div>
     `;
     container.insertAdjacentHTML('beforeend', html);
