@@ -2,12 +2,23 @@
 
 import  * as Library  from './functions-library.js';
 import Notice from './notice.js';
+
+import { PAGE } from '../main.js';
 import { MAIN_CONTAINER } from '../main.js';
 
 export class NewsError extends Error{
     constructor(message){
         super(message);
     }
+}
+
+/*-----------------------Function-CLEAR-PAGE-----------------------*/
+
+function clearPage( page, container) {
+    page.innerHTML = "";
+    page.append(container);
+    container.innerHTML = "";
+    window.scrollTo(0,0);
 }
 
 /*------------------------Get-simple-request-----------------------*/
@@ -22,8 +33,8 @@ export async function getRequest(url){
         })
         .then( (res) => { resolve(res) } )
         .catch( (err)=> { 
-            console.dir(err);
-            forErrors(err, MAIN_CONTAINER) 
+            console.log(err);
+            forErrors(err, PAGE, MAIN_CONTAINER);
         } );
     });
 }
@@ -48,7 +59,7 @@ export async function getNoticeById(baseUrl, news) {
             });
         })
         .then( () => { resolve(arrNews) } )
-        .catch( (err)=> { resolve(forErrors(err, MAIN_CONTAINER)) } );;
+        .catch( (err)=> { resolve(forErrors(err, PAGE, MAIN_CONTAINER)) } );;
     });
 }
 
@@ -84,6 +95,7 @@ export function writeNotice(news, container=false){
             return res;     // If there isn't "container" argument, it returns RES array 
         }
     } catch(err){
+        clearPage(PAGE, MAIN_CONTAINER);
         throw new NewsError(err);
     }
 }
@@ -177,7 +189,7 @@ export async function printElement(baseUrl, id, container=false) {
             let elem = writeNotice([response.data], container);
             resolve(elem);
         })
-        .catch( (err)=> { forErrors(err, MAIN_CONTAINER) } );;
+        .catch( (err)=> { forErrors(err, PAGE, MAIN_CONTAINER) } );;
     });
 }
 
@@ -185,25 +197,20 @@ export async function printElement(baseUrl, id, container=false) {
 
 
 
-export function forErrors(error, container){
-
-    let loading = document.body.querySelector(".loading");
-      if ( loading ) {
-          loading.remove();
-      }
+export function forErrors(error, page, container){
 
       if (error.response) {
   
-          errorPage(error.response.status, error.response.statusText, container);
+          errorPage(error.response.status, error.response.statusText, page, container);
           return error;
   
         } else if (error.request) {
 
             if ( !error.request.status && !error.request.statusText ){
-                errorPage("", error.message, container);
+                errorPage("", error.message, page, container);
             }
             else {
-                errorPage(error.request.status, error.request.statusText, container);
+                errorPage(error.request.status, error.request.statusText, page, container);
             }
             return error;
             
@@ -215,10 +222,9 @@ export function forErrors(error, container){
 
 /*-------------------------Manage-error-page-----------------------*/
 
-  export function errorPage(status, statusText, container) {
+  export function errorPage(status, statusText, page, container) {
 
-    container.innerHTML = "";
-    window.scrollTo(0,0);
+    clearPage(page, container);
 
     let text = "";
 

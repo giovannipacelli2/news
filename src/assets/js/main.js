@@ -17,6 +17,7 @@ import  * as NewsLibrary  from './modules/news-function-library.js';
 let baseUrl = 'https://hacker-news.firebaseio.com/v0/';
 let newStories = 'newstories.json';
 
+export const PAGE = document.body.querySelector("#page");
 export const MAIN_CONTAINER = document.body.querySelector("#main-container");
 
 let newStoriesId = null;    // All news ID
@@ -26,22 +27,24 @@ const NEWS_LIMIT = 10;  // commands the limit of printed news
 
 let seeNews = 0; // number of seen news -486-
 
-let refresh = 60/*seconds*/ * 1000;
+let refresh = 20/*seconds*/ * 1000;
+
+errorOnMainRequest.retry = 0;
 
 
 
 /*---------------------------MAIN-PROGRAM--------------------------*/
 
+setTimeout( async()=>{ await main() }, 5000 );
 
-
-await main();
+/* await main(); */
 
 let refreshCicle = setInterval(async function() {
     let res;    
     try{
         res = await NewsLibrary.refreshNews(baseUrl, newStories, MAIN_CONTAINER, newStoriesId[0]);
     }
-    catch(err) { errorAtRefresh(err, refreshCicle); }
+    catch(err) { genericError(err); }
 
     if (res) {      // If there are new news, it UPDATES the news ids array
         newStoriesId = res.newsIds;
@@ -89,7 +92,7 @@ async function main(){
         MAIN_CONTAINER.after(button);
 
         // Manage MORE news
-        button.addEventListener( 'click', seeMore );
+        PAGE.addEventListener( 'click', seeMore );
         
     }
     catch(err) { errorOnMainRequest(err); }
@@ -147,7 +150,7 @@ async function seeMore(e) {
             noMoreNews( loading, MAIN_CONTAINER, button );
         }
     }
-    catch(err) { errorButtonLoad(err); }
+    catch(err) { genericError(err); }
 }
 
 
@@ -160,7 +163,6 @@ async function requireMoreNews( baseUrl, newsIds, loading, mainContainer, button
         try{
             //Get request for each ID of "newsIds"
             let moreNews = await NewsLibrary.getNoticeById( baseUrl, newsIds );
-
             if ( moreNews instanceof Error ) reject(moreNews);
 
             // stories = Array of CARDs html code 
@@ -175,7 +177,7 @@ async function requireMoreNews( baseUrl, newsIds, loading, mainContainer, button
             resolve();
             
         }
-        catch(err) { throw err }
+        catch(err) { genericError(err) }
     } );
 
 }
@@ -225,25 +227,29 @@ function errorMessage() {
 
 function errorOnMainRequest(err) {
     let message = errorMessage();
-    let loading = document.body.querySelector(".loading");
-    let page = document.body.querySelector("#page");
-    let button = document.body.querySelector("#more-button");
 
-    button.removeEventListener( 'click', seeMore );
+    PAGE.removeEventListener( 'click', seeMore );
 
-    page.prepend(message);
+    PAGE.prepend(message);
 
     if ( err instanceof NewsLibrary.NewsError ) {
 
         console.log(err.message + "\n" + "-----------");
 
-        setTimeout( async function(){
+        errorOnMainRequest.retry++;
 
-            message.remove();
-            if (loading) loading.remove();
+        if ( errorOnMainRequest.retry < 4 ) {
+            setTimeout( async function(){
 
-            await main();   //retry to load main function
-        }, 5000 );
+                message.remove();
+
+                await main();   //retry to load main function
+            }, 5000 );
+        }
+        else if ( errorOnMainRequest.retry >= 4 ) {
+            errorOnMainRequest.retry = 0;
+            clearInterval(refreshCicle);
+        }
     }
 
     else {
@@ -251,41 +257,17 @@ function errorOnMainRequest(err) {
     }
 }
 
-/*-----------------Manage-error-for-more-news-request--------------*/
+/*---------------------------Manage-errors-------------------------*/
 
 
-function errorButtonLoad(err){
-
-    clearInterval(refreshCicle);
-
-    let message = errorMessage();
-    let button = document.body.querySelector("#more-button");
-    let loading = document.body.querySelector(".loading");
-    let page = document.body.querySelector("#page");
-        
-    if (loading) loading.remove();
-    button.removeEventListener( 'click', seeMore );
-
-    page.append(message);
-    throw err;
-}
-
-/*---------------------Manage-error-for-REFRESH--------------------*/
-
-
-function errorAtRefresh(err){
+function genericError(err){
 
     clearInterval(refreshCicle);
 
     let message = errorMessage();
-    let loading = document.body.querySelector(".loading");
-    let page = document.body.querySelector("#page");
-    let button = document.body.querySelector("#more-button");
 
-    button.removeEventListener( 'click', seeMore );
-        
-    if (loading) loading.remove();
+    PAGE.removeEventListener( 'click', seeMore );
 
-    page.prepend(message);
+    PAGE.append(message);
     throw err;
 }
