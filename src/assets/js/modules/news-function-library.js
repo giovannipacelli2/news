@@ -105,7 +105,7 @@ export function writeNotice(news, container=false){
 
 export async function refreshNews(baseUrl, newStories, mainContainer, last) {
 
-    // Call the master request for News list to Hacker News and stores it in a global variable
+    // Call the master request for News list to Hacker News
     let response = await getRequest( baseUrl + newStories );
     let refreshNewsIds = response.data;
 

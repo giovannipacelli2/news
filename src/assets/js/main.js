@@ -24,10 +24,11 @@ let newStoriesId = null;    // All news ID
 let mainStories = null;     // First block of printed news
 
 const NEWS_LIMIT = 10;  // commands the limit of printed news
+const RETRY_TIMES = 3;  // Times to reload main 
 
 let seeNews = 0; // number of seen news -486-
 
-let refresh = 20/*seconds*/ * 1000;
+let refresh = 60/*seconds*/ * 1000;
 
 errorOnMainRequest.retry = 0;
 
@@ -131,7 +132,7 @@ async function seeMore(e) {
                 await requireMoreNews( baseUrl, newsIds, loading, MAIN_CONTAINER, button );
 
                 // Alerts that the news are finished
-                noMoreNews( loading, MAIN_CONTAINER, button );
+                noMoreNews( loading, PAGE, MAIN_CONTAINER );
             }
 
             else {
@@ -147,7 +148,7 @@ async function seeMore(e) {
         }
 
         else {
-            noMoreNews( loading, MAIN_CONTAINER, button );
+            noMoreNews( loading, PAGE, MAIN_CONTAINER );
         }
     }
     catch(err) { genericError(err); }
@@ -197,15 +198,19 @@ function createLoading(){
 /*----------------Shows-that-there-aren't-more-news----------------*/
 
 
-function noMoreNews( loading, mainContainer, button ) {
+function noMoreNews( loading, page, mainContainer ) {
     loading.remove();
     let message = document.createElement('DIV');
     message.classList.add("no-more-news");
     message.textContent = "No more news!";
     mainContainer.append(message);
 
-    button.removeEventListener('click', seeMore);
+    page.removeEventListener('click', seeMore);
 }
+
+
+
+
 
 /*--------------------------------------------Error-Handling-------------------------------------------*/
 
@@ -234,11 +239,10 @@ function errorOnMainRequest(err) {
 
     if ( err instanceof NewsLibrary.NewsError ) {
 
-        console.log(err.message + "\n" + "-----------");
-
         errorOnMainRequest.retry++;
 
-        if ( errorOnMainRequest.retry < 4 ) {
+        if ( errorOnMainRequest.retry <= RETRY_TIMES ) {
+
             setTimeout( async function(){
 
                 message.remove();
@@ -246,7 +250,10 @@ function errorOnMainRequest(err) {
                 await main();   //retry to load main function
             }, 5000 );
         }
-        else if ( errorOnMainRequest.retry >= 4 ) {
+        else if ( errorOnMainRequest.retry > RETRY_TIMES ) {
+
+            console.log(err.message);
+
             errorOnMainRequest.retry = 0;
             clearInterval(refreshCicle);
         }
