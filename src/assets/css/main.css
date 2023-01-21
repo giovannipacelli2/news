@@ -98,7 +98,7 @@ body {
 /*--------------------------Other-elements--------------------------*/
 
 
-.loading {
+#loading {
     width: 20%;
     margin: 0 auto;
     opacity: 0.8;
@@ -207,6 +207,10 @@ body {
 
     #header, #page{
         --headerHeight: 14em;
+    }
+
+    #loading {
+        width: 80px;
     }
 
     .error-card {

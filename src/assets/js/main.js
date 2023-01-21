@@ -30,7 +30,7 @@ let seeNews = 0; // number of seen news -486-
 
 let refreshCicle = null;
 
-let refreshTime = 60/*seconds*/ * 1000;
+let refreshTime = 60;  // seconds
 
 errorOnMainRequest.retry = 0;
 
@@ -38,18 +38,15 @@ errorOnMainRequest.retry = 0;
 
 /*---------------------------MAIN-PROGRAM--------------------------*/
 
-setTimeout( async()=>{ await main() }, 5000 );
+/* setTimeout( async()=>{ await main() }, 5000 ); */ // FOR DEBUG
 
-/* await main(); */
+await main();
 
 
 /*---------------------MAIN-FUNCTION-DECLARATION-------------------*/
 
 
 async function main(){
-
-    window.scrollTo(0,0);
-
     try {
 
         // Create loading animation during loading news
@@ -72,6 +69,7 @@ async function main(){
         mainStories = NewsLibrary.writeNotice(arrayNews);
 
         loading.remove();
+        window.scrollTo(0,0);
 
         // Appends in HTML with CSS animation
         await NewsLibrary.animationAppendStories(mainStories, MAIN_CONTAINER);
@@ -111,7 +109,7 @@ function refresh(refreshTime) {
             newStoriesId = res.newsIds;
             seeNews += res.downloadedNews;
         }
-    }, refreshTime);
+    }, refreshTime * 1000);
 }
 
 /*---------------Get-id-of-more-news-and-get-the-request-----------*/
@@ -200,7 +198,7 @@ async function requireMoreNews( baseUrl, newsIds, loading, mainContainer, button
 function createLoading(){
     let loading = document.createElement('IMG');
     loading.src = './assets/img/loading_1.gif';
-    loading.classList.add('loading');
+    loading.id = 'loading';
 
     return loading;
 }
