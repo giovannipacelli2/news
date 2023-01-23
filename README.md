@@ -51,8 +51,23 @@
 ## Suddivisione dei file JavaScript:
 </br>
 
+## **main.js**:
+
 1. ### Il **main.js** contiene la funzione primaria **main()** che si occupa di eseguire il codice di "_alto livello_" e comprende tutte le variabili globali condivise con i moduli.
 
 </br>
 
-2. ### Sotto alla dichiarazione di **main()** si trovano tutte le funzioni "_interne_" come la funzione di **refresh** o **seeMore** e **requireMoreNews** che gestiscono il pulsante e in aggiunta la gestione specifica degli errori.
+2. ### Sotto alla dichiarazione di **main()** si trovano tutte le funzioni "_interne_":
+    </br>
+
+    * ### le funzioni **refresh**, **seeMore** e **requireMoreNews** che gestiscono il pulsante che carica più notizie.
+    * ### le funzioni per la gestione specifica degli errori.
+</br>
+
+## **news-function-library.js**:
+
+* ### Si occupa di tutto ciò che riguarda le news e contiene le funzioni che gestiscono le richieste di rete ad Hacker News come la richiesta degli id delle topnews al recupero delle notizie stesse tramite quegli id. Ognuna di queste funzioni cattura eventuali errori. 
+
+* ### Ci sono funzioni addette a creare la grafica a partire dalle news richiamando l'opportuno metodo dalla classe Notice
+
+* ### Funzioni che creano un'animazione quando le card (contenenti le notizie) vengono inserite nel documento HTML.
