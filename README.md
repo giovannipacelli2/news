@@ -66,7 +66,7 @@
 
 # **Screenshot dell'app:**
 
-<img src = "./src/assets/presentation/Screenshot_smartphone_1.jpg">
+<img src = "src/assets/presentation/Screenshot_smartphone_1.jpg">
 
 ![](https://giovannipacelli2.github.io/news/src/assets/presentation/img/)
 
