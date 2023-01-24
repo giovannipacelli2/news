@@ -25,7 +25,7 @@
 
 # **Organizzazione dei file:** 
 
-#### Nella _root_ sono presenti:
+#### Nella cartella principale "_src_" sono presenti:
 
 * #### Il file _index.html_
 * #### La cartella _assets_
@@ -47,8 +47,8 @@
 1. #### Il **main.js** contiene la funzione primaria **main()** che si occupa di eseguire il codice di "_alto livello_" e comprende tutte le variabili globali condivise con i moduli.
 
 2. #### Sotto alla dichiarazione di **main()** si trovano tutte le funzioni "_interne_":
-    * ### le funzioni **refresh**, **seeMore** e **requireMoreNews** che gestiscono il pulsante che carica più notizie.
-    * ### le funzioni per la gestione specifica degli errori.
+    * #### le funzioni **refresh**, **seeMore** e **requireMoreNews** che gestiscono il pulsante che carica più notizie.
+    * #### le funzioni per la gestione specifica degli errori.
 
 ### **news-function-library.js** :
 
@@ -65,6 +65,8 @@
 </br>
 
 # **Screenshot dell'app:**
+
+<img src = "./src/assets/presentation/Screenshot_smartphone_1.jpg">
 
 ![](https://giovannipacelli2.github.io/news/src/assets/presentation/img/)
 
