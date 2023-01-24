@@ -10,11 +10,11 @@
 
 </br>
 
-* #### VIsualizzare le ultime notizie tramite le API di Hacker News dalla sezione *Top news*
+* ### VIsualizzare le ultime notizie tramite le API di Hacker News dalla sezione *Top news*
 
-* #### Funzione di aggiornamento automatico delle ultime notizie
+* ### Funzione di aggiornamento automatico delle ultime notizie
 
-* #### Possibilità di caricare le notizie meno recenti
+* ### Possibilità di caricare le notizie meno recenti
 
 </br>
 
@@ -51,7 +51,7 @@
 ## Suddivisione dei file JavaScript:
 </br>
 
-## **main.js**:
+## **main.js** :
 
 1. ### Il **main.js** contiene la funzione primaria **main()** che si occupa di eseguire il codice di "_alto livello_" e comprende tutte le variabili globali condivise con i moduli.
 
@@ -64,10 +64,28 @@
     * ### le funzioni per la gestione specifica degli errori.
 </br>
 
-## **news-function-library.js**:
+## **news-function-library.js** :
 
-* ### Si occupa di tutto ciò che riguarda le news e contiene le funzioni che gestiscono le richieste di rete ad Hacker News come la richiesta degli id delle topnews al recupero delle notizie stesse tramite quegli id. Ognuna di queste funzioni cattura eventuali errori. 
+### Si occupa di tutto ciò che riguarda le news e contiene:
+* ### le funzioni che gestiscono le richieste di rete ad Hacker News come la richiesta degli id delle topnews ed il recupero delle notizie stesse tramite quegli id. Ognuna di queste funzioni gestisce eventuali errori. 
 
-* ### Ci sono funzioni addette a creare la grafica a partire dalle news richiamando l'opportuno metodo dalla classe Notice
+* ### le funzioni addette ad inserire dinamicamente le cards (contenenti le notizie) all'interno della pagina
+</br>
 
-* ### Funzioni che creano un'animazione quando le card (contenenti le notizie) vengono inserite nel documento HTML.
+## La classe **Notice** :
+
+1. ### Astrae il concetto di notizia e comprende tutti i metodi atti a costruirne la veste grafica
+2. ### Possiede una variabile statica _argumentsOrder_ nella quale è memorizzato l'ordine preciso in cui il costruttore vuole le proprietà.
+</br>
+
+# **Screenshot dell'app:**
+
+![](https://giovannipacelli2.github.io/news/src/assets/presentation/img/)
+
+# **Link utili:**
+
+### - [Sito personale (portfolio)](https://giovannipacelli2.github.io/portfolio/)
+
+### - [Link al sito](https://giovannipacelli2.github.io/news/src)
+
+### - [Breve presentazione](https://giovannipacelli2.github.io/counter/assets/presentation/Presentazione_Counter.pdf)
