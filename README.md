@@ -66,9 +66,21 @@
 
 # **Screenshot dell'app:**
 
-<img src = "src/assets/presentation/Screenshot_smartphone_1.jpg">
+## Vista Mobile
 
-![](https://giovannipacelli2.github.io/news/src/assets/presentation/img/)
+<img src = "./src/assets/presentation/img/Screenshot_smatphone_collage.jpg" style = "width:100%">
+
+</br>
+
+## Vista PC
+<img src = "./src/assets/presentation/img/screen_pc.jpg" style = "width:100%;">
+
+</br>
+
+## Schermata d'errore
+<img src = "./src/assets/presentation/img/error.jpg" style = "width:100%;">
+
+</br>
 
 # **Link utili:**
 
