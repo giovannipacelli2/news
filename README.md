@@ -6,16 +6,11 @@
 
 ## **Funzioni principali:** 
 
-</br>
-
 * #### VIsualizzare le ultime notizie tramite le API di Hacker News dalla sezione *Top news*
 
 * #### Funzione di aggiornamento automatico delle ultime notizie
 
 * #### Possibilità di caricare le notizie meno recenti
-
-</br>
-
 
 ## **Visita la pagina:** 
 
@@ -56,7 +51,6 @@
 * #### le funzioni che gestiscono le richieste di rete ad Hacker News come la richiesta degli id delle topnews ed il recupero delle notizie stesse tramite quegli id. Ognuna di queste funzioni gestisce eventuali errori. 
 
 * #### le funzioni addette ad inserire dinamicamente le cards (contenenti le notizie) all'interno della pagina
-</br>
 
 ### La classe **Notice** :
 
