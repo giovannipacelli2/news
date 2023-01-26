@@ -22,6 +22,12 @@
     --D_cardTitleColor: #FFD180;
 }
 
+.cardButton {
+    --color: #37474F;
+    --bgColor: #ffffff;
+    --bgColorHover: #fff8eb;
+}
+
 /*-------------------------Card-TRANSITION--------------------------*/
 
 
@@ -63,7 +69,36 @@
     color: var(--D_cardTitleColor);
 }
 
+/*-----------------------News-comment-button------------------------*/
+
+.cardButton {
+    padding: 0.1em 0.5em;
+
+    text-align: center;
+
+    border: 2px solid;
+    border-color: var(--bgColor);
+    border-radius: 8px;
+
+    color: var(--color);
+    background-color: var(--bgColor);
+}
+
+.cardButton:hover {
+    color: var(--color);
+    background-color: var(--bgColorHover);
+    border-color: var(--bgColorHover);
+}
+
 /*----------------------------News-Link-----------------------------*/
+
+.links {
+    margin: 1.5em auto 0.5em auto;
+    padding: 0 2em;
+
+    display: flex;
+    justify-content: space-between;
+}
 
 
 .cards a:hover,

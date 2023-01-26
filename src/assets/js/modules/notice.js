@@ -3,18 +3,34 @@
 
 export default class Notice{
 
-    constructor(by, id, time, type, title, text, url, score) {
+    constructor(by, id, time, type, title, text, url, score, kids) {
         this.by = by;
         this.id = id;
         this.time = time;
-        this.fullDate = this.convertTime(this.time);
-        this.fullHours = this.convertHours(this.time);
         this.type = type;
         this.title = title;
         this.text = text;
         this.url = url;
         this.score = score;
+        this.kids = kids;
+
+        this.fullDate = this.convertTime(this.time);
+        this.fullHours = this.convertHours(this.time);
+        this.comment = this.commentButton();
     }
+
+    /*---------------------------Create-Comment-Button----------------------------*/
+
+
+    commentButton() {
+        if ( this.kids && this.type == "story" ) {
+            return `
+                <button class="cardButton commentButton" type="button" data-id="${this.id}">Commenti</button>
+            `;
+        }
+        else return "";
+    }
+
     /*---------------Convert-Date-from-Unix-Time-RETURNS-DD/MM/YYYY---------------*/
 
     convertTime(time) {
@@ -93,8 +109,16 @@ export default class Notice{
     /*--------------Creates-the-HTML-code-of-a-card-and-returns-it----------------*/
 
     createCard() {
-        let url = this.urlController();
+
         let title = this.titleOrText();
+
+        let url = this.urlController();
+        let commentButton = this.commentButton();
+
+        let none = ()=>{
+            if (!url && !commentButton) {return `style = "display:none"`;}
+            else { return "" }
+        };
 
         let body = `
             <div class="card cards">
@@ -105,7 +129,12 @@ export default class Notice{
                     <p class="card-text text-end me-4">Data e ora:</p>
                     <p class="card-text text-end me-1">${this.fullDate}-${this.fullHours}</p>
                     
-                    ${url}
+                    <div class="links" ${none()}>
+                        ${url}
+                        ${commentButton}
+                    </div>
+
+                    
 
                 </div>
             </div>
@@ -119,4 +148,4 @@ export default class Notice{
 
 /*------Arrays that store the specific order to constructor arguments of Class-------------*/
 
-Notice.argumentsOrder = ['by', 'id', 'time', 'type', 'title', 'text', 'url', 'score'];
+Notice.argumentsOrder = ['by', 'id', 'time', 'type', 'title', 'text', 'url', 'score', 'kids'];
