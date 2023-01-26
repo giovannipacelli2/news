@@ -1,0 +1,41 @@
+Linguaggi utilizzati:
+
+Javascript, HTML, CSS.
+
+Librerie utilizzate:
+
+Lodash, Axios, Bootstrap
+
+----------------------------
+
+Scopo:
+
+Visualizzare le ultime notizie tramite le API di Hacker News dalla sezione Top news
+
+----------------------------
+
+Grafica:
+
+Per la grafica sono state utilizzate delle cards contenenti le notizie, grafica minima e contenuto indispensabile. [ foto esplicativa di una card]
+
+Come si presenta:
+
+- La pagina all'apertura carica le ultime 10 news
+
+- C'è un pulsante che da all'utente la possibilità di caricare altre notizie
+
+- Ogni minuto la pagina effettua una richiesta ad Hacker News per controllare se ci sono ultime notizie.
+
+----------------------------
+
+Specifiche tecniche:
+
+Astrazione del problema:
+
+Ogni notizia viene vista come un'entità, quindi come un oggetto con un costruttore ed i suoi metodi.
+
+Librerie personalizzate:
+
+Semplificazioni visive ed organizzative per avere un main più pulito ed intuitivo
+
+
