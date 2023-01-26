@@ -6,7 +6,7 @@
 
 ## **Funzioni principali:** 
 
-* #### VIsualizzare le ultime notizie tramite le API di Hacker News dalla sezione *Top news*
+* #### Visualizzare le ultime notizie tramite le API di Hacker News dalla sezione *Top news*
 
 * #### Funzione di aggiornamento automatico delle ultime notizie
 
