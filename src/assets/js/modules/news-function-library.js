@@ -141,7 +141,7 @@ export async function refreshNews(baseUrl, newStories, mainContainer, last) {
 /*-----------------Append-stories-with-CSS-Animation---------------*/
 
 
-export async function animationAppendStories( arrStories, father ) {
+export async function animationAppendStories( arrStories, father, where='beforeend' ) {
 
     let container = document.createElement("DIV");
     container.classList.add("container-sm", "cards-container", "elem-invisible");
@@ -154,7 +154,7 @@ export async function animationAppendStories( arrStories, father ) {
 
         // Insert every story in INVISIBLE CONTAINER
         for ( let story of arrStories ) {
-            container.insertAdjacentHTML('beforeend',story);       
+            container.insertAdjacentHTML(where, story);       
         }
                
         father.append(container);

@@ -19,18 +19,6 @@ export default class Notice{
         this.comment = this.commentButton();
     }
 
-    /*---------------------------Create-Comment-Button----------------------------*/
-
-
-    commentButton() {
-        if ( this.kids && this.type == "story" ) {
-            return `
-                <button class="cardButton commentButton" type="button" data-id="${this.id}">Commenti</button>
-            `;
-        }
-        else return "";
-    }
-
     /*---------------Convert-Date-from-Unix-Time-RETURNS-DD/MM/YYYY---------------*/
 
     convertTime(time) {
@@ -82,6 +70,8 @@ export default class Notice{
         return fullHours;
     }
 
+    /*-----------------------------------------------------CARD-MANAGEMENT----------------------------------------------------*/
+
     /*-------------------Returns-HTML-code-IF-URL-is-present----------------------*/
 
 
@@ -106,6 +96,20 @@ export default class Notice{
           }
         else return ""; 
     }
+
+    /*---------------------------Create-Comment-Button----------------------------*/
+
+
+    commentButton() {
+        if ( this.kids && this.type == "story" ) {
+            return `
+                <button class="cardButton commentButton" type="button" data-id="${this.id}">Commenti</button>
+            `;
+        }
+        else return "";
+    }
+
+
     /*--------------Creates-the-HTML-code-of-a-card-and-returns-it----------------*/
 
     createCard() {
@@ -141,6 +145,22 @@ export default class Notice{
         `;
         return body;
     }
+
+    /*---------------------------------------------------COMMENT-MANAGEMENT---------------------------------------------------*/
+
+    createComment(top) {
+
+        let body = `
+            <div class="comment">
+                <p class="card-text by">${this.by}:</p>
+                <p class="card-text">${this.text}</p>
+                <p class="card-text text-end me-1 mt-3">${this.fullDate}-${this.fullHours}</p>
+            </div>
+        `;
+
+        return body;
+    }
+
 };
 
 

@@ -6,7 +6,10 @@ import Notice from './modules/notice.js';
 
 import { PAGE, MAIN_CONTAINER, newStories, baseUrl } from './main.js';
 
+
 MAIN_CONTAINER.addEventListener("click", seeComments);
+
+
 
 async function seeComments(e) {
 
@@ -16,17 +19,63 @@ async function seeComments(e) {
 
     let card = e.target.offsetParent.closest(".cards");
 
-    let id = button.dataset.id;     // getting the notice id
+    if( !card.classList.contains("show-comments")) {
 
-    let request = await NewsLibrary.getNoticeById( baseUrl, [id] );
+        let id = button.dataset.id;     // getting the notice id
 
-    let commentsId = request[0].kids;
+        let request = await NewsLibrary.getNoticeById( baseUrl, [id] );
 
-    let commentArr = await NewsLibrary.getNoticeById( baseUrl, commentsId );
+        let commentsId = request[0].kids;
 
-    let html = NewsLibrary.writeNotice(commentArr);
+        let commentArr = await NewsLibrary.getNoticeById( baseUrl, commentsId );
 
-    // Appends in HTML with CSS animation
-    await NewsLibrary.animationAppendStories(html, card);
-    
+        let html = writeComment(commentArr);
+
+        card.classList.add("show-comments", "mb-0");
+
+        let div = document.createElement('DIV');
+        div.classList.add( "comment-container" ,"visible" );
+
+        card.after(div);
+
+        div.insertAdjacentHTML("beforeend", html);
+        // Appends in HTML with CSS animation
+        /* await NewsLibrary.animationAppendStories(html, div); */
+    }
+    else {
+        card.classList.remove("show-comments", "mb-0");
+        card.nextElementSibling.remove();
+
+    }
+}
+
+/*---------------------Write-COMMENTS-in-DOCUMENT------------------*/
+
+function writeComment(comments){
+
+    try{
+        let res = [];
+
+        for ( let data of comments ) {
+
+            let comment = null;
+            let property = null;
+
+            // Creates CARD
+
+            property = Library.exstractProperty(data, Notice.argumentsOrder);
+
+            comment = new Notice(...property);
+
+            let html = comment.createComment(top);
+
+            res.push(html);     // Array of CARDs html code
+
+        }
+        return res;
+
+    } catch(err){
+        NewsLibrary.clearPage(PAGE, MAIN_CONTAINER);
+        throw err;
+    }
 }

@@ -57,6 +57,8 @@
     align-items: center;
 }
 .cards {
+    position: relative;
+
     width: 90%;
     margin-bottom: var(--cardMarginBottom);
     background-color: var(--D_bgCard);
