@@ -176,7 +176,7 @@ export async function animationAppendStories( arrStories, father ) {
 
 /*--------------------------Get-one-element------------------------*/   // for future implementations
 
-export async function printElement(baseUrl, id, container=false) {
+export async function printElement(baseUrl, id) {
     let url = baseUrl + 'item/' + id + '.json';
 
     return new Promise( function(resolve, reject) {
@@ -187,7 +187,7 @@ export async function printElement(baseUrl, id, container=false) {
             }
         })
         .then((response) => {
-            let elem = writeNotice([response.data], container);
+            let elem = writeNotice([response.data]);
             resolve(elem);
         })
         .catch( (err)=> { forErrors(err, PAGE, MAIN_CONTAINER) } );;

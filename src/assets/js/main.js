@@ -14,8 +14,8 @@ import  * as NewsLibrary  from './modules/news-function-library.js';
 
 /*-------------------------VAR-DECLARATION-------------------------*/
 
-let baseUrl = 'https://hacker-news.firebaseio.com/v0/';
-let newStories = 'newstories.json';
+export const baseUrl = 'https://hacker-news.firebaseio.com/v0/';
+export const newStories = 'newstories.json';
 
 export const PAGE = document.body.querySelector("#page");
 export const MAIN_CONTAINER = document.body.querySelector("#main-container");
