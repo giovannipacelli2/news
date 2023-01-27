@@ -218,3 +218,11 @@ body {
     }
 
 }
+
+/*------------------------------------*/
+@media only screen and ( max-height: 30em ) {
+
+    #header {
+        position: absolute;
+    }
+}
