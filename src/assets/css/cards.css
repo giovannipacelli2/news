@@ -94,7 +94,7 @@
 
 .links {
     margin: 1.5em auto 0.5em auto;
-    padding: 0 2em;
+    padding: 0;
 
     display: flex;
     justify-content: space-between;
@@ -152,6 +152,10 @@
 
     .cards {
         width: 60%;
+    }
+
+    .links {
+        padding: 0 2em;
     }
 }
 
