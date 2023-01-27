@@ -148,7 +148,7 @@ export default class Notice{
 
     /*---------------------------------------------------COMMENT-MANAGEMENT---------------------------------------------------*/
 
-    createComment(top) {
+    createComment() {
 
         let body = `
             <div class="comment">
