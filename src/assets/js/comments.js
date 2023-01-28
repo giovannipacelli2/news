@@ -8,6 +8,7 @@ import { PAGE, MAIN_CONTAINER, newStories, baseUrl } from './main.js';
 
 
 MAIN_CONTAINER.addEventListener("click", seeComments);
+/* MAIN_CONTAINER.addEventListener("dblclick", (e)=>{debbugger; e.preventDefault()}); */
 
 
 
@@ -15,11 +16,32 @@ async function seeComments(e) {
 
     let button = e.target;
 
-    if ( !button.classList.contains("commentButton") ) return;
+    if ( !e.target.classList.contains("commentButton") ) {
 
-    let card = e.target.offsetParent.closest(".cards");
+        if ( e.target.closest(".comment-container") ) return;
+
+        let allComments = document.body.querySelectorAll(".comment-container");
+
+        if ( allComments ) {
+
+            for ( let comment of allComments) {
+                comment.remove();
+            } 
+
+            let allCards = document.body.querySelectorAll( ".cards") ;
+
+            for ( let card of allCards) {	   card.classList.remove("show-comments", "mb-0");
+            } 
+        } 
+
+        return;
+    }
+
+    let card = e.target.closest(".cards");
 
     if( !card.classList.contains("show-comments")) {
+
+        MAIN_CONTAINER.removeEventListener("click", seeComments);
 
         let id = button.dataset.id;     // getting the notice id
 
@@ -39,8 +61,8 @@ async function seeComments(e) {
         card.after(div);
 
         div.insertAdjacentHTML("beforeend", html);
-        // Appends in HTML with CSS animation
-        /* await NewsLibrary.animationAppendStories(html, div); */
+        
+        MAIN_CONTAINER.addEventListener("click", seeComments);
     }
     else {
         card.classList.remove("show-comments", "mb-0");
