@@ -53,20 +53,35 @@ async function seeComments(e) {
 
         let html = writeComment(commentArr);
 
-        card.classList.add("show-comments", "mb-0");
+        card.classList.add("show-comments");
 
         let div = document.createElement('DIV');
         div.classList.add( "comment-container" ,"visible" );
-
+        
         card.after(div);
-
+        
+        setTimeout( ()=>{ 
+            div.style.top = "-5px";
+            div.style.opacity = "1"; 
+        }, 10 );
+        
         div.insertAdjacentHTML("beforeend", html);
+        div.onload
         
         MAIN_CONTAINER.addEventListener("click", seeComments);
     }
     else {
-        card.classList.remove("show-comments", "mb-0");
-        card.nextElementSibling.remove();
+        let divComments = card.nextElementSibling;
+
+        divComments.addEventListener('transitionend', ()=>{ 
+            divComments.remove(); 
+            card.classList.remove("show-comments");
+        });
+
+        setTimeout( ()=>{ 
+            divComments.style.top = "-100px";
+            divComments.style.opacity = "0"; 
+        }, 10 );
 
     }
 }
