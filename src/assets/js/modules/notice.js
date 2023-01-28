@@ -157,7 +157,7 @@ export default class Notice{
                     <span class="card-text by">${this.by}:</span>
                 </div>
 
-                <div class="text-container">
+                <div class="comment-text-container">
                     <p class="card-text">${this.text}</p>
                     <span class="other">...altro</span>
                     <p class="card-text text-end data">${this.fullDate}-${this.fullHours}</p>

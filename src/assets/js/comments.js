@@ -52,7 +52,12 @@ async function seeComments(e) {
 
         let commentArr = await NewsLibrary.getNoticeById( baseUrl, commentsId );
 
-        let html = writeComment(commentArr);
+        let htmlCommentArr = writeComment(commentArr);
+
+        let html = htmlCommentArr.reduce( (acc, html)=> {
+            let res = acc + html + `\n`;
+            return res;
+        }, "" );
 
         card.classList.add("show-comments");
 

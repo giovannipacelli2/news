@@ -10,7 +10,7 @@
     --borderColor : #37474F;
 }
 
-.comment .text-container {
+.comment-text-container {
     --bgColor : #ECEFF1;
 }
 
@@ -36,6 +36,7 @@
     box-shadow: 0px 5px 6px #37474F;
     
     position: relative;
+    z-index: 5;
 
     opacity: 0;
 
@@ -67,11 +68,7 @@
     word-wrap: normal;
 }
 
-.comment p a {
-    word-wrap: break-word;
-}
-
-.text-container {
+.comment-text-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -84,6 +81,14 @@
 
     background-color: var(--bgColor);
 
+    word-wrap: break-word;
+    overflow-x: hidden;
+}
+
+.comment-text-container a {
+/*     word-wrap: break-word;
+    text-overflow: ellipsis; */
+    overflow: hidden;
 }
 
 .data {
