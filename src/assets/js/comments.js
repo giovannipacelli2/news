@@ -25,12 +25,13 @@ async function seeComments(e) {
         if ( allComments ) {
 
             for ( let comment of allComments) {
-                comment.remove();
+                TRANSITION.out(comment);
             } 
 
             let allCards = document.body.querySelectorAll( ".cards") ;
 
-            for ( let card of allCards) {	   card.classList.remove("show-comments", "mb-0");
+            for ( let card of allCards) {
+                card.classList.remove("show-comments");
             } 
         } 
 
@@ -60,28 +61,17 @@ async function seeComments(e) {
         
         card.after(div);
         
-        setTimeout( ()=>{ 
-            div.style.top = "-5px";
-            div.style.opacity = "1"; 
-        }, 10 );
+        TRANSITION.in(div);
         
         div.insertAdjacentHTML("beforeend", html);
-        div.onload
         
         MAIN_CONTAINER.addEventListener("click", seeComments);
     }
     else {
         let divComments = card.nextElementSibling;
 
-        divComments.addEventListener('transitionend', ()=>{ 
-            divComments.remove(); 
-            card.classList.remove("show-comments");
-        });
-
-        setTimeout( ()=>{ 
-            divComments.style.top = "-100px";
-            divComments.style.opacity = "0"; 
-        }, 10 );
+        TRANSITION.out(divComments);
+        card.classList.remove("show-comments");
 
     }
 }
@@ -114,5 +104,36 @@ function writeComment(comments){
     } catch(err){
         NewsLibrary.clearPage(PAGE, MAIN_CONTAINER);
         throw err;
+    }
+}
+
+/*----------------------------TRANSITION---------------------------*/
+
+const TRANSITION = {
+
+    in : function(div) {
+
+        div.style.top = "-100px";
+        div.style.transition = "top 0.5s, opacity 0.8s";  
+
+        setTimeout( ()=>{ 
+            div.style.top = "-35px";
+            div.style.opacity = "1"; 
+        }, 10 );
+    },
+
+    out : function(div) {
+
+        div.style.transition = "top 0.5s, opacity 0.8s";  
+
+        div.addEventListener('transitionend', ()=>{ 
+            div.remove();           
+        });
+
+        setTimeout( ()=>{ 
+            div.style.top = "-100px";
+            div.style.opacity = "0"; 
+        }, 10 );
+
     }
 }

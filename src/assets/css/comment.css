@@ -14,7 +14,6 @@
 
 
 .show-comments {
-    margin-bottom: 0;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
@@ -33,14 +32,10 @@
     box-shadow: 0px 5px 6px #37474F;
     
     position: relative;
-    top: -100px;
 
     opacity: 0;
 
     width: 90%;
-
-    transition: top 1s, opacity 1s;  
-
 }
 
 .user-container {
