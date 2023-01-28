@@ -152,7 +152,10 @@ export default class Notice{
 
         let body = `
             <div class="comment">
-                <p class="card-text by">${this.by}:</p>
+                <div class="user-container">
+                    <img class="comment-img" src="./assets/img/user.png">
+                    <span class="card-text by">${this.by}:</span>
+                </div>
                 <p class="card-text">${this.text}</p>
                 <p class="card-text text-end me-1 mt-3">${this.fullDate}-${this.fullHours}</p>
             </div>

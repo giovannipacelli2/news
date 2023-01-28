@@ -27,6 +27,21 @@
     width: 90%;
 }
 
+.user-container {
+    margin-bottom: 5px;
+    display: flex;
+}
+
+.user-container span{
+    margin-left: 5px;
+    align-self: flex-end;
+}
+
+.comment-img {
+    width: 10%;
+    display: inline-block;
+}
+
 .comment {
     border-bottom: 1px solid var(--borderColor);
     padding: 1.2em 0;
