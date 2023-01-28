@@ -156,8 +156,12 @@ export default class Notice{
                     <img class="comment-img" src="./assets/img/user.png">
                     <span class="card-text by">${this.by}:</span>
                 </div>
-                <p class="card-text">${this.text}</p>
-                <p class="card-text text-end me-1 mt-3">${this.fullDate}-${this.fullHours}</p>
+
+                <div class="text-container">
+                    <p class="card-text">${this.text}</p>
+                    <span class="other">...altro</span>
+                    <p class="card-text text-end data">${this.fullDate}-${this.fullHours}</p>
+                </div>
             </div>
         `;
 

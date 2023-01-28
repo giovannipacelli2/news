@@ -10,6 +10,10 @@
     --borderColor : #37474F;
 }
 
+.comment .text-container {
+    --bgColor : #ECEFF1;
+}
+
 /*---------------------------------Comment-Management--------------------------------*/
 
 
@@ -54,7 +58,6 @@
 }
 
 .comment {
-    border-bottom: 1px solid var(--borderColor);
     padding: 1.2em 0;
 }
 
@@ -66,6 +69,34 @@
 
 .comment p a {
     word-wrap: break-word;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    padding: 1em;
+
+    /* max-height: 150px; */
+
+    border-radius: 5px;
+
+    background-color: var(--bgColor);
+
+}
+
+.data {
+    margin-top: 1em;
+    align-self: flex-end;
+}
+
+.other {
+    font-size: 1em;
+    text-decoration: underline;
+    align-self: flex-end;
+
+    display: none;
 }
 
 
