@@ -23,9 +23,13 @@
 }
 
 .cardButton {
-    --color: #37474F;
+    --color: #fae49a;
     --bgColor: #ffffff;
     --bgColorHover: #fff8eb;
+}
+
+.links-container {
+    --bgColor : #607D8B;
 }
 
 /*-------------------------Card-TRANSITION--------------------------*/
@@ -75,28 +79,40 @@
 /*-----------------------News-comment-button------------------------*/
 
 .cardButton {
-    padding: 0.1em 0.5em;
-
-    text-align: center;
-
-    border: 2px solid;
-    border-color: var(--bgColor);
-    border-radius: 8px;
-
+    border: none;
+    background-color: transparent;
     color: var(--color);
-    background-color: var(--bgColor);
+
+
 }
 
-.cardButton:hover {
+/* .cardButton:hover {
     color: var(--color);
     background-color: var(--bgColorHover);
     border-color: var(--bgColorHover);
+} */
+
+.comment-icon {
+    margin-left: 5px;
+    width: 1em;
 }
 
 /*----------------------------News-Link-----------------------------*/
 
+.links-container {
+    background-color: var(--bgColor);
+
+    height: 2em;
+    width: 100%;
+
+    border: none;
+
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
 .links {
-    margin: 1.5em auto 0.5em auto;
+    /* margin: 1.5em auto 0.5em auto; */
     padding: 0;
 
     display: flex;

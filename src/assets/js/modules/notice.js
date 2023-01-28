@@ -103,7 +103,10 @@ export default class Notice{
     commentButton() {
         if ( this.kids && this.type == "story" ) {
             return `
-                <button class="cardButton commentButton" type="button" data-id="${this.id}">Commenti</button>
+                <button class="cardButton commentButton" type="button" data-id="${this.id}">
+                    <span>Commenti</span>
+                    <img src="./assets/img/comment.png" alt="comments" class="comment-icon">
+                </button>
             `;
         }
         else return "";
@@ -133,14 +136,14 @@ export default class Notice{
                     <p class="card-text text-end me-4">Data e ora:</p>
                     <p class="card-text text-end me-1">${this.fullDate}-${this.fullHours}</p>
                     
+                </div>
+
+                <div class="links-container"> 
                     <div class="links" ${none()}>
                         ${url}
                         ${commentButton}
-                    </div>
-
-                    
-
-                </div>
+                    </div>         
+                </div> 
             </div>
         `;
         return body;
