@@ -8,8 +8,6 @@ import { PAGE, MAIN_CONTAINER, newStories, baseUrl } from './main.js';
 
 
 MAIN_CONTAINER.addEventListener("click", seeComments);
-/* MAIN_CONTAINER.addEventListener("dblclick", (e)=>{debbugger; e.preventDefault()}); */
-
 
 
 async function seeComments(e) {
@@ -47,18 +45,7 @@ async function seeComments(e) {
 
         let id = button.dataset.id;     // getting the notice id
 
-        let request = await NewsLibrary.getNoticeById( baseUrl, [id] );
-
-        let commentsId = request[0].kids;
-
-        let commentArr = await NewsLibrary.getNoticeById( baseUrl, commentsId );
-
-        let htmlCommentArr = writeComment(commentArr);
-
-        let html = htmlCommentArr.reduce( (acc, html)=> {
-            let res = acc + html + `\n`;
-            return res;
-        }, "" );
+        let html = await getCommentsByNoticeId(id);
 
         card.classList.add("show-comments");
         linksContainer.classList.add("show-comments");
@@ -75,7 +62,7 @@ async function seeComments(e) {
         MAIN_CONTAINER.addEventListener("click", seeComments);
     }
     else {
-        let divComments = card.nextElementSibling;
+        let divComments = card.nextElementSibling.closest( ".comment-container");
 
         TRANSITION.out(divComments);
         card.classList.remove("show-comments");
@@ -83,6 +70,27 @@ async function seeComments(e) {
 
     }
 }
+
+/*-------------------------Get-HTML-Comments-----------------------*/
+
+async function getCommentsByNoticeId(id) {
+
+    let request = await NewsLibrary.getNoticeById( baseUrl, [id] );
+
+    let commentsId = request[0].kids;
+
+    let commentArr = await NewsLibrary.getNoticeById( baseUrl, commentsId );
+
+    let htmlCommentArr = writeComment(commentArr);
+
+    return htmlCommentArr.reduce( (acc, html)=> {
+        let res = acc + html + `\n`;
+        return res;
+    }, "" );
+
+}
+
+
 
 /*---------------------Write-COMMENTS-in-DOCUMENT------------------*/
 

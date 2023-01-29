@@ -62,12 +62,20 @@
 
 ## Vista Mobile
 
-<img src = "./src/assets/presentation/img/Screenshot_smatphone_collage.jpg" style = "width:100%">
+<img src = "./src/assets/presentation/img/Screenshot_smatphone_collage_1.jpg" style = "width:100%">
+
+</br>
+
+<img src = "./src/assets/presentation/img/Screenshot_smatphone_collage_2.jpg" style = "width:100%">
 
 </br>
 
 ## Vista PC
-<img src = "./src/assets/presentation/img/screen_pc.jpg" style = "width:100%;">
+<img src = "./src/assets/presentation/img/screen_pc_1.jpg" style = "width:100%;">
+
+</br>
+
+<img src = "./src/assets/presentation/img/screen_pc_2.jpg" style = "width:100%;">
 
 </br>
 
