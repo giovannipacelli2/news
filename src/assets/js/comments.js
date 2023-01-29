@@ -14,9 +14,9 @@ MAIN_CONTAINER.addEventListener("click", seeComments);
 
 async function seeComments(e) {
 
-    let button = e.target;
+    let button = e.target.closest(".commentButton");
 
-    if ( !e.target.classList.contains("commentButton") ) {
+    if ( !button ) {
 
         if ( e.target.closest(".comment-container") ) return;
 

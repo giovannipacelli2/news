@@ -16,20 +16,19 @@
 
     --D_bgCard : #37474F;
     --D_cardTextColor : rgb(255, 255, 255); 
-    --D_cardLink : #fae49a;
-    --D_cardLinkVisited : rgb(188, 247, 188);
+    --D_cardLink : #000000; /* #fae49a; */
+    --D_cardLinkVisited : rgb(7, 127, 7); /* rgb(188, 247, 188); */
 
     --D_cardTitleColor: #FFD180;
 }
 
 .cardButton {
-    --color: #fae49a;
-    --bgColor: #ffffff;
-    --bgColorHover: #fff8eb;
+    --color: #000000;
+    --colorHover: #414141;
 }
 
 .links-container {
-    --bgColor : #607D8B;
+    --bgColor : #ECEFF1;
 }
 
 /*-------------------------Card-TRANSITION--------------------------*/
@@ -86,11 +85,10 @@
 
 }
 
-/* .cardButton:hover {
-    color: var(--color);
-    background-color: var(--bgColorHover);
-    border-color: var(--bgColorHover);
-} */
+.cardButton:hover {
+    /* color: var(--colorHover); */
+    text-decoration: underline;
+}
 
 .comment-icon {
     margin-left: 5px;
@@ -109,11 +107,15 @@
 
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+
+    display: flex;
+    align-items: center;
 }
 
 .links {
-    /* margin: 1.5em auto 0.5em auto; */
-    padding: 0;
+    padding: 0 1em;
+
+    width: 100%;
 
     display: flex;
     justify-content: space-between;
