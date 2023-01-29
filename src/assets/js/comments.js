@@ -39,6 +39,7 @@ async function seeComments(e) {
     }
 
     let card = e.target.closest(".cards");
+    let linksContainer = card.querySelector(".links-container");
 
     if( !card.classList.contains("show-comments")) {
 
@@ -60,6 +61,7 @@ async function seeComments(e) {
         }, "" );
 
         card.classList.add("show-comments");
+        linksContainer.classList.add("show-comments");
 
         let div = document.createElement('DIV');
         div.classList.add( "comment-container" ,"visible" );
@@ -77,6 +79,7 @@ async function seeComments(e) {
 
         TRANSITION.out(divComments);
         card.classList.remove("show-comments");
+        linksContainer.classList.remove("show-comments");
 
     }
 }

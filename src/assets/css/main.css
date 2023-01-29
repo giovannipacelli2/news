@@ -206,7 +206,7 @@ body {
     }
 
     #header, #page{
-        --headerHeight: 14em;
+        --headerHeight: 11em;
     }
 
     #loading {

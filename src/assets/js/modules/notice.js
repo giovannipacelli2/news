@@ -138,7 +138,7 @@ export default class Notice{
                     
                 </div>
 
-                <div class="links-container"> 
+                <div class="links-container" ${none()}> 
                     <div class="links" ${none()}>
                         ${url}
                         ${commentButton}
@@ -152,6 +152,8 @@ export default class Notice{
     /*---------------------------------------------------COMMENT-MANAGEMENT---------------------------------------------------*/
 
     createComment() {
+
+        if (!this.by && !this.text) return "";
 
         let body = `
             <div class="comment">
