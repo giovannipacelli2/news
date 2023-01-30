@@ -101,10 +101,16 @@ export default class Notice{
 
 
     commentButton() {
-        if ( this.kids && this.type == "story" ) {
+        if ( this.type == "story" ) {
+
+            let id;
+
+            if ( this.kids ) { id = this.id }
+            else { id = "" }
+
             return `
-                <button class="cardButton commentButton" type="button" data-id="${this.id}">
-                    <span>Commenti</span>
+                <button class="cardButton commentButton" type="button" data-id="${id}">
+                    <span>Commenti: ${this.kids.length}</span>
                     <img src="./assets/img/comment.png" alt="comments" class="comment-icon">
                 </button>
             `;
@@ -140,8 +146,8 @@ export default class Notice{
 
                 <div class="links-container" ${none()}> 
                     <div class="links" ${none()}>
-                        ${url}
                         ${commentButton}
+                        ${url}
                     </div>         
                 </div> 
             </div>

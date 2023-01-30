@@ -44,8 +44,18 @@ async function seeComments(e) {
         MAIN_CONTAINER.removeEventListener("click", seeComments);
 
         let id = button.dataset.id;     // getting the notice id
+        
 
-        let html = await getCommentsByNoticeId(id);
+        let html;
+
+        if ( id !== "" ){
+            html = await getCommentsByNoticeId(id);
+        }
+
+        else if ( id == "" ){
+            html = `<span>Non ci sono commenti</span>`
+        }
+        
 
         card.classList.add("show-comments");
         linksContainer.classList.add("show-comments");
