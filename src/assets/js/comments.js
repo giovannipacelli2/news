@@ -85,18 +85,25 @@ async function seeComments(e) {
 
 async function getCommentsByNoticeId(id) {
 
-    let request = await NewsLibrary.getNoticeById( baseUrl, [id] );
+    let error = `<span style="color:red">Errore nel recupero del commento</span>`;
 
-    let commentsId = request[0].kids;
+try{
+        let request = await NewsLibrary.getNoticeById( baseUrl, [id] );
 
-    let commentArr = await NewsLibrary.getNoticeById( baseUrl, commentsId );
+        let commentsId = request[0].kids;
 
-    let htmlCommentArr = writeComment(commentArr);
+        let commentArr = await NewsLibrary.getNoticeById( baseUrl, commentsId );
 
-    return htmlCommentArr.reduce( (acc, html)=> {
-        let res = acc + html + `\n`;
-        return res;
-    }, "" );
+        if ( !commentArr ) { return error; }
+
+        let htmlCommentArr = writeComment(commentArr);
+
+        return htmlCommentArr.reduce( (acc, html)=> {
+            let res = acc + html + `\n`;
+            return res;
+        }, "" );
+    }
+    catch(err) { NewsLibrary.forErrors(err, PAGE, MAIN_CONTAINER) };
 
 }
 

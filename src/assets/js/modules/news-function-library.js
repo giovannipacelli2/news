@@ -46,6 +46,8 @@ export async function getRequest(url){
 export async function getNoticeById(baseUrl, news) {
     let arrNews = [];
 
+    if ( !news ) return null;
+
     let requests = news.map((id)=> {
         let url = baseUrl + 'item/' + id + '.json';
         return axios.get( url );
@@ -190,7 +192,7 @@ export async function printElement(baseUrl, id) {
             let elem = writeNotice([response.data]);
             resolve(elem);
         })
-        .catch( (err)=> { forErrors(err, PAGE, MAIN_CONTAINER) } );;
+        .catch( (err)=> { forErrors(err, PAGE, MAIN_CONTAINER) } );
     });
 }
 

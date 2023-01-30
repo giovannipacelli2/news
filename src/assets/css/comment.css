@@ -82,7 +82,7 @@
     background-color: var(--bgColor);
 
     word-wrap: break-word;
-    overflow-x: hidden;
+    overflow-x: auto;
 }
 
 .comment-text-container a {
