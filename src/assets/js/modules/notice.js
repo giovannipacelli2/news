@@ -110,7 +110,7 @@ export default class Notice{
 
             return `
                 <button class="cardButton commentButton" type="button" data-id="${id}">
-                    <span>Commenti: ${this.kids.length}</span>
+                    <span>Commenti: <span class="n-comments">${this.kids.length}</span></span>
                     <img src="./assets/img/comment.png" alt="comments" class="comment-icon">
                 </button>
             `;

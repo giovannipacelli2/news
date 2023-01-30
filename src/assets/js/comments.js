@@ -39,7 +39,7 @@ async function seeComments(e) {
     let card = e.target.closest(".cards");
     let linksContainer = card.querySelector(".links-container");
 
-    if( !card.classList.contains("show-comments")) {
+    if( !card.classList.contains("show-comments")) {    // SEE COMMENTS
 
         MAIN_CONTAINER.removeEventListener("click", seeComments);
 
@@ -49,7 +49,11 @@ async function seeComments(e) {
         let html;
 
         if ( id !== "" ){
-            html = await getCommentsByNoticeId(id);
+            let commentObj = await getCommentsByNoticeId(id);
+            html = commentObj.html;
+
+            let commentButton = card.querySelector(".n-comments");
+            commentButton.textContent = commentObj.nComments;
         }
 
         else if ( id == "" ){
@@ -98,10 +102,15 @@ try{
 
         let htmlCommentArr = writeComment(commentArr);
 
-        return htmlCommentArr.reduce( (acc, html)=> {
-            let res = acc + html + `\n`;
-            return res;
-        }, "" );
+        return {
+            html: htmlCommentArr.reduce( (acc, html)=> {
+                        let res = acc + html + `\n`;
+                        return res;
+                    }, "" ),
+
+            nComments : commentsId.length
+        }
+        
     }
     catch(err) { NewsLibrary.forErrors(err, PAGE, MAIN_CONTAINER) };
 
