@@ -14,16 +14,21 @@ async function seeComments(e) {
 
     let button = e.target.closest(".commentButton");
 
+    /*-----------------If target isn't comment button-----------------*/
+
     if ( !button ) {
 
         if ( e.target.closest(".comment-container") ) return;
+
+        // Removes comments by clicking anywhere in the document
+        // EXCEPT the itself's comment
 
         let allComments = document.body.querySelectorAll(".comment-container");
 
         if ( allComments ) {
 
             for ( let comment of allComments) {
-                TRANSITION.out(comment);
+                TRANSITION.out(comment);    // Remove all comments
             } 
 
             let allCards = document.body.querySelectorAll( ".cards") ;
@@ -36,6 +41,8 @@ async function seeComments(e) {
         return;
     }
 
+    /*---------------------CLICK ON COMMENT BUTTON--------------------*/
+
     let card = e.target.closest(".cards");
     let linksContainer = card.querySelector(".links-container");
 
@@ -44,9 +51,13 @@ async function seeComments(e) {
         MAIN_CONTAINER.removeEventListener("click", seeComments);
 
         let id = button.dataset.id;     // getting the notice id
-        
 
         let html;
+
+        // Check the ID
+
+        // NB the constructor of every Notice inserts its id in the button 
+        // only if there are comments
 
         if ( id !== "" ){
             let commentObj = await getCommentsByNoticeId(id);
@@ -59,7 +70,8 @@ async function seeComments(e) {
         else if ( id == "" ){
             html = `<span>Non ci sono commenti</span>`
         }
-        
+
+        // Creates the elements that make up the comments
 
         card.classList.add("show-comments");
         linksContainer.classList.add("show-comments");
@@ -76,6 +88,8 @@ async function seeComments(e) {
         MAIN_CONTAINER.addEventListener("click", seeComments);
     }
     else {
+        // Remove the comments by clicking on comment button
+
         let divComments = card.nextElementSibling.closest( ".comment-container");
 
         TRANSITION.out(divComments);
@@ -87,19 +101,29 @@ async function seeComments(e) {
 
 /*-------------------------Get-HTML-Comments-----------------------*/
 
+// getCommentsByNoticeId returns an HTML message
+// in case of null/undefinided or void response
+
+// else returns an object that has the HTML code of comments 
+// and the number of how many are there
+
 async function getCommentsByNoticeId(id) {
 
     let error = `<span style="color:red">Errore nel recupero del commento</span>`;
 
 try{
+        // Get Notice by ID
         let request = await NewsLibrary.getNoticeById( baseUrl, [id] );
 
-        let commentsId = request[0].kids;
+        // Put the comments array in commentsIds
+        let commentsIds = request[0].kids;
 
-        let commentArr = await NewsLibrary.getNoticeById( baseUrl, commentsId );
+        // Get the Comments by Ids
+        let commentArr = await NewsLibrary.getNoticeById( baseUrl, commentsIds );
 
         if ( !commentArr ) { return error; }
 
+        // Get the array of HTML code by comments
         let htmlCommentArr = writeComment(commentArr);
 
         return {
@@ -108,7 +132,7 @@ try{
                         return res;
                     }, "" ),
 
-            nComments : commentsId.length
+            nComments : commentsIds.length
         }
         
     }
