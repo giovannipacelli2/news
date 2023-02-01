@@ -96,6 +96,10 @@
 
 </br>
 
+<img src = "./src/assets/presentation/img/Screenshot_smatphone_collage_3.jpg" style = "width:100%">
+
+</br>
+
 ## Vista PC
 <img src = "./src/assets/presentation/img/screen_pc_1.jpg" style = "width:100%;">
 
