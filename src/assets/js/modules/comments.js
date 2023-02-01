@@ -1,10 +1,10 @@
 'use strict'
 
-import  * as NewsLibrary  from './modules/news-function-library.js';
-import  * as Library  from './modules/functions-library.js';
-import Notice from './modules/notice.js';
+import  * as NewsLibrary  from './library/news-function-library.js';
+import  * as Library  from './library/functions-library.js';
+import Comment from './classes/comment.js';
 
-import { PAGE, MAIN_CONTAINER, newStories, baseUrl } from './main.js';
+import { PAGE, MAIN_CONTAINER, newStories, baseUrl } from '../main.js';
 
 
 MAIN_CONTAINER.addEventListener("click", seeComments);
@@ -120,6 +120,8 @@ try{
 
         // Get the Comments by Ids
         let commentArr = await NewsLibrary.getNoticeById( baseUrl, commentsIds );
+        console.clear();
+        console.dir(commentArr);
 
         if ( !commentArr ) { return error; }
 
@@ -156,11 +158,11 @@ function writeComment(comments){
 
             // Creates CARD
 
-            property = Library.exstractProperty(data, Notice.argumentsOrder);
+            property = Library.exstractProperty(data, Comment.argumentsOrder);
 
-            comment = new Notice(...property);
+            comment = new Comment(...property);
 
-            let html = comment.createComment(top);
+            let html = comment.exportHtmlElement();
 
             res.push(html);     // Array of CARDs html code
 

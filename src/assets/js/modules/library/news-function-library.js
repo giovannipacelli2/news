@@ -1,10 +1,10 @@
 'use strict'
 
 import  * as Library  from './functions-library.js';
-import Notice from './notice.js';
+import Notice from '../classes/notice.js';
 
-import { PAGE } from '../main.js';
-import { MAIN_CONTAINER } from '../main.js';
+import { PAGE } from '../../main.js';
+import { MAIN_CONTAINER } from '../../main.js';
 
 export class NewsError extends Error{
     constructor(message){
@@ -84,7 +84,7 @@ export function writeNotice(news, container=false){
 
             notice = new Notice(...property);
 
-            let card = notice.createCard();
+            let card = notice.exportHtmlElement();
 
             if (container) {
                 container.insertAdjacentHTML('beforeend',card);

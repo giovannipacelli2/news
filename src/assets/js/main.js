@@ -8,8 +8,8 @@ import 'https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js';
 /*-------------------------MODULES-IMPORT--------------------------*/
 
 
-import  * as Library  from './modules/functions-library.js';
-import  * as NewsLibrary  from './modules/news-function-library.js';
+import  * as Library  from './modules/library/functions-library.js';
+import  * as NewsLibrary  from './modules/library/news-function-library.js';
 
 
 /*-------------------------VAR-DECLARATION-------------------------*/

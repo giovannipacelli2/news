@@ -33,7 +33,7 @@
 
 * #### la cartella **img** : contenente tutte le immagini
 
-* #### la cartella **js** : che contiene il file main.js (entry point) e la cartella _modules_ che contiene le librerie.
+* #### la cartella **js** : che contiene il file main.js (entry point) e la cartella _modules_ che contiene, librerie e classi.
 
 </br>
 
