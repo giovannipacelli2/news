@@ -12,6 +12,8 @@
 
 * #### Possibilità di caricare le notizie meno recenti
 
+* #### Possibilità di visualizzare i commenti di ogni storia
+
 ## **Visita la pagina:** 
 
 * ### [_Flash news_](https://giovannipacelli2.github.io/news/src)
@@ -45,6 +47,22 @@
     * #### le funzioni **refresh**, **seeMore** e **requireMoreNews** che gestiscono il pulsante che carica più notizie.
     * #### le funzioni per la gestione specifica degli errori.
 
+## **Modules** :
+
+### **comment.js** :
+
+#### Si occupa della gestione dei commenti e contiene:
+
+* #### la gestione del listener sulla pagina.
+
+* #### la gestione delle richieste per ottenere gli id dei commenti.
+
+* #### la gestione grafica con relative animazioni.
+
+</br>
+
+## **Modules/Library** :
+
 ### **news-function-library.js** :
 
 #### Si occupa di tutto ciò che riguarda le news e contiene:
@@ -52,10 +70,18 @@
 
 * #### le funzioni addette ad inserire dinamicamente le cards (contenenti le notizie) all'interno della pagina
 
+## **Modules/Classes** :
+
 ### La classe **Notice** :
 
 1. #### Astrae il concetto di notizia e comprende tutti i metodi atti a costruirne la veste grafica
 2. #### Possiede una variabile statica _argumentsOrder_ nella quale è memorizzato l'ordine preciso in cui il costruttore vuole le proprietà.
+
+### La classe **Comment** :
+
+1. #### Estende la classe Notice
+2. #### Possiede un suo metodo per la costruzione grafica del commento
+
 </br>
 
 # **Screenshot dell'app:**
