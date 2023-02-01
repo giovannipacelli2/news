@@ -2,7 +2,7 @@
 
 import 'https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js';
 
-/*-------------------------DOMS-ELEMENTS---------------------------*/
+/*--------------------------------------------------DOMS-ELEMENTS--------------------------------------------------*/
 
 export function createButton(text) {
   let button = document.createElement('BUTTON');
@@ -13,7 +13,69 @@ export function createButton(text) {
   return button;
 }
 
-/*-------------------------Error-handlers--------------------------*/
+/*----------------------------To-Top-button------------------------*/
+
+export function toTopButton(button) {
+
+  let control = true;
+
+  button.onclick  = ()=> { window.scrollTo(0,0); };
+
+  button.style.display = "none";
+
+  window.onscroll = ()=> {
+
+    let scroll = window.innerHeight;
+
+    if ( window.pageYOffset > scroll && control  ) {
+      OPACITY.in(button, "0.85");
+      control = false;
+      console.log("giù");
+    } 
+    else if ( window.pageYOffset <= scroll && !control ) {
+      OPACITY.out(button);
+      control = true;
+      console.log("su");
+    } 
+  };
+}
+
+/*---------------------------basic-animation-----------------------*/
+
+const OPACITY = {
+
+  in : function(elem, opacity) {
+
+      elem.style.display = "";
+      elem.style.opacity = "0";
+      elem.style.transition = "opacity 0.8s";  
+
+      setTimeout( ()=>{ 
+          elem.style.opacity = opacity; 
+      }, 50 );
+  },
+
+  out : function(elem) {
+
+      elem.style.transition = "opacity 0.8s";  
+
+      elem.addEventListener('transitionend', none);
+
+      function none() { 
+        elem.style.display = "none";
+        elem.removeEventListener('transitionend', none);
+      }
+
+      setTimeout( ()=>{ 
+          elem.style.opacity = "0"; 
+      }, 50 );
+
+      
+
+  }
+}
+
+/*-------------------------------------------------OBJECT-FUNCTIONS------------------------------------------------*/
 
 
 /*-----------------------Exstract-Obj-Property---------------------*/
@@ -44,4 +106,5 @@ export function exstractProperty(obj, order) {
 
 }
 
-/*-------------------------Request-functions-----------------------*/
+
+

@@ -39,6 +39,8 @@ errorOnMainRequest.retry = 0;
 /*---------------------------MAIN-PROGRAM--------------------------*/
 
 /* setTimeout( async()=>{ await main() }, 5000 ); */ // FOR DEBUG
+let toTop = document.body.querySelector(".to-top");
+Library.toTopButton(toTop);
 
 await main();
 

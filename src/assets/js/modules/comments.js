@@ -120,8 +120,6 @@ try{
 
         // Get the Comments by Ids
         let commentArr = await NewsLibrary.getNoticeById( baseUrl, commentsIds );
-        console.clear();
-        console.dir(commentArr);
 
         if ( !commentArr ) { return error; }
 
