@@ -181,27 +181,27 @@ const TRANSITION = {
 
     in : function(div) {
 
-        div.style.top = "-100px";
-        div.style.transition = "top 0.5s, opacity 0.8s";  
+        div.style.top = "-150px";
+        div.style.transition = "top 0.8s, opacity 0.8s 0.1s";  
 
         setTimeout( ()=>{ 
             div.style.top = "-35px";
             div.style.opacity = "1"; 
-        }, 10 );
+        }, 50 );
     },
 
     out : function(div) {
 
-        div.style.transition = "top 0.5s, opacity 0.8s";  
+        div.style.transition = "top 0.8s 0.2s, opacity 0.8s";  
 
         div.addEventListener('transitionend', ()=>{ 
             div.remove();           
         });
 
         setTimeout( ()=>{ 
-            div.style.top = "-100px";
+            div.style.top = "-150px";
             div.style.opacity = "0"; 
-        }, 10 );
+        }, 50 );
 
     }
 }
