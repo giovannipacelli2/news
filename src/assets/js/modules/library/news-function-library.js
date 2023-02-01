@@ -1,10 +1,10 @@
 'use strict'
 
 import  * as Library  from './functions-library.js';
-import Notice from './notice.js';
+import Notice from '../classes/notice.js';
 
-import { PAGE } from '../main.js';
-import { MAIN_CONTAINER } from '../main.js';
+import { PAGE } from '../../main.js';
+import { MAIN_CONTAINER } from '../../main.js';
 
 export class NewsError extends Error{
     constructor(message){
@@ -46,6 +46,8 @@ export async function getRequest(url){
 export async function getNoticeById(baseUrl, news) {
     let arrNews = [];
 
+    if ( !news ) return null;
+
     let requests = news.map((id)=> {
         let url = baseUrl + 'item/' + id + '.json';
         return axios.get( url );
@@ -82,7 +84,7 @@ export function writeNotice(news, container=false){
 
             notice = new Notice(...property);
 
-            let card = notice.createCard();
+            let card = notice.exportHtmlElement();
 
             if (container) {
                 container.insertAdjacentHTML('beforeend',card);
@@ -190,7 +192,7 @@ export async function printElement(baseUrl, id) {
             let elem = writeNotice([response.data]);
             resolve(elem);
         })
-        .catch( (err)=> { forErrors(err, PAGE, MAIN_CONTAINER) } );;
+        .catch( (err)=> { forErrors(err, PAGE, MAIN_CONTAINER) } );
     });
 }
 

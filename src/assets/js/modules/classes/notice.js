@@ -101,10 +101,16 @@ export default class Notice{
 
 
     commentButton() {
-        if ( this.kids && this.type == "story" ) {
+        if ( this.type == "story" ) {
+
+            let id;
+
+            if ( this.kids ) { id = this.id }
+            else { id = "" }
+
             return `
-                <button class="cardButton commentButton" type="button" data-id="${this.id}">
-                    <span>Commenti</span>
+                <button class="cardButton commentButton" type="button" data-id="${id}">
+                    <span>Commenti: <span class="n-comments">${this.kids.length}</span></span>
                     <img src="./assets/img/comment.png" alt="comments" class="comment-icon">
                 </button>
             `;
@@ -115,7 +121,7 @@ export default class Notice{
 
     /*--------------Creates-the-HTML-code-of-a-card-and-returns-it----------------*/
 
-    createCard() {
+    exportHtmlElement() {
 
         let title = this.titleOrText();
 
@@ -140,36 +146,12 @@ export default class Notice{
 
                 <div class="links-container" ${none()}> 
                     <div class="links" ${none()}>
-                        ${url}
                         ${commentButton}
+                        ${url}
                     </div>         
                 </div> 
             </div>
         `;
-        return body;
-    }
-
-    /*---------------------------------------------------COMMENT-MANAGEMENT---------------------------------------------------*/
-
-    createComment() {
-
-        if (!this.by && !this.text) return "";
-
-        let body = `
-            <div class="comment">
-                <div class="user-container">
-                    <img class="comment-img" src="./assets/img/user.png">
-                    <span class="card-text by">${this.by}:</span>
-                </div>
-
-                <div class="comment-text-container">
-                    <p class="card-text text">${this.text}</p>
-                    <span class="other">...altro</span>
-                    <p class="card-text text-end data">${this.fullDate}-${this.fullHours}</p>
-                </div>
-            </div>
-        `;
-
         return body;
     }
 

@@ -81,14 +81,18 @@
 
     background-color: var(--bgColor);
 
-    word-wrap: break-word;
-    overflow-x: hidden;
+    word-wrap: normal;
+    overflow-x: auto;
 }
 
-.comment-text-container a {
-/*     word-wrap: break-word;
-    text-overflow: ellipsis; */
-    overflow: hidden;
+.comment-text-container a,
+.comment-text-container code,
+.comment-text-container pre {
+    width: 100%;
+
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: auto;
 }
 
 .data {

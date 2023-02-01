@@ -163,6 +163,30 @@ body {
     align-items: center;
 }
 
+/*--------------------------Other-elements--------------------------*/
+
+.to-top {
+
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    z-index: 20;
+
+    padding: 5px;
+
+    width: 40px;
+    cursor: pointer;
+
+    background-color: #FFD180;
+    border-radius: 50px;
+
+    transition: 0.2s linear !important;
+}
+
+.to-top:hover {
+    translate: 0 -15%;	
+}
+
 /*-----------------------------ERRORS-------------------------------*/
 
 .error-card {
@@ -211,6 +235,13 @@ body {
 
     #loading {
         width: 80px;
+    }
+
+    .to-top {
+        right: 2em;
+        bottom: 2em;
+
+        width: 60px;
     }
 
     .error-card {
