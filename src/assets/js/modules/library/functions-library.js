@@ -19,7 +19,10 @@ export function toTopButton(button) {
 
   let control = true;
 
-  button.onclick  = ()=> { window.scrollTo(0,0); };
+  button.onclick  = ()=> { 
+    window.scrollTo(0,0); 
+    button.blur();
+  };
 
   button.style.display = "none";
 

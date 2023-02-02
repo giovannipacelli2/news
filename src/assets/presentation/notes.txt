@@ -10,7 +10,9 @@ Lodash, Axios, Bootstrap
 
 Scopo:
 
-Visualizzare le ultime notizie tramite le API di Hacker News dalla sezione Top news
+-Visualizzare le ultime notizie tramite le API di Hacker News dalla sezione Top news.
+
+-Visualizzazione dei commenti delle notizie.
 
 ----------------------------
 
@@ -22,9 +24,15 @@ Come si presenta:
 
 - La pagina all'apertura carica le ultime 10 news
 
+- Ogni minuto la pagina effettua una richiesta ad Hacker News per controllare se ci sono ultime notizie.
+
+Pulsanti:
+
 - C'è un pulsante che da all'utente la possibilità di caricare altre notizie
 
-- Ogni minuto la pagina effettua una richiesta ad Hacker News per controllare se ci sono ultime notizie.
+- Il pulsante commentButton che fa richiesta e visualizza i commenti
+
+- il pultante toTop che appare quando lo scroll è maggiore dell'altezza della finestra, che riporta su nella pagina.
 
 ----------------------------
 
