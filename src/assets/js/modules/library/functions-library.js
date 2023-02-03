@@ -20,8 +20,7 @@ export function toTopButton(button) {
   let control = true;
 
   button.onclick  = ()=> { 
-    window.scrollTo(0,0); 
-    button.blur();
+    window.scrollTo(0,0);     
   };
 
   button.style.display = "none";
@@ -33,12 +32,10 @@ export function toTopButton(button) {
     if ( window.pageYOffset > scroll && control  ) {
       OPACITY.in(button, "0.85");
       control = false;
-      console.log("giù");
     } 
     else if ( window.pageYOffset <= scroll && !control ) {
       OPACITY.out(button);
       control = true;
-      console.log("su");
     } 
   };
 }
