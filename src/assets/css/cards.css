@@ -41,11 +41,21 @@
 
 .card-transition {
     display: flex;
-    opacity: 1;
 
-    transform: transition;
-    transition-property: 'opacity';
-    transition-duration: var(--timeTransition);
+    animation-name: card-transition;
+    animation-iteration-count: 1;
+    animation-duration: var(--timeTransition);
+}
+
+@keyframes card-transition {
+
+    from{
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 /*----------------------------------CARD-Management----------------------------------*/

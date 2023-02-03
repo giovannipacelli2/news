@@ -146,32 +146,20 @@ export async function refreshNews(baseUrl, newStories, mainContainer, last) {
 export async function animationAppendStories( arrStories, father, where='beforeend' ) {
 
     let container = document.createElement("DIV");
-    container.classList.add("container-sm", "cards-container", "elem-invisible");
-
-    let cssProperty = window.getComputedStyle(document.documentElement);
-    let timeTransition = cssProperty.getPropertyValue("--timeTransition");
-    let time = +timeTransition.split('ms')[0];  // get the value of time transition as NUMBER
+    container.classList.add("container-sm", "cards-container");
 
     return new Promise( function( resolve, reject ) {
 
-        // Insert every story in INVISIBLE CONTAINER
         for ( let story of arrStories ) {
             container.insertAdjacentHTML(where, story);       
         }
                
         father.append(container);
-        setTimeout( ()=> {
-            // CSS ANIMATION
-            container.classList.add("card-transition");
+        // CSS ANIMATION
+        container.classList.add("card-transition");
 
-            setTimeout( ()=> {
-                // CSS ANIMATION
-                container.classList.remove("elem-invisible");
-                container.classList.remove("card-transition");
-                resolve();
-            } ,time );
+        resolve();
 
-        } ,time);
     } );      
     
 }
