@@ -50,10 +50,9 @@ await main();
 
 async function main(){
     try {
-
         // Create loading animation during loading news
         let loading = createLoading();
-        loading.style.marginTop = "4em";
+        loading.style.marginTop = "8em";
         MAIN_CONTAINER.before(loading);
 
         // Call the master request for News list to Hacker News and stores it in a global variable
@@ -86,8 +85,7 @@ async function main(){
         PAGE.addEventListener( 'click', seeMore );
 
         // update cycle for the latest news
-        refreshCicle = refresh(refreshTime);
-        
+        refreshCicle = refresh(refreshTime);       
     }
     catch(err) { errorOnMainRequest(err); }
 }
@@ -107,7 +105,11 @@ function refresh(refreshTime) {
         try{
             res = await NewsLibrary.refreshNews(baseUrl, newStories, MAIN_CONTAINER, newStoriesId[0]);
         }
-        catch(err) { genericError(err); }
+        catch(err) { 
+            NewsLibrary.clearPage(PAGE, MAIN_CONTAINER);
+            let msg = genericError(err); 
+            PAGE.before(msg);
+        }
 
         if (res) {      // If there are new news, it UPDATES the news ids array
             newStoriesId = res.newsIds;
@@ -163,7 +165,11 @@ async function seeMore(e) {
             noMoreNews( loading, PAGE, MAIN_CONTAINER );
         }
     }
-    catch(err) { genericError(err); }
+    catch(err) { 
+        let msg = genericError(err); 
+        MAIN_CONTAINER.append(msg);
+        throw err;
+    }
 }
 
 
@@ -173,7 +179,7 @@ async function seeMore(e) {
 async function requireMoreNews( baseUrl, newsIds, loading, mainContainer, button ) {
 
     return new Promise( async function( resolve,reject ){
-        try{
+        try{ 
             //Get request for each ID of "newsIds"
             let moreNews = await NewsLibrary.getNoticeById( baseUrl, newsIds );           
             if ( moreNews instanceof Error ) reject(moreNews);
@@ -185,12 +191,16 @@ async function requireMoreNews( baseUrl, newsIds, loading, mainContainer, button
 
             // append into container with animation
             await NewsLibrary.animationAppendStories(stories, mainContainer);
-
+            
             mainContainer.after(button);
             resolve();
             
         }
-        catch(err) { genericError(err) }
+        catch(err) { 
+            let msg = genericError(err); 
+            MAIN_CONTAINER.append(msg);
+            throw err;
+        }
     } );
 
 }
@@ -249,7 +259,7 @@ function errorOnMainRequest(err) {
 
     PAGE.removeEventListener( 'click', seeMore );
 
-    PAGE.append(message);
+    PAGE.before(message);
 
     if ( err instanceof NewsLibrary.NewsError ) {
 
@@ -289,5 +299,6 @@ function genericError(err){
     PAGE.removeEventListener( 'click', seeMore );
 
     PAGE.append(message);
-    throw err;
+
+    return message;
 }

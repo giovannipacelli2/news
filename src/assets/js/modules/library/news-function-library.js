@@ -236,7 +236,7 @@ export function forErrors(error, page, container){
     }
 
     let html = `
-        <div class = "error-card">
+        <div class = "error-card" style = "margin-top:10em">
             <h1 style ='text-align:center'>Error ${status}</h1>
             <div style ='font-size:1.2em' >Something gone wrong: <div style ='color:red'>${text}${statusText}</div></div>
         </div>
