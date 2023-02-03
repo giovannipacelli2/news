@@ -17,7 +17,7 @@ body {
 }
 
 #header, #page{
-    --headerHeight: 18em;
+    --headerHeight: 24em;
     --headerColor : rgb(37, 54, 149);
     --flashNewsColor : #ffffff;
     --headerTextColor : #FFD180;    /* #313131 */
@@ -57,7 +57,7 @@ body {
 
     width: 100%;
 
-    height: var(--headerHeight);
+    height: calc(var(--headerHeight) - 6em);
 
     background: var(--yellowBgTop);
     background-color: var(--headerColor);
@@ -229,7 +229,7 @@ body {
     }
 
     #header, #page{
-        --headerHeight: 24em;
+        height: var(--headerHeight);
     }
 
     #page {
@@ -257,6 +257,6 @@ body {
 @media only screen and ( max-height: 30em ) {
 
     #header {
-        position: absolute;
+        height: calc(var(--headerHeight) - 8em);
     }
 }
