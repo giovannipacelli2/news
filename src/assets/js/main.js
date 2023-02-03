@@ -53,6 +53,7 @@ async function main(){
 
         // Create loading animation during loading news
         let loading = createLoading();
+        loading.style.marginTop = "4em";
         MAIN_CONTAINER.before(loading);
 
         // Call the master request for News list to Hacker News and stores it in a global variable

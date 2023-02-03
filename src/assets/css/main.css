@@ -6,6 +6,7 @@
 
 body {
     font-size: 16px;
+    width: 100%;
 }
 
 /*---------------------------------Color Management----------------------------------*/
@@ -75,20 +76,20 @@ body {
     justify-content: space-around;
     align-items: center;
 
-    height: 70%;
+    height: 65%;
 
     color : var(--headerTextColor);
 }
 
 .text-container h1 {
     color: var(--flashNewsColor);
-    font-size: 2em;
+    font-size: 3em;
     margin-top: 1em;
     text-shadow: 7px 5px 2px #313131;
 }
 
 .header-text {
-    font-size: 1em;
+    font-size: 1.2em;
     text-overflow:clip;
     text-align: center;
     font-style: italic;
@@ -219,12 +220,12 @@ body {
 @media only screen and ( min-width:576px ) {
 
     .text-container h1 {
-        font-size: 2.5em;
+        font-size: 3em;
     }
 
     .header-text {
         text-align: start;
-        font-size: 1.2em;
+        font-size: 1.4em;
     }
 
     #header, #page{
