@@ -182,11 +182,43 @@ body {
     background-color: #FFD180;
     border-radius: 50px;
 
-    transition: 0.2s linear !important;
 }
 
 .to-top:hover {
-    translate: 0 -15%;	
+    animation-name: toTop;
+    animation-iteration-count: 1;
+    animation-duration: 1.8s;
+    animation-direction: normal;
+    animation-timing-function: cubic-bezier(0,.83,.38,.43);
+}
+
+@keyframes toTop {
+    from {
+        translate: 0 0;	
+    }
+
+    30% {
+        translate: 0 -30%;	
+    }
+
+    35% {
+        translate: 0 -20%;	
+    }
+
+    40% {
+        translate: 0 -30%;	
+    }
+
+    45% {
+        translate: 0 -20%;	
+    }
+    70% {
+        translate: 0 -30%;	
+    }
+
+    to {
+        translate: 0 0;	
+    }
 }
 
 /*-----------------------------ERRORS-------------------------------*/
