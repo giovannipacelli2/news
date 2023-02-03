@@ -108,7 +108,7 @@ function refresh(refreshTime) {
         catch(err) { 
             NewsLibrary.clearPage(PAGE, MAIN_CONTAINER);
             let msg = genericError(err); 
-            PAGE.before(msg);
+            if (msg) PAGE.before(msg);
         }
 
         if (res) {      // If there are new news, it UPDATES the news ids array
@@ -167,7 +167,7 @@ async function seeMore(e) {
     }
     catch(err) { 
         let msg = genericError(err); 
-        MAIN_CONTAINER.append(msg);
+        if (msg) MAIN_CONTAINER.append(msg);
         throw err;
     }
 }
@@ -198,7 +198,7 @@ async function requireMoreNews( baseUrl, newsIds, loading, mainContainer, button
         }
         catch(err) { 
             let msg = genericError(err); 
-            MAIN_CONTAINER.append(msg);
+            if (msg) MAIN_CONTAINER.append(msg);
             throw err;
         }
     } );
@@ -298,7 +298,11 @@ function genericError(err){
 
     PAGE.removeEventListener( 'click', seeMore );
 
-    PAGE.append(message);
-
-    return message;
+    if ( err instanceof NewsLibrary.NewsError ) {
+        PAGE.before(message);
+        return false;
+    }
+    else {
+        return message;
+    }
 }
