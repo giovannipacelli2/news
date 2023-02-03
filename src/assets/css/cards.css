@@ -61,7 +61,7 @@
 }
 .cards {
     position: relative;
-    z-index: 10;
+    z-index: 15;
 
     width: 90%;
     margin-bottom: var(--cardMarginBottom);
