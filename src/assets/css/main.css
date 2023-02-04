@@ -197,25 +197,10 @@ body {
         translate: 0 0;	
     }
 
-    30% {
-        translate: 0 -30%;	
+    50% {
+        translate: 0 -15%;	
     }
-
-    35% {
-        translate: 0 -20%;	
-    }
-
-    40% {
-        translate: 0 -30%;	
-    }
-
-    45% {
-        translate: 0 -20%;	
-    }
-    70% {
-        translate: 0 -30%;	
-    }
-
+    
     to {
         translate: 0 0;	
     }
