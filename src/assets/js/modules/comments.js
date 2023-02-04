@@ -28,13 +28,16 @@ async function seeComments(e) {
         if ( allComments ) {
 
             for ( let comment of allComments) {
-                TRANSITION.out(comment);    // Remove all comments
+                commentTransition(comment, "comment-transition", "reverse");    // Remove all comments
             } 
 
             let allCards = document.body.querySelectorAll( ".cards") ;
 
             for ( let card of allCards) {
                 card.classList.remove("show-comments");
+
+                let linksContainer = card.querySelector( ".links-container") ;
+                linksContainer.classList.remove("show-comments");
             } 
         } 
 
@@ -80,8 +83,7 @@ async function seeComments(e) {
         div.classList.add( "comment-container" ,"visible" );
         
         card.after(div);
-        
-        TRANSITION.in(div);
+        commentTransition(div, "comment-transition", "normal");
         
         div.insertAdjacentHTML("beforeend", html);
         
@@ -92,7 +94,7 @@ async function seeComments(e) {
 
         let divComments = card.nextElementSibling.closest( ".comment-container");
 
-        TRANSITION.out(divComments);
+        commentTransition(divComments, "comment-transition", "reverse");
         card.classList.remove("show-comments");
         linksContainer.classList.remove("show-comments");
 
@@ -175,31 +177,26 @@ function writeComment(comments){
 
 /*----------------------------TRANSITION---------------------------*/
 
-const TRANSITION = {
+function commentTransition(elem, cssClass, direction="normal") {
 
-    in : function(div) {
+    let start = window.getComputedStyle(elem).getPropertyValue("--startTransition");
+    let end = window.getComputedStyle(elem).getPropertyValue("--endTransition");
 
-        div.style.top = "-150px";
-        div.style.transition = "top 0.8s, opacity 0.8s 0.1s";  
+    elem.style.animationDirection = direction;
+    elem.classList.add(cssClass);
+    
+    elem.onanimationend = ()=> {
 
-        setTimeout( ()=>{ 
-            div.style.top = "-35px";
-            div.style.opacity = "1"; 
-        }, 50 );
-    },
+        let top;
+        
+        if ( direction == "normal" ) {top=`${end}`;}
 
-    out : function(div) {
+        elem.style.top = top;
+        elem.classList.remove(cssClass);
 
-        div.style.transition = "top 0.8s 0.2s, opacity 0.8s";  
-
-        div.addEventListener('transitionend', ()=>{ 
-            div.remove();           
-        });
-
-        setTimeout( ()=>{ 
-            div.style.top = "-150px";
-            div.style.opacity = "0"; 
-        }, 50 );
-
-    }
+        if ( direction == "reverse" ) {
+            top=`${start}`;
+            elem.remove();
+        }
+    };
 }

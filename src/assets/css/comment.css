@@ -4,6 +4,13 @@
     box-sizing: border-box;
 }
 
+.comment-container,
+.comment-transition,
+ moveY {
+    --startTransition : -180px;
+    --endTransition : -35px;
+}
+
 /*---------------------------------Color-Management----------------------------------*/
 
 .comment-container {
@@ -36,9 +43,10 @@
     box-shadow: 0px 5px 6px var(--borderColor);
     
     position: relative;
+    top: var(--startTransition);
     z-index: 10;
 
-    opacity: 0;
+    opacity: 1;
 
     width: 90%;
 }
@@ -108,6 +116,34 @@
     display: none;
 }
 
+/*------------------------------TRANSITION-Management--------------------------------*/
+
+.comment-transition {
+    animation-name: moveY, opacity;
+    animation-duration: 0.8s, 0.8s;
+    animation-delay: 0s, 0s;
+    animation-iteration-count: 1;
+}
+
+@keyframes moveY {
+    from {
+        top: var(--startTransition);
+    }
+
+    to {
+        top: var(--endTransition);
+    }
+}
+
+@keyframes opacity {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
 
 
 @media only screen and ( min-width:576px ) {
