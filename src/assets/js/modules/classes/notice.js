@@ -135,7 +135,7 @@ export default class Notice{
 
         let body = `
             <div class="card cards">
-                <div class="card-body px-4">
+                <div class="card-body">
 
                     ${title}
                     <p class="card-text by">By: ${this.by}</p>
