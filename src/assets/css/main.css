@@ -228,12 +228,12 @@ body {
 }
 
 
-.to-top:hover {
+.to-top:focus {
     animation-name: toTop;
     animation-iteration-count: 1;
-    animation-duration: 1.2s;
-    animation-direction: normal;
-    animation-timing-function: cubic-bezier(0,.83,.38,.43);
+    animation-duration: 0.8s;
+    animation-direction:alternate;
+    animation-timing-function: cubic-bezier(0,1.17,.17,.99);
 }
 
 @keyframes toTop {
@@ -241,12 +241,8 @@ body {
         translate: 0 0;	
     }
 
-    50% {
-        translate: 0 -20%;	
-    }
-    
     to {
-        translate: 0 0;	
+        translate: 0 -40%;	
     }
 }
 
