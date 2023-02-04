@@ -156,7 +156,7 @@ export async function animationAppendStories( arrStories, father, where='beforee
                
         father.append(container);
         // CSS ANIMATION
-        container.classList.add("card-transition");
+        container.classList.add("opacity-transition");
 
         resolve();
 

@@ -31,32 +31,6 @@
     --bgColor : #ffffff;
 }
 
-/*-------------------------Card-TRANSITION--------------------------*/
-
-
-.elem-invisible {
-    display: none;
-    opacity: 0;
-}
-
-.card-transition {
-    display: flex;
-
-    animation-name: opacity;
-    animation-iteration-count: 1;
-    animation-duration: var(--timeTransition);
-}
-
-@keyframes opacity {
-
-    from{
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
 
 /*----------------------------------CARD-Management----------------------------------*/
 
