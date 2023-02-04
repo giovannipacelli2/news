@@ -2,7 +2,7 @@
 
 import 'https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js';
 
-/*--------------------------------------------------DOMS-ELEMENTS--------------------------------------------------*/
+/*---------------------------------------------------DOM-ELEMENTS--------------------------------------------------*/
 
 // Create simple button
 // have 2 arguments
@@ -117,5 +117,25 @@ export function exstractProperty(obj, order) {
 
 }
 
+/*--------------------------------------------------NETWORK-REQUEST------------------------------------------------*/
 
 
+/*------------------------Get-simple-request-----------------------*/
+
+// Uses AXIOS
+
+export async function getSimpleRequest(url){
+
+  return new Promise( function(resolve, reject) {
+      axios.get( url, {
+          params:{}
+      })
+
+      .then( (res) => { resolve(res) } )
+
+      .catch( (err)=> { 
+          console.log(err.message);
+          reject(err);
+      } );
+  });
+}

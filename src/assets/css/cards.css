@@ -42,12 +42,12 @@
 .card-transition {
     display: flex;
 
-    animation-name: card-transition;
+    animation-name: opacity;
     animation-iteration-count: 1;
     animation-duration: var(--timeTransition);
 }
 
-@keyframes card-transition {
+@keyframes opacity {
 
     from{
         opacity: 0;
