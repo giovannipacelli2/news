@@ -179,6 +179,8 @@ body {
 
     background-color: #FFD180;
     border-radius: 50px;
+
+    opacity: 0.8;
 }
 
 /*---------------------------TRANSITION-----------------------------*/
@@ -204,6 +206,24 @@ body {
 
     to {
         opacity: 1;
+    }
+}
+
+.to-top-opacity {
+    /* display: flex; */
+    animation-name: opacity-08;
+    animation-iteration-count: 1;
+    animation-duration: var(--timeTransition);
+}
+
+@keyframes opacity-08 {
+
+    from{
+        opacity: 0;
+    }
+
+    to {
+        opacity: 0.8;
     }
 }
 

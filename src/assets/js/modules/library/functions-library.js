@@ -41,11 +41,11 @@ export function toTopButton(button) {
     let scroll = window.innerHeight;
 
     if ( window.pageYOffset > scroll && control  ) {
-      opacityTransion(button, "opacity-transition", "normal");
+      opacityTransion(button, "to-top-opacity", "normal");
       control = false;
     } 
     else if ( window.pageYOffset <= scroll && !control ) {
-      opacityTransion(button, "opacity-transition", "reverse");
+      opacityTransion(button, "to-top-opacity", "reverse");
       control = true;
     } 
   };
@@ -63,7 +63,7 @@ function opacityTransion(elem, cssClass, direction="normal") {
 
     elem.classList.remove(cssClass);
     elem.onanimationend = null;
-    
+
     if (direction == "reverse") elem.style.display = "none";
   };
   
