@@ -212,7 +212,11 @@
 
     .cards {
         width: 700px;
-        min-height: 250px;
+        min-height: 270px;
+    }
+
+    .card-body {
+        padding: 2em 2em;
     }
 
 }

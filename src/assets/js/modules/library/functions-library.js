@@ -41,11 +41,11 @@ export function toTopButton(button) {
     let scroll = window.innerHeight;
 
     if ( window.pageYOffset > scroll && control  ) {
-      OPACITY.in(button, "0.85");
+      opacityTransion(button, "opacity-transition", "normal");
       control = false;
     } 
     else if ( window.pageYOffset <= scroll && !control ) {
-      OPACITY.out(button);
+      opacityTransion(button, "opacity-transition", "reverse");
       control = true;
     } 
   };
@@ -53,37 +53,20 @@ export function toTopButton(button) {
 
 /*---------------------------basic-animation-----------------------*/
 
-const OPACITY = {
+function opacityTransion(elem, cssClass, direction="normal") {
 
-  in : function(elem, opacity) {
+  elem.style.display = "";
+  elem.style.animationDirection = direction;
+  elem.classList.add(cssClass);
+  
+  elem.onanimationend = ()=>{
 
-      elem.style.display = "";
-      elem.style.opacity = "0";
-      elem.style.transition = "opacity 0.8s";  
-
-      setTimeout( ()=>{ 
-          elem.style.opacity = opacity; 
-      }, 50 );
-  },
-
-  out : function(elem) {
-
-      elem.style.transition = "opacity 0.8s";  
-
-      elem.addEventListener('transitionend', none);
-
-      function none() { 
-        elem.style.display = "none";
-        elem.removeEventListener('transitionend', none);
-      }
-
-      setTimeout( ()=>{ 
-          elem.style.opacity = "0"; 
-      }, 50 );
-
-      
-
-  }
+    elem.classList.remove(cssClass);
+    elem.onanimationend = null;
+    
+    if (direction == "reverse") elem.style.display = "none";
+  };
+  
 }
 
 /*-------------------------------------------------OBJECT-FUNCTIONS------------------------------------------------*/
