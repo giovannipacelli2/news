@@ -38,11 +38,14 @@ errorOnMainRequest.retry = 0;
 
 /*---------------------------MAIN-PROGRAM--------------------------*/
 
-/* setTimeout( async()=>{ await main() }, 5000 ); */ // FOR DEBUG
+// Turn .to-top element in a scroll up button
 let toTop = document.body.querySelector(".to-top");
 Library.toTopButton(toTop);
 
 await main();
+
+/* setTimeout( async()=>{ await main() }, 5000 ); */ // FOR DEBUG
+
 
 
 /*---------------------MAIN-FUNCTION-DECLARATION-------------------*/
@@ -76,7 +79,7 @@ async function main(){
         // Appends in HTML with CSS animation
         await NewsLibrary.animationAppendStories(mainStories, MAIN_CONTAINER);
 
-        let button = Library.createButton("...vedi altro...");
+        let button = Library.createButton("...vedi altro...", "button");
         button.id = "more-button";
 
         MAIN_CONTAINER.after(button);
@@ -292,11 +295,11 @@ function errorOnMainRequest(err) {
 
 function genericError(err){
 
-    clearInterval(refreshCicle);
+    clearInterval(refreshCicle);    // Removing last news download
 
-    let message = errorMessage();
+    let message = errorMessage();   // Create an error message
 
-    PAGE.removeEventListener( 'click', seeMore );
+    PAGE.removeEventListener( 'click', seeMore );   // Disable more-button
 
     if ( err instanceof NewsLibrary.NewsError ) {
         PAGE.before(message);

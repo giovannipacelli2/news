@@ -4,9 +4,17 @@ import 'https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js';
 
 /*--------------------------------------------------DOMS-ELEMENTS--------------------------------------------------*/
 
-export function createButton(text) {
+// Create simple button
+// have 2 arguments
+
+// text = desired text in button
+// OPTIONAL - cssClass = The CSS class to associate with the button
+
+export function createButton(text, cssClass=false) {
   let button = document.createElement('BUTTON');
-  button.classList.add( "button" );
+
+  if (cssClass) button.classList.add( cssClass );
+  
   button.setAttribute("type", "button");
   button.textContent = text;
 
@@ -15,8 +23,11 @@ export function createButton(text) {
 
 /*----------------------------To-Top-button------------------------*/
 
+// Create a scroll up button from a DOM element
+
 export function toTopButton(button) {
 
+  // Ensures that the animation is done one time
   let control = true;
 
   button.onclick  = ()=> { 
