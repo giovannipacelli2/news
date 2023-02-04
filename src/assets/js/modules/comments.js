@@ -84,6 +84,8 @@ async function seeComments(e) {
         
         card.after(div);
         commentTransition(div, "comment-transition", "normal");
+       
+        if ( window.innerWidth < 576 ) div.scrollIntoView("alignToTop");
         
         div.insertAdjacentHTML("beforeend", html);
         
