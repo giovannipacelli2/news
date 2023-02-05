@@ -33,7 +33,7 @@ async function seeComments(e) {
 
             let allCards = document.body.querySelectorAll( ".cards") ;
 
-            for ( let card of allCards) {
+            for ( let card of allCards) {       // Makes the border-radius at initial value
                 card.classList.remove("show-comments");
 
                 let linksContainer = card.querySelector( ".links-container") ;
@@ -76,16 +76,17 @@ async function seeComments(e) {
 
         // Creates the elements that make up the comments
 
-        card.classList.add("show-comments");
-        linksContainer.classList.add("show-comments");
+        card.classList.add("show-comments");    // Remove border-radius at the bottom of card
+        linksContainer.classList.add("show-comments");  // Remove border-radius at the top of comment
 
-        let div = document.createElement('DIV');
+        let div = document.createElement('DIV');        // Create container for comment
         div.classList.add( "comment-container" ,"visible" );
         
         card.after(div);
         commentTransition(div, "comment-transition", "normal");
        
-        if ( window.innerWidth < 576 ) div.scrollIntoView("alignToTop");
+        // Scrol for smarphone
+        if ( window.innerWidth < 600 ) div.scrollIntoView("alignToTop");
         
         div.insertAdjacentHTML("beforeend", html);
         
@@ -97,6 +98,8 @@ async function seeComments(e) {
         let divComments = card.nextElementSibling.closest( ".comment-container");
 
         commentTransition(divComments, "comment-transition", "reverse");
+        
+        // Makes the border-radius at initial value
         card.classList.remove("show-comments");
         linksContainer.classList.remove("show-comments");
 

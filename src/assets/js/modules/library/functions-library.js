@@ -56,7 +56,10 @@ export function toTopButton(button) {
 
 /*---------------------------basic-animation-----------------------*/
 
-function opacityTransion(elem, cssClass, direction="normal") {
+// Basic animation based on: an element, css class that must have animation, 
+// an optional argument: direction
+
+export function opacityTransion(elem, cssClass, direction="normal") {
 
   elem.style.display = "";
   elem.style.animationDirection = direction;

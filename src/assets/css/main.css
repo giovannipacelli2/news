@@ -94,25 +94,6 @@ body {
     font-style: italic;
 }
 
-/*--------------------------Other-elements--------------------------*/
-
-
-#loading {
-    width: 20%;
-    margin: 0 auto;
-    opacity: 0.8;
-    user-select: none;
-}
-
-.no-more-news {
-    font-size: 1.5em;
-    font-weight: 600;
-    text-decoration: underline;
-    color: red;
-
-    margin-top: 2em;
-}
-
 /*---------------------------Button-Class---------------------------*/
 
 
@@ -164,6 +145,22 @@ body {
 }
 
 /*--------------------------Other-elements--------------------------*/
+
+#loading {
+    width: 20%;
+    margin: 0 auto;
+    opacity: 0.8;
+    user-select: none;
+}
+
+.no-more-news {
+    font-size: 1.5em;
+    font-weight: 600;
+    text-decoration: underline;
+    color: red;
+
+    margin-top: 2em;
+}
 
 .to-top {
     position: fixed;
@@ -317,6 +314,10 @@ body {
 @media only screen and ( max-height: 30em ) {
 
     #header {
-        height: calc(var(--headerHeight) - 8em);
+        height: calc(var(--headerHeight) - 10em);
+    }
+
+    #page {
+        translate: 0 -4.5em;
     }
 }

@@ -4,13 +4,6 @@
     box-sizing: border-box;
 }
 
-.comment-container,
-.comment-transition,
- moveY {
-    --startTransition : -180px;
-    --endTransition : -35px;
-}
-
 /*---------------------------------Color-Management----------------------------------*/
 
 .comment-container {
@@ -20,6 +13,16 @@
 .comment-text-container {
     --bgColor : #ECEFF1;
 }
+
+/*------------------------------Comment-Transition-var-------------------------------*/
+
+.comment-container,
+.comment-transition,
+ moveY {
+    --startTransition : -180px;
+    --endTransition : -35px;
+}
+
 
 /*---------------------------------Comment-Management--------------------------------*/
 
@@ -150,6 +153,15 @@
 }
 
 
+/*-----------------------------------MEDIA-QUERY-------------------------------------*/
+
+
+@media only screen and (min-width:360px) and ( max-width:576px ) {
+    .comment-container {
+        width: 90%;
+    }
+}
+
 @media only screen and ( min-width:576px ) {
     .comment-container {
         width: 60%;
@@ -159,7 +171,7 @@
 @media only screen and ( min-width:576px ) and ( max-width:768px ) {
 
     .comment-container {
-        width: 80%;
+        width: 100%;
     }
 }
 
