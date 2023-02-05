@@ -70,6 +70,13 @@
 
 * #### le funzioni addette ad inserire dinamicamente le cards (contenenti le notizie) all'interno della pagina
 
+### **function-library.js** :
+
+#### Consiste in una libreria personale contente funzioni generiche:
+
+* #### Creazione di pulsanti personalizzati, pulsanti di scroll up, funzioni che lavorano su oggetti, ecc...
+
+
 ## **Modules/Classes** :
 
 ### La classe **Notice** :
