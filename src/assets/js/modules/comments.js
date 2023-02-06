@@ -7,7 +7,7 @@ import Comment from './classes/comment.js';
 import { PAGE, MAIN_CONTAINER, newStories, baseUrl } from '../main.js';
 
 
-MAIN_CONTAINER.addEventListener("click", seeComments);
+PAGE.addEventListener("click", seeComments);
 
 
 async function seeComments(e) {
@@ -51,7 +51,7 @@ async function seeComments(e) {
 
     if( !card.classList.contains("show-comments")) {    // SEE COMMENTS
 
-        MAIN_CONTAINER.removeEventListener("click", seeComments);
+        PAGE.removeEventListener("click", seeComments);
 
         let id = button.dataset.id;     // getting the notice id
 
@@ -90,7 +90,7 @@ async function seeComments(e) {
         
         div.insertAdjacentHTML("beforeend", html);
         
-        MAIN_CONTAINER.addEventListener("click", seeComments);
+        PAGE.addEventListener("click", seeComments);
     }
     else {
         // Remove the comments by clicking on comment button
@@ -194,13 +194,16 @@ function commentTransition(elem, cssClass, direction="normal") {
 
         let top;
         
-        if ( direction == "normal" ) {top=`${end}`;}
+        if ( direction == "normal" ) {
+            top=`${end}`;
+            elem.style.top = top;
+        }
 
-        elem.style.top = top;
         elem.classList.remove(cssClass);
 
         if ( direction == "reverse" ) {
             top=`${start}`;
+            elem.style.top = top;
             elem.remove();
         }
     };
