@@ -95,29 +95,29 @@
 
 ## Vista Mobile
 
-<img src = "./src/assets/presentation/img/Screenshot_smatphone_collage_1.jpg" style = "width:100%">
+<img src = "./src/assets/presentation/img/readme_img/Screenshot_smatphone_collage_1.jpg" style = "width:100%">
 
 </br>
 
-<img src = "./src/assets/presentation/img/Screenshot_smatphone_collage_2.jpg" style = "width:100%">
+<img src = "./src/assets/presentation/img/readme_img/Screenshot_smatphone_collage_2.jpg" style = "width:100%">
 
 </br>
 
-<img src = "./src/assets/presentation/img/Screenshot_smatphone_collage_3.jpg" style = "width:100%">
+<img src = "./src/assets/presentation/img/readme_img/Screenshot_smatphone_collage_3.jpg" style = "width:100%">
 
 </br>
 
 ## Vista PC
-<img src = "./src/assets/presentation/img/screen_pc_1.jpg" style = "width:100%;">
+<img src = "./src/assets/presentation/img/readme_img/screen_pc_1.jpg" style = "width:100%;">
 
 </br>
 
-<img src = "./src/assets/presentation/img/screen_pc_2.jpg" style = "width:100%;">
+<img src = "./src/assets/presentation/img/readme_img/screen_pc_2.jpg" style = "width:100%;">
 
 </br>
 
 ## Schermata d'errore
-<img src = "./src/assets/presentation/img/error.jpg" style = "width:100%;">
+<img src = "./src/assets/presentation/img/readme_img/error.jpg" style = "width:100%;">
 
 </br>
 
