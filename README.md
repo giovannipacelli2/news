@@ -127,4 +127,4 @@
 
 ### - [Link al sito](https://giovannipacelli2.github.io/news/src)
 
-### - [Breve presentazione](https://giovannipacelli2.github.io/counter/assets/presentation/Presentazione_Counter.pdf)
+### - [Breve presentazione](https://giovannipacelli2.github.io/news/src/assets/presentation/Presentazione_News.pdf)
