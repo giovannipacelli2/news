@@ -1,11 +1,13 @@
 'use strict'
 
-/*-----------------------------------------------------------------*/
+/*-------------------------LIBRARY-IMPORT--------------------------*/
 
 import _ from 'lodash';
 import axios from 'axios';
-
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+
+/*---------------------------CSS-IMPORT----------------------------*/
 
 import "../css/main.css";
 import "../css/cards.css";
@@ -50,10 +52,6 @@ let toTop = document.body.querySelector(".to-top");
 Library.toTopButton(toTop);
 
 await main();
-
-/* setTimeout( async()=>{ await main() }, 5000 ); */ // FOR DEBUG
-
-
 
 /*---------------------MAIN-FUNCTION-DECLARATION-------------------*/
 
