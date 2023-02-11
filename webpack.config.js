@@ -9,9 +9,9 @@ module.exports = {
     main: {
       import: path.resolve(__dirname,'src/assets/js/main.js'),
     },
-    comment: {
+    /* comment: {
       import: path.resolve(__dirname,'src/assets/js/modules/comments.js'),
-    },
+    }, */
   },
 
   devtool: 'inline-source-map',
@@ -34,7 +34,7 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name][contenthash].js',
+    filename: '[name].[contenthash].js',
     clean: true,
   },
 

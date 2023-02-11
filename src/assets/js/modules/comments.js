@@ -9,10 +9,7 @@ import Comment from './classes/comment.js';
 import { PAGE, MAIN_CONTAINER, newStories, baseUrl } from '../main.js';
 
 
-PAGE.addEventListener("click", seeComments);
-
-
-async function seeComments(e) {
+export default async function seeComments(e) {
 
     let button = e.target.closest(".commentButton");
 

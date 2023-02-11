@@ -5,6 +5,8 @@
 import _ from 'lodash';
 import axios from 'axios';
 
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import "../css/main.css";
 import "../css/cards.css";
 
@@ -12,7 +14,7 @@ import "../css/cards.css";
 
 import LOAD_IMG from "../img/loading_1.gif";
 
-
+import seeComments from './modules/comments.js'
 import  * as Library  from './modules/library/functions-library.js';
 import  * as NewsLibrary  from './modules/library/news-function-library.js';
 
@@ -93,7 +95,11 @@ async function main(){
         PAGE.addEventListener( 'click', seeMore );
 
         // update cycle for the latest news
-        refreshCicle = refresh(refreshTime);       
+        refreshCicle = refresh(refreshTime);      
+        
+        // LISTENER FOR COMMENTS
+        PAGE.addEventListener("click", seeComments);
+
     }
     catch(err) { errorOnMainRequest(err); }
 }
