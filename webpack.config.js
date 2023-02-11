@@ -1,14 +1,30 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
-
-  mode: 'development',
 
   entry: {
     main: {
       import: path.resolve(__dirname,'src/assets/js/main.js'),
-    }
+      dependOn: ['shared','library','classes'],
+    },
+    comments: {
+      import: path.resolve(__dirname,'src/assets/js/modules/comments.js'),
+      dependOn: ['shared','library','classes'],
+    },
+
+    shared: ['lodash','axios','bootstrap'],
+
+    library: [
+      path.resolve(__dirname,'src/assets/js/modules/library/news-function-library.js'), 
+      path.resolve(__dirname,'src/assets/js/modules/library/functions-library.js'),
+    ],
+
+    classes: [
+      path.resolve(__dirname,'src/assets/js/modules/classes/notice.js'),
+      path.resolve(__dirname,'src/assets/js/modules/classes/comment.js'),
+    ],
   },
 
   devtool: 'inline-source-map',
@@ -36,9 +52,12 @@ module.exports = {
   },
 
   optimization: {
+    runtimeChunk: 'single',
     splitChunks: {
       chunks: 'all',
     },
+    minimize: true,
+    minimizer: [new TerserPlugin()],
   },
 
   module: {
@@ -71,6 +90,18 @@ module.exports = {
         type: 'asset/resource',
       },
 
+      {
+        test: /\.(js|jsx)$/i,			
+        exclude: /node_modules/,
+      
+        use : {
+                  loader : 'babel-loader',
+                  options : {
+                      presets : [ '@babel/preset-env' ]
+                  }
+              }
+      },
+      
       {
         test: /\.html$/i,				
         use : [ 'html-loader' ],

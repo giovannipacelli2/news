@@ -16,7 +16,7 @@ import "../css/cards.css";
 
 import LOAD_IMG from "../img/loading_1.gif";
 
-import seeComments from './modules/comments.js'
+/* import seeComments from './modules/comments.js' */
 import  * as Library  from './modules/library/functions-library.js';
 import  * as NewsLibrary  from './modules/library/news-function-library.js';
 
@@ -96,7 +96,7 @@ async function main(){
         refreshCicle = refresh(refreshTime);      
         
         // LISTENER FOR COMMENTS
-        PAGE.addEventListener("click", seeComments);
+        /* PAGE.addEventListener("click", seeComments); */
 
     }
     catch(err) { errorOnMainRequest(err); }

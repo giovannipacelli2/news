@@ -4,8 +4,9 @@
   "description": "</br>",
   "main": "webpack.config.js",
   "scripts": {
-    "build": "webpack",
-    "dev": "webpack serve"
+    "build": "webpack --mode=development",
+    "prod": "webpack --mode=production",
+    "serve": "webpack serve --mode=development"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
     "lodash": "^4.17.21",
     "sass-loader": "^13.2.0",
     "style-loader": "^3.3.1",
+    "terser-webpack-plugin": "^5.3.6",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1"
