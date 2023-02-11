@@ -1,18 +1,20 @@
 'use strict'
 
 import Notice from "./notice.js";
+import USER_IMG from '../../../img/user.png';
 
 export default class Comment extends Notice {
     /*---------------------------------------------------COMMENT-MANAGEMENT---------------------------------------------------*/
 
     exportHtmlElement() {
+        
 
         if (!this.by && !this.text) return "";
     
         let body = `
              <div class="comment">
                 <div class="user-container">
-                    <img class="comment-img" src="./assets/img/user.png">
+                    <img class="comment-img" src=${USER_IMG}>
                     <span class="card-text by">${this.by}:</span>
                 </div>
     

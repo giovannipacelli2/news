@@ -2,10 +2,15 @@
 
 /*-----------------------------------------------------------------*/
 
-import 'https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js';
-import 'https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js';
+import _ from 'lodash';
+import axios from 'axios';
+
+import "../css/main.css";
+import "../css/cards.css";
 
 /*-------------------------MODULES-IMPORT--------------------------*/
+
+import LOAD_IMG from "../img/loading_1.gif";
 
 
 import  * as Library  from './modules/library/functions-library.js';
@@ -54,7 +59,7 @@ await main();
 async function main(){
     try {
         // Create loading animation during loading news
-        let loading = createLoading();
+        let loading = createLoading(LOAD_IMG);
         loading.style.marginTop = "8em";
         MAIN_CONTAINER.before(loading);
 
@@ -130,7 +135,7 @@ async function seeMore(e) {
 
         if ( button.id !== "more-button" ) return;
 
-        let loading = createLoading();  // Create loading effect
+        let loading = createLoading(LOAD_IMG);  // Create loading effect
         button.after(loading);
 
         let newsIds;
@@ -208,13 +213,12 @@ async function requireMoreNews( baseUrl, newsIds, loading, mainContainer, button
 
 }
 
-
 /*---------------------Create-loading-animation--------------------*/
 
 
-function createLoading(){
+function createLoading(LOAD_IMG){
     let loading = document.createElement('IMG');
-    loading.src = './assets/img/loading_1.gif';
+    loading.src = LOAD_IMG;
     loading.id = 'loading';
 
     return loading;

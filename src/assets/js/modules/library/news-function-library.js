@@ -1,5 +1,7 @@
 'use strict'
 
+import axios from 'axios';
+
 import  * as Library  from './functions-library.js';
 import Notice from '../classes/notice.js';
 

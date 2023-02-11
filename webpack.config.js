@@ -2,34 +2,39 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+
+  mode: 'development',
+
   entry: {
     main: {
-      import: './src/assets/js/main.js',
-      dependOn: 'shared',
+      import: path.resolve(__dirname,'src/assets/js/main.js'),
     },
     comment: {
-      import: './src/assets/js/modules/comment.js',
-      dependOn: 'shared',
+      import: path.resolve(__dirname,'src/assets/js/modules/comments.js'),
     },
-    shared: 'lodash',
   },
 
   devtool: 'inline-source-map',
 
   devServer: {
-    static: './dist',
+    static: path.resolve(__dirname, 'dist'),
+    open: true,
+    hot: true,
+    compress: true,
+    historyApiFallback: true,
   },
 
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Get the news',
+      filename: 'index.html',
       template: './src/index.html',
     }),
   ],
 
   output: {
-    filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
+    filename: '[name][contenthash].js',
     clean: true,
   },
 
@@ -59,14 +64,26 @@ module.exports = {
 
         generator : { 
           filename : '[name].[contenthash].[ext]',	
-          outputPath : 'assets/img',	
-          publicPath : './src/assets/img',	
+          outputPath : 'assets/img/',	
+          publicPath : 'assets/img/',	
         }   
       },
+
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: 'asset/resource',
       },
+
+      {
+        test: /\.html$/i,				
+        use : [ 'html-loader' ],
+      }
+      
+
     ],
   },
+  experiments: {
+    topLevelAwait: true
+  }
+
 };

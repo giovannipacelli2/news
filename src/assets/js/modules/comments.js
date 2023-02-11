@@ -1,5 +1,7 @@
 'use strict'
 
+import '../../css/comment.css';
+
 import  * as NewsLibrary  from './library/news-function-library.js';
 import  * as Library  from './library/functions-library.js';
 import Comment from './classes/comment.js';
