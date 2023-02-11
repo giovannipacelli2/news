@@ -8,10 +8,7 @@ module.exports = {
   entry: {
     main: {
       import: path.resolve(__dirname,'src/assets/js/main.js'),
-    },
-    /* comment: {
-      import: path.resolve(__dirname,'src/assets/js/modules/comments.js'),
-    }, */
+    }
   },
 
   devtool: 'inline-source-map',

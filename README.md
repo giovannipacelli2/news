@@ -24,7 +24,7 @@
 
 #### Nella cartella principale "_src_" sono presenti:
 
-* #### Il file _index.html_
+* #### Il file _index.html_ (utilizzato come template da webpack)
 * #### La cartella _assets_
 
 #### La cartella _assets_ a sua volta contiene:
@@ -52,8 +52,6 @@
 ### **comment.js** :
 
 #### Si occupa della gestione dei commenti e contiene:
-
-* #### la gestione del listener sulla pagina.
 
 * #### la gestione delle richieste per ottenere gli id dei commenti.
 
