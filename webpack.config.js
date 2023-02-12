@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 module.exports = {
 
@@ -11,7 +12,7 @@ module.exports = {
     },
     comments: {
       import: path.resolve(__dirname,'src/assets/js/modules/comments.js'),
-      dependOn: ['shared','library','classes'],
+      /* dependOn: ['shared','library','classes'], */
     },
 
     shared: ['lodash','axios','bootstrap'],
@@ -43,11 +44,13 @@ module.exports = {
       filename: 'index.html',
       template: './src/index.html',
     }),
+    
+    /* new BundleAnalyzerPlugin(), */  //DEPENDENCY GRAPH
   ],
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[contenthash].js',
+    filename: '[name].js',
     clean: true,
   },
 
@@ -112,6 +115,10 @@ module.exports = {
   },
   experiments: {
     topLevelAwait: true
-  }
+  },
 
 };
+
+
+
+
