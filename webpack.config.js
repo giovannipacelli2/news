@@ -1,124 +1,119 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const TerserPlugin = require("terser-webpack-plugin");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const path = require("path");
+const webpack = require("webpack");
+// Plugin per l'estrazione separata del file .css
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// Plugin per la minificazione e ottimizzazione del file .js
+const TerserJSPlugin = require("terser-webpack-plugin");
+// Plugin per la minificazione e ottimizzazione del file .css
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+// Plugin che rimuove il css non utilizzato
+const { PurgeCSSPlugin } = require("purgecss-webpack-plugin");
 
-module.exports = {
-
-  entry: {
-    main: {
-      import: path.resolve(__dirname,'src/assets/js/main.js'),
-      dependOn: ['shared','library','classes'],
+module.exports = (env, argv) => {
+  return {
+    // File Javascript di entrata pre-compilato
+    entry: {
+      main: {
+        import: path.resolve(__dirname,'src/assets/js/main.js'),
+      },
+      comments: {
+        import: path.resolve(__dirname,'src/assets/js/modules/comments.js'),
+      },
     },
-    comments: {
-      import: path.resolve(__dirname,'src/assets/js/modules/comments.js'),
-      /* dependOn: ['shared','library','classes'], */
+    // Cartella di output per i file compilati e nome del file Javascript
+    output: {
+      path: path.resolve(__dirname, "dist"),
+      filename: "app.js",
+      clean: true,
+      assetModuleFilename: "[hash][ext][query]",
+    },
+    // Configurazione di sviluppo per l'Hot Module Replacement
+    devtool: "source-map",
+    devServer: {
+      static: "./",
+      devMiddleware: {
+        publicPath: "/dist/",
+      },
+    },
+    module: {
+      rules: [
+        // Loaders per i file di tipo CSS e SCSS
+        {
+          test: /\.(sa|sc|pc|c)ss$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            "css-loader",
+            "postcss-loader",
+            "sass-loader",
+          ],
+        },
+        // Risorse assets
+        {
+          test: /\.(jpg|jpeg|gif|png|woff|woff2|eot|ttf|svg)$/,
+          type: "asset",
+          parser: {
+            dataUrlCondition: {
+              maxSize: 8192,
+            },
+          },
+        },
+        // Loader e configurazione di Babel per il transpiling
+        {
+          test: /\.m?js$/,
+          exclude: /(node_modules|bower_components)/,
+          use: {
+            loader: "babel-loader",
+            options: {
+              presets: ["@babel/preset-env"],
+            },
+          },
+        },
+      ],
+    },
+    // Assegnazione dei plugin di minificazione e ottimizzazione
+    optimization: {
+      runtimeChunk: 'single',
+        splitChunks: {
+          chunks: 'all',
+        },
+
+      minimize: true,
+      minimizer: [new TerserJSPlugin({}), new CssMinimizerPlugin({})],
     },
 
-    shared: ['lodash','axios','bootstrap'],
-
-    library: [
-      path.resolve(__dirname,'src/assets/js/modules/library/news-function-library.js'), 
-      path.resolve(__dirname,'src/assets/js/modules/library/functions-library.js'),
-    ],
-
-    classes: [
-      path.resolve(__dirname,'src/assets/js/modules/classes/notice.js'),
-      path.resolve(__dirname,'src/assets/js/modules/classes/comment.js'),
-    ],
-  },
-
-  devtool: 'inline-source-map',
-
-  devServer: {
-    static: path.resolve(__dirname, 'dist'),
-    open: true,
-    hot: true,
-    compress: true,
-    historyApiFallback: true,
-  },
-
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: 'Get the news',
-      filename: 'index.html',
-      template: './src/index.html',
-    }),
+    experiments: {
+      topLevelAwait: true
+    },
     
-    /* new BundleAnalyzerPlugin(), */  //DEPENDENCY GRAPH
-  ],
-
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
-    clean: true,
-  },
-
-  optimization: {
-    runtimeChunk: 'single',
-    splitChunks: {
-      chunks: 'all',
-    },
-    minimize: true,
-    minimizer: [new TerserPlugin()],
-  },
-
-  module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
-
-        generator : { 
-          filename : '[name].[contenthash].[ext]',	
-          outputPath : 'assets/css',	
-          publicPath : './src/assets/css',	
-        }    
-
-      },
-
-      {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
-
-        generator : { 
-          filename : '[name].[contenthash].[ext]',	
-          outputPath : 'assets/img/',	
-          publicPath : 'assets/img/',	
-        }   
-      },
-
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: 'asset/resource',
-      },
-
-      {
-        test: /\.(js|jsx)$/i,			
-        exclude: /node_modules/,
-      
-        use : {
-                  loader : 'babel-loader',
-                  options : {
-                      presets : [ '@babel/preset-env' ]
-                  }
-              }
-      },
-      
-      {
-        test: /\.html$/i,				
-        use : [ 'html-loader' ],
-      }
-      
-
+    plugins: [
+      // Nome del file di output .css
+      new MiniCssExtractPlugin({
+        filename: "app.css",
+      }),
+      // Inizializzazione del plugin per rimuovere i css inutilizzati
+      argv.mode === "production"
+        ? new PurgeCSSPlugin({
+            paths: require("glob").sync(`./*.html`, { nodir: true }),
+            //paths: require("glob-all").sync(['./Pages/**/*', './Controls/**/*', './*.{aspx,master}'], { nodir: true }),
+            variables: true,
+            safelist: {
+              deep: [
+                /slick/,
+                /show/,
+                /sticky/,
+                /zoom/,
+                /cc/,
+                /hamburger/,
+                /fancy/,
+                /loaded/,
+                /active/,
+                /open/,
+              ],
+            },
+          })
+        : function () {
+            return false;
+          },
     ],
-  },
-  experiments: {
-    topLevelAwait: true
-  },
-
+  };
 };
-
-
-
-
