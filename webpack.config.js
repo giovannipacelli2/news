@@ -71,6 +71,11 @@ module.exports = (env, argv) => {
             },
           },
         },
+        {
+          test: /\.html$/i,				
+          use : [ 'html-loader' ]		/* Gestisce immagini e media collegati alla index.html */
+        }
+        
       ],
     },
     // Assegnazione dei plugin di minificazione e ottimizzazione

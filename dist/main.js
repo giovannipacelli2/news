@@ -1,1 +1,1 @@
-"use strict";(self.webpackChunknews=self.webpackChunknews||[]).push([[179],{},e=>{e.O(0,[797,434],(()=>{return s=740,e(e.s=s);var s}));e.O()}]);
+"use strict";(self.webpackChunknews=self.webpackChunknews||[]).push([["main"],{},s=>{s.O(0,["vendors-node_modules_bootstrap_dist_js_bootstrap_bundle_min_js-node_modules_lodash_lodash_js--93ec57","src_assets_js_main_js-src_assets_js_modules_library_news-function-library_js"],(()=>{return _="./src/assets/js/main.js",s(s.s=_);var _}));s.O()}]);

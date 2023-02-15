@@ -1,1 +1,31 @@
+/*! ../../../img/user.png */
+
+/*! ../../css/comment.css */
+
+/*! ../main.js */
+
+/*! ./classes/comment.js */
+
+/*! ./library/functions-library.js */
+
+/*! ./library/news-function-library.js */
+
+/*! ./notice.js */
+
 /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
+
+/*!*********************************!*\
+  !*** ./src/assets/img/user.png ***!
+  \*********************************/
+
+/*!************************************!*\
+  !*** ./src/assets/css/comment.css ***!
+  \************************************/
+
+/*!*******************************************!*\
+  !*** ./src/assets/js/modules/comments.js ***!
+  \*******************************************/
+
+/*!**************************************************!*\
+  !*** ./src/assets/js/modules/classes/comment.js ***!
+  \**************************************************/
