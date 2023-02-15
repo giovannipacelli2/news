@@ -1,4 +1,7 @@
 const path = require("path");
+
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
 const webpack = require("webpack");
 // Plugin per l'estrazione separata del file .css
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -23,7 +26,7 @@ module.exports = (env, argv) => {
     // Cartella di output per i file compilati e nome del file Javascript
     output: {
       path: path.resolve(__dirname, "dist"),
-      filename: "app.js",
+      filename: "[name].js",
       clean: true,
       assetModuleFilename: "[hash][ext][query]",
     },
@@ -88,7 +91,7 @@ module.exports = (env, argv) => {
     plugins: [
       // Nome del file di output .css
       new MiniCssExtractPlugin({
-        filename: "app.css",
+        filename: "[name].css",
       }),
       // Inizializzazione del plugin per rimuovere i css inutilizzati
       argv.mode === "production"
@@ -114,6 +117,16 @@ module.exports = (env, argv) => {
         : function () {
             return false;
           },
+
+   
+    new HtmlWebpackPlugin(
+      {
+        /* title : 'Nuova applicazione', */  // Crea un file html con questo title
+        template: './src/index.html'	
+        /* Si può creare un nuovo dile Html a partire da un certo template */
+      }
+    ),
+         
     ],
   };
 };

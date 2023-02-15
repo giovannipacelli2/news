@@ -1,0 +1,2 @@
+.show-comments{border-bottom-left-radius:0;border-bottom-right-radius:0}@keyframes moveY{0%{top:var(--startTransition)}to{top:var(--endTransition)}}@keyframes opacity{0%{opacity:0}to{opacity:1}}@keyframes opacity-08{0%{opacity:0}to{opacity:.8}}@keyframes toTop{0%{translate:0 0}to{translate:0 -40%}}*{box-sizing:border-box;margin:0;padding:0}
+/*# sourceMappingURL=comments.css.map*/
