@@ -26,7 +26,7 @@ module.exports = (env, argv) => {
     // Cartella di output per i file compilati e nome del file Javascript
     output: {
       path: path.resolve(__dirname, "dist"),
-      filename: "[name].js",
+      filename: argv.mode === "production" ? "[name].[contenthash].js" : "[name].js",
       clean: true,
       assetModuleFilename: "[hash][ext][query]",
     },
@@ -96,13 +96,12 @@ module.exports = (env, argv) => {
     plugins: [
       // Nome del file di output .css
       new MiniCssExtractPlugin({
-        filename: "[name].css",
+        filename: argv.mode === "production" ? "[name].[contenthash].css" : "[name].css",
       }),
       // Inizializzazione del plugin per rimuovere i css inutilizzati
-      argv.mode === "production"
+      /* argv.mode === "production"
         ? new PurgeCSSPlugin({
-            paths: require("glob").sync(`./*.html`, { nodir: true }),
-            //paths: require("glob-all").sync(['./Pages/**/*', './Controls/**/*', './*.{aspx,master}'], { nodir: true }),
+            paths: require("glob").sync(`.src/*.html`, { nodir: true }),
             variables: true,
             safelist: {
               deep: [
@@ -121,7 +120,7 @@ module.exports = (env, argv) => {
           })
         : function () {
             return false;
-          },
+          }, */
 
    
     new HtmlWebpackPlugin(
