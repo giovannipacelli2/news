@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunknews=self.webpackChunknews||[]).push([[179],{},e=>{e.O(0,[797,434],(()=>{return s=740,e(e.s=s);var s}));e.O()}]);
