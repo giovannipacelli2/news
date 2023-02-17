@@ -125,4 +125,4 @@
 
 ### - [Link al sito](https://giovannipacelli2.github.io/news/dist)
 
-### - [Breve presentazione](https://giovannipacelli2.github.io/news/src/assets/presentation/Presentazione_News.pdf)
+### - [Breve presentazione](https://giovannipacelli2.github.io/news/src/assets/presentation/Presentazione-News.pdf)
