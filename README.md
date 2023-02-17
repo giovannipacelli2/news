@@ -16,7 +16,7 @@
 
 ## **Visita la pagina:** 
 
-* ### [_Flash news_](https://giovannipacelli2.github.io/news/src)
+* ### [_Flash news_](https://giovannipacelli2.github.io/news/dist)
 
 </br>
 
@@ -123,6 +123,6 @@
 
 ### - [Sito personale (portfolio)](https://giovannipacelli2.github.io/portfolio/)
 
-### - [Link al sito](https://giovannipacelli2.github.io/news/src)
+### - [Link al sito](https://giovannipacelli2.github.io/news/dist)
 
 ### - [Breve presentazione](https://giovannipacelli2.github.io/news/src/assets/presentation/Presentazione_News.pdf)
