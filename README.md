@@ -46,6 +46,7 @@
 
 #### Dalla root, la cartella _dist_ contiene:
 * #### Tutti i file processati ed ottimizzati da _webpack_
+* #### Il file principale _index.html_
 
 </br>
 
