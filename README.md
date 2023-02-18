@@ -1,6 +1,13 @@
 # **Flash news to Hacker News**
 ## **Prerequisiti:** 
-#### - Avere un browser recente ( Chrome, Firefox, Safari...ecc ).
+
+### - Per l'utilizzo:
+
+* ####  Avere un browser recente ( Chrome, Firefox, Safari...ecc ).
+
+### - Per lo sviluppo:
+
+* #### Richiede _npm_
 
 </br>
 
@@ -33,7 +40,12 @@
 
 * #### la cartella **img** : contenente tutte le immagini
 
-* #### la cartella **js** : che contiene il file main.js (entry point) e la cartella _modules_ che contiene, librerie e classi.
+* #### la cartella **js** : che contiene il file main.js (entry point) e la cartella _modules_ che contiene il file comments.js (secondo entry point) più altre librerie e classi.
+
+<hr>
+
+#### Dalla root, la cartella _dist_ contiene:
+* #### Tutti i file processati ed ottimizzati da _webpack_
 
 </br>
 
@@ -49,7 +61,7 @@
 
 ## **Modules** :
 
-### **comment.js** :
+### **comments.js** :
 
 #### Si occupa della gestione dei commenti e contiene:
 
@@ -125,4 +137,4 @@
 
 ### - [Link al sito](https://giovannipacelli2.github.io/news/dist)
 
-### - [Breve presentazione](./src/assets/presentation/Presentazione__News.pdf)
+### - [Breve presentazione](./src/assets/presentation/Presentazione-News01.pdf)
